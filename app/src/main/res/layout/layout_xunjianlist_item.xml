@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginBottom="1dp"
+    android:background="@drawable/comm_selector_bg"
+    android:paddingBottom="16dp"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:paddingLeft="10dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right|center_vertical"
+        android:id="@+id/tv_KeHuName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/commo_text_color"
+        android:text="中原银行金水支行"
+        android:textSize="18sp"
+        />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        >
+    <TextView
+        android:paddingLeft="10dp"
+        android:id="@+id/tv_time"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="计划时间 : 2016-07-20"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        />
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/touxiang"
+            />
+        <TextView
+            android:id="@+id/tv_using"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张小强"
+            android:textColor="#666666"
+        />
+       <RelativeLayout
+           android:layout_width="70dp"
+           android:layout_height="28dp"
+           android:gravity="center"
+           android:background="#3c78d8"
+           android:layout_marginLeft="15dp"
+           android:layout_marginRight="10dp"
+           android:id="@+id/tv_StartXunJian"
+           >
+           <TextView
+              android:gravity="center"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:text="开始巡检"
+               android:textColor="#fff"
+               />
+       </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

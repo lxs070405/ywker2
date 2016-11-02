@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_comm_gray"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/layout_comm_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_back"
+            android:id="@+id/btn_comm_swiperefresh_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/sousoua"
+            android:id="@+id/comm_search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/layout_comm_swiprefresh_recylerview"
+        />
+</LinearLayout>

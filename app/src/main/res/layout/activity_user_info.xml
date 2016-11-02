@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/layout_comm_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:id="@+id/user_info_back"
+            style="@style/comm_activity_back_btn_style"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/comm_new_order_comm_layout_style">
+        <TextView
+            android:text="头像"
+            style="@style/comm_left_textview_style"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:id="@+id/user_info_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/edit_hd"
+            />
+        <ImageView
+            style="@style/comm_arrow_right_img_style"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/comm_new_order_comm_layout_style">
+        <TextView
+            android:text="账号"
+            style="@style/comm_left_textview_style"
+            />
+        <TextView
+            android:id="@+id/user_info_account"
+            android:text=""
+            style="@style/comm_right_textview_style"
+            />
+        <ImageView
+            style="@style/comm_arrow_right_img_style" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_info_name_layout"
+        style="@style/comm_new_order_comm_layout_style">
+        <TextView
+            android:text="姓名"
+            style="@style/comm_left_textview_style"
+            />
+        <TextView
+            android:id="@+id/user_info_name"
+            android:text=""
+            style="@style/comm_right_textview_style"
+            />
+        <ImageView
+            style="@style/comm_arrow_right_img_style" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_info_phone_layout"
+        style="@style/comm_new_order_comm_layout_style">
+        <TextView
+            android:text="手机号"
+            style="@style/comm_left_textview_style"
+            />
+        <TextView
+            android:id="@+id/user_info_phone"
+            android:text=""
+            style="@style/comm_right_textview_style"
+            />
+        <ImageView
+            style="@style/comm_arrow_right_img_style" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/user_info_modify_pwd"
+        android:background="@drawable/login_in_btn_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="修改密码"
+        android:textSize="14sp"
+        android:textColor="#fff"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp"
+        />
+
+    <Button
+        android:id="@+id/user_info_logout"
+        android:background="@drawable/login_out_btn_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="注销"
+        android:textSize="14sp"
+        android:textColor="#535353"
+        android:layout_margin="16dp"
+        />
+
+</LinearLayout>

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_comm_gray"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    >
+                    <TextView
+                        android:id="@+id/tv_orderId"
+                        android:layout_width="56dp"
+                        android:layout_height="22dp"
+                        android:gravity="center"
+                        android:background="@drawable/ordernumber_bg"
+                        android:text="11111"
+                        android:textColor="#fff"
+                        />
+                    <TextView
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/new_order_arrrow5_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="22dp"
+                        android:gravity="center"
+                        android:background="@drawable/ordertype_bg"
+                        android:text="故障"
+                        android:textColor="#fff"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:gravity="center"
+                        android:background="@drawable/orderstate_bg"
+                        android:id="@+id/new_order_arrrow4_text2"
+                        android:layout_width="56dp"
+                        android:layout_height="22dp"
+                        android:text=""
+                        android:textColor="#fff"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/order_details_title_info"
+                    android:textColor="#000"
+                    android:paddingLeft="16dp"
+                    android:text="发起人"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/order_details_l_1"
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:id="@+id/new_order_arrrow1_text1"
+                        style="@style/comm_left_textview_style"
+                        android:text="标题"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_arrrow1_text2"
+                        style="@style/comm_right_textview_style"
+                        android:text=""
+                        />
+
+                    <ImageView
+                        style="@style/comm_arrow_right_img_style"
+
+                        />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/order_details_l_3"
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:layout_marginTop="16dp"
+                    >
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:id="@+id/new_order_arrrow3_text1"
+                        android:text="客户"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_arrrow3_text2"
+                        style="@style/comm_right_textview_style"
+                        android:singleLine="false"
+                        android:layout_height="wrap_content"
+                        android:text="选填项"
+                        />
+
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/order_details_l_client_adress"
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="客户地址"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_client_adress_text2"
+                        style="@style/comm_right_textview_style"
+                        android:singleLine="false"
+                        android:layout_height="wrap_content"
+                        android:text="选填项"
+                        />
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/order_details_l_client_connect"
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="客户联系人"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_client_connect_text2"
+                        style="@style/comm_right_textview_style"
+                        />
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_lianxiren"
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="客户联系人"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_lianxiren"
+                        style="@style/comm_right_textview_style"
+                        />
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_dianhua"
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="联系人电话"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_dianhua"
+                        style="@style/comm_right_textview_style"
+                        />
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/order_details_l_4"
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:layout_marginTop="16dp"
+                    >
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:id="@+id/new_order_arrrow4_text1"
+                        android:text="工单状态"
+                        />
+
+                    <ImageView
+                        style="@style/comm_arrow_right_img_style"
+                        android:visibility="invisible"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/order_details_l_5"
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+
+                    <TextView
+                        android:id="@+id/new_order_arrrow5_text1"
+                        style="@style/comm_left_textview_style"
+                        android:text="工单类型"
+                        />
+
+
+
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/order_details_l_6"
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="优先级"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_arrrow6_text2"
+                        style="@style/comm_right_textview_style"
+                        android:text="普通"
+
+                        />
+
+                    <ImageView
+                        style="@style/comm_arrow_right_img_style"
+                        android:visibility="invisible"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/order_details_l_7"
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="受理人"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_arrrow7_text2"
+                        style="@style/comm_right_textview_style"
+                        android:text="技术组"
+                        />
+
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/order_details_l_8"
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="受理人"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_arrrow8_text2"
+                        style="@style/comm_right_textview_style"
+                        android:text="机器"
+                        />
+
+                    <ImageView
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/order_details_l_2"
+                    android:layout_marginTop="0.5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/comm_selector_bg"
+                    >
+                    <TextView
+                        android:id="@+id/new_order_arrrow2_text1"
+                        style="@style/comm_left_textview_style"
+                        android:text="描述"
+                        />
+                    <TextView
+                        android:id="@+id/new_order_arrrow2_text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false"
+                        android:gravity="end"
+                        android:layout_gravity="center"
+                        android:textSize="14sp"
+                        android:ellipsize="end"
+                        android:layout_marginRight="48dp"
+                        android:layout_marginLeft="16dp"
+                        android:text=""
+                        android:textColor="#c7c7c7"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/order_details_l_9"
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="关注人"
+                        />
+
+                    <TextView
+                        android:id="@+id/new_order_arrrow9_text2"
+                        style="@style/comm_right_textview_style"
+                        android:layout_height="wrap_content"
+                        android:text="所有人所有人所有人所有人所有人所有人所有人所有人所有人所有人所有人所有人所有人所有人"
+                        />
+
+                    <ImageView
+                        style="@style/comm_arrow_right_img_style"
+                        android:visibility="invisible"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_zongjie"
+                    android:visibility="gone"
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="工作总结"
+                        />
+                    <TextView
+                        android:id="@+id/tv_zongjie"
+                        style="@style/comm_right_textview_style"
+                        android:layout_height="wrap_content"
+                        android:text="查看"
+                        />
+                    <ImageView
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <Button
+                    android:visibility="gone"
+                    android:text="开始处理"
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:background="@drawable/login_in_btn_drawable"
+                    android:layout_margin="16dp"
+                    android:id="@+id/btn_caozuo"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+</LinearLayout>

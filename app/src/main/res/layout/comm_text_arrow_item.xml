@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/comm_new_order_comm_layout_style"
+    android:gravity="center_vertical"
+    >
+
+    <TextView
+        android:id="@+id/comm_text_arrrow_text1"
+        style="@style/comm_left_textview_style"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/comm_text_arrrow_text2"
+        style="@style/comm_right_textview_style"
+        />
+
+    <ImageView
+        style="@style/comm_arrow_right_img_style"
+        />
+</LinearLayout>

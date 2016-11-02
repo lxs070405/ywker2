@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_comm_gray"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="客户"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_KeHuName"
+                        style="@style/comm_right_textview_style"
+                        android:singleLine="false"
+                        android:layout_height="wrap_content"
+                        android:text="选填项"
+                        />
+
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="客户联系人"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_lianxiren"
+                        style="@style/comm_right_textview_style"
+                        />
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/comm_new_order_comm_layout_style"
+                    >
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="联系人电话"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_dianhua"
+                        style="@style/comm_right_textview_style"
+                        />
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/comm_new_order_comm_layout_style"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        style="@style/comm_left_textview_style"
+                        android:text="受理人"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_ShouLiRen"
+                        style="@style/comm_right_textview_style"
+                        android:text="技术组,李晓帅"
+                        />
+
+                    <ImageView
+                        android:visibility="invisible"
+                        style="@style/comm_arrow_right_img_style"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="0.5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/comm_selector_bg"
+                    >
+                    <TextView
+                        android:id="@+id/new_order_arrrow2_text1"
+                        style="@style/comm_left_textview_style"
+                        android:text="描述"
+                        />
+                    <TextView
+                        android:id="@+id/tv_OrderDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="false"
+                        android:gravity="end"
+                        android:layout_gravity="center"
+                        android:textSize="14sp"
+                        android:ellipsize="end"
+                        android:layout_marginRight="48dp"
+                        android:layout_marginLeft="16dp"
+                        android:text=""
+                        android:textColor="#c7c7c7"
+                        />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/recyclerview"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    />
+                <Button
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:id="@+id/btn_addAseet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="增加设备"
+                    android:background="#4a86e8"
+                    />
+
+                <Button
+                    android:visibility="gone"
+                    android:text="开始处理"
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:background="@drawable/login_in_btn_drawable"
+                    android:layout_margin="16dp"
+                    android:id="@+id/btn_caozuo"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+</LinearLayout>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_comm_gray"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_comm_activity_toolbar"
+            />
+        <ImageView
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/connect_details_btn_back"
+            style="@style/comm_activity_back_btn_style" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:id="@+id/connect_details_icon"
+            android:src="@drawable/edit_hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:text=""
+            android:layout_marginTop="16dp"
+            android:id="@+id/connect_details_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                style="@style/comm_new_order_comm_layout_style"
+                >
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="当前工单"
+                    />
+
+                <TextView
+                    android:id="@+id/connect_details_order_num"
+                    style="@style/comm_right_textview_style"
+                    android:text=""
+                    android:layout_marginRight="16dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/comm_new_order_comm_layout_style"
+                >
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="角色"
+                    />
+
+                <TextView
+                    android:id="@+id/connect_details_role"
+                    style="@style/comm_right_textview_style"
+                    android:text=""
+                    android:layout_marginRight="16dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/comm_new_order_comm_layout_style"
+                >
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="受理服务组"
+                    />
+
+                <TextView
+                    android:id="@+id/connect_details_group"
+                    style="@style/comm_right_textview_style"
+                    android:text=""
+                    android:layout_marginRight="16dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/comm_new_order_comm_layout_style"
+                >
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="联系电话"
+                    />
+
+                <TextView
+                    android:id="@+id/connect_details_tel"
+                    style="@style/comm_right_textview_style"
+                    android:text=""
+                    android:layout_marginRight="16dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/comm_new_order_comm_layout_style"
+                >
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="创建时间"
+                    />
+
+                <TextView
+                    android:id="@+id/connect_details_create_time"
+                    style="@style/comm_right_textview_style"
+                    android:text=""
+                    android:layout_marginRight="16dp"
+                    />
+            </LinearLayout>
+            <Button
+                android:layout_marginTop="16dp"
+                android:background="@drawable/login_in_btn_drawable"
+                android:id="@+id/connect_details_send_msg"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="发送消息"
+                android:textSize="14sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                />
+            <Button
+                android:background="@drawable/login_in_btn_drawable"
+                android:id="@+id/connect_details_new_order"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="创建工单"
+                android:textSize="14sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

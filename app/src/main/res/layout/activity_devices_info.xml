@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_comm_gray"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/layout_comm_activity_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/btn_back_devices_info"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:id="@+id/devices_info_client_layout"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="客户"
+                />
+
+            <TextView
+                android:id="@+id/devices_info_client_name_tv"
+                style="@style/comm_right_textview_style"
+                android:text="必填项"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:id="@+id/devices_info_client_connect_layout"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="客户联系人"
+                />
+
+            <TextView
+                android:id="@+id/devices_info_client_connect_name_tv"
+                style="@style/comm_right_textview_style"
+                android:text="必填项"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:id="@+id/devices_info_devices_name_layout"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="设备类型"
+                />
+
+            <TextView
+                android:id="@+id/devices_info_name_tv"
+                style="@style/comm_right_textview_style"
+                android:text="必填项"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:id="@+id/devices_info_pinpai_layout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="品牌"
+                />
+
+            <TextView
+                android:id="@+id/devices_info_pinpai_tv"
+                style="@style/comm_right_textview_style"
+                android:text="必填项"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:id="@+id/devices_info_xinghao_layout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="型号"
+                />
+
+            <TextView
+                android:id="@+id/devices_info_xinghao_tv"
+                style="@style/comm_right_textview_style"
+                android:text="必填项"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_fenGe"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下列三项任选其中至少一项"
+            android:textColor="@android:color/holo_red_dark"
+            />
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:id="@+id/ll_Xuliehao"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="序列号"
+                />
+
+            <TextView
+                android:id="@+id/devices_info_xuliehao_tv"
+                style="@style/comm_right_textview_style"
+                android:text="选填"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_xianshiBeizhu"
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            >
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="备注"
+                />
+            <TextView
+                android:id="@+id/XunJianDsc"
+                style="@style/comm_right_textview_style" />
+            <ImageView
+                android:visibility="invisible"
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+        <com.y.w.ywker.views.EditFocusLayout
+            android:id="@+id/ll_BeiZhu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="8dp"
+            android:background="#fff"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="16dp"
+                android:text="备注"
+                android:textColor="@color/commo_text_color"
+                />
+            <RelativeLayout
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_in_centerlayout_drawable"
+                >
+
+                <EditText
+                    android:padding="8dp"
+                    android:id="@+id/tv_XunJianDsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:hint="填写使用中设备外观,位置,使用人等信息(限80字以内)"
+                    android:textColorHint="#c7c7c7"
+                    android:maxLength="80"
+                    android:textSize="16sp"
+                    android:textColor="#c7c7c7"
+                    android:background="#00000000"
+                    android:minHeight="100dp"
+                    />
+            </RelativeLayout>
+        </com.y.w.ywker.views.EditFocusLayout>
+        <LinearLayout
+            android:id="@+id/ll_TuPian"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            >
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/image"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/icon_addpic_unfocused"
+                    />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/image1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/icon_addpic_unfocused"
+                    />
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/image2"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/icon_addpic_unfocused"
+                    />
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/image4"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/devices_info_btn_sure"
+            android:layout_marginTop="20dp"
+            style="@style/comm_btn_yellow_style"
+            android:text="绑定设备"
+            android:layout_marginBottom="20dp"
+            />
+    </LinearLayout>
+</ScrollView>
+
+
+</LinearLayout>

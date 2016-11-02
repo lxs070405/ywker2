@@ -1,0 +1,191 @@
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/round_rect_translucent_black_shape</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+    <style name="PopupAnimation" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/activity_translate_in</item>
+        <item name="android:windowExitAnimation">@anim/activity_translate_out</item>
+    </style>
+
+    <style name="PopupAnimation1" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="YwkerBaseTheme" parent="Theme.AppCompat">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="comm_edt_style">
+        <item name="android:layout_height">
+            48dp
+        </item>
+        <item name="android:layout_width">
+            match_parent
+        </item>
+        <item name="android:textColorHint">
+            #d6d6d6
+        </item>
+        <item name="android:background">
+            #00000000
+        </item>
+        <item name="android:textColor">
+            #d6d6d6
+        </item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+    <style name="lxs_textviewstyle">
+        <item name="android:layout_height">
+            wrap_content
+        </item>
+        <item name="android:layout_width">
+           wrap_content
+        </item>
+        <item name="android:textColor">
+            #343434
+        </item>
+        <item name="android:singleLine">true</item>
+        <item name="android:padding"> 10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="comm_left_textview_style">
+
+        <item name="android:layout_height">
+            56dp
+        </item>
+        <item name="android:layout_width">
+            wrap_content
+        </item>
+        <item name="android:textColor">
+            #343434
+        </item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="comm_right_textview_style">
+
+        <item name="android:layout_height">
+            56dp
+        </item>
+        <item name="android:layout_width">
+            0dp
+        </item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">
+            #c7c7c7
+        </item>
+        <item name="android:gravity">right</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+
+    </style>
+
+    <style name="comm_btn_yellow_style">
+
+        <item name="android:layout_height">
+            56dp
+        </item>
+        <item name="android:layout_width">
+            match_parent
+        </item>
+        <item name="android:textColor">
+            #fff
+        </item>
+        <item name="android:background">@drawable/login_in_btn_drawable</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="comm_arrow_right_img_style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:src">@drawable/nexta</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="comm_activity_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="comm_activity_back_btn_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:src">@drawable/icon_back</item>
+    </style>
+    <style name="comm_new_order_comm_layout_style">
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_marginTop">0.5dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/comm_selector_bg</item>
+    </style>
+
+    <style name="comm_cbx_style" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/cbx_drawable</item>
+    </style>
+
+    <style name="comm_switch_btn">
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:layout_marginRight">32dp</item>
+    </style>
+
+    <style name="loading_dialog" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>       <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowBackground">@color/window_background</item> <!-- 设置dialog的背景 -->
+        <item name="android:windowNoTitle">true</item>      <!-- 是否显示title -->
+        <item name="android:windowIsTranslucent">true</item>    <!-- 是否半透明 -->
+        <item name="android:windowIsFloating">true</item>       <!-- 是否浮现在activity之上 -->
+        <item name="android:windowContentOverlay">@null</item>  <!-- 也是个drawable，定义contentoverlay的背景 -->
+        <item name="android:backgroundDimEnabled">false</item>  <!-- 背景是否模糊显示 -->
+    </style>
+
+    <!--极光推送-->
+    <style name="push_style">
+        <item name="android:hint">@string/style_hint</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="push_alias">
+        <item name="android:hint">@string/alias_hint</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="push_tag">
+        <item name="android:hint">@string/tag_hint</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/layout_comm_swiprefresh_recylerview"
+        >
+    </include>
+    <include
+        android:id="@+id/empty_view"
+        layout="@layout/comm_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</RelativeLayout>

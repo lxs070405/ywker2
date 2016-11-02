@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/color_comm_gray"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/layout_comm_toolbar"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:layout_height="?attr/actionBarSize"
+                    >
+                </android.support.v7.widget.Toolbar>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:text="设备维修详情"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_marginLeft="8dp"
+                    android:id="@+id/btn_back_devices_info"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    android:padding="15dp"
+                    android:id="@+id/tv_post"
+                    android:layout_alignParentRight="true"
+                    android:text="完成"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:background="@color/color_comm_gray"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        >
+                        <TextView
+                            android:textColor="@color/commo_text_color"
+                            android:text="设备信息"
+                            android:textSize="18sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@color/commo_text_color"
+                            android:id="@+id/tv_SheBeiXinXi"
+                            android:textSize="18sp"
+                            android:gravity="end"
+                            android:text="打印机,联想,型号"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:background="#ccc"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+
+                        >
+                        <TextView
+                            android:textColor="@color/commo_text_color"
+                            android:padding="16dp"
+                            android:text="维修进度"
+                            android:textSize="18sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@color/commo_text_color"
+                            android:padding="16dp"
+                            android:id="@+id/tv_WeiXiuJinDu"
+                            android:textSize="18sp"
+                            android:gravity="end"
+                            android:text="请选择"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:background="#ccc"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:textColor="@color/commo_text_color"
+                            android:padding="16dp"
+                            android:text="更换零件"
+                            android:textSize="18sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <LinearLayout
+                                android:id="@+id/ll_addlingjian"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent" />
+                                <TextView
+                                    android:padding="16dp"
+                                    android:id="@+id/tv_AddLingJian"
+                                    android:gravity="end"
+                                    android:text="添加零件"
+                                    android:textSize="18sp"
+                                    android:textColor="#63B8FF"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.y.w.ywker.views.EditFocusLayout
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+                        <TextView
+                            android:textColor="@color/commo_text_color"
+                            android:paddingLeft="16dp"
+                            android:text="维修总结"
+                            android:textSize="18sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RelativeLayout
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <EditText
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:id="@+id/et_Zongjie"
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:background="@null"
+                                android:gravity="start"
+                                android:hint="请输入维修总结(必填)"
+                                android:textColorHint="#ccc"
+                                android:textColor="#7e7e7e"
+                                />
+                            <TextView
+                                android:id="@+id/tv_zongjie"
+                                android:padding="10dp"
+                                android:gravity="end"
+                                android:text="常用总结"
+                                android:textSize="18sp"
+                                android:textColor="#63B8FF"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignRight="@+id/et_Zongjie"
+                                android:layout_alignEnd="@+id/et_Zongjie" />
+                        </RelativeLayout>
+
+                    </com.y.w.ywker.views.EditFocusLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        >
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:visibility="gone"
+                                android:id="@+id/image"
+                                android:layout_width="100dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/icon_addpic_unfocused"
+                                />
+                            <ImageView
+                                android:visibility="gone"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/image1"
+                                android:layout_width="100dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/icon_addpic_unfocused"
+                                />
+                            <ImageView
+                                android:visibility="gone"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/image2"
+                                android:layout_width="100dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/icon_addpic_unfocused"
+                                />
+                        </LinearLayout>
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/image4"
+                            android:layout_width="100dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/icon_addpic_unfocused"
+                            />
+                    </LinearLayout>
+
+                    <GridView
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/gridview"
+                        android:numColumns="auto_fit"
+                        android:columnWidth="90dp"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="15dp"
+                        android:horizontalSpacing="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:visibility="gone"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/btn_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#4a86e8"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_bigImg"
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_bigImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_comm_activity_toolbar"
+            />
+        <ImageView
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/setting_btn_back"
+            style="@style/comm_activity_back_btn_style" />
+    </RelativeLayout>
+
+
+<TextView
+    android:layout_marginTop="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_marginLeft="16dp"
+    android:text="工单动态通知"
+    android:textColor="#000"
+    android:textSize="18sp"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_comm_gray"
+        />
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_marginLeft="32dp"
+            android:text="全部动态"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/setting_switch_all_dynamic"
+            style="@style/SwitchButtonMD"
+            android:layout_width="60dp"
+            android:layout_height="32dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_marginLeft="32dp"
+            android:text="工单状态"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <!--<com.y.w.ywker.views.IOSSwitchView-->
+            <!--android:id="@+id/setting_switch_order_status"-->
+            <!--style="@style/comm_switch_btn"-->
+            <!--app:tintColor="#00ff00"-->
+            <!--app:thumbTintColor="#ffffff"-->
+            <!--app:isOn="false"-->
+            <!--/>-->
+
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/setting_switch_order_status"
+            style="@style/SwitchButtonMD"
+            android:layout_width="60dp"
+            android:layout_height="32dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_marginLeft="32dp"
+            android:text="工单回复"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <!--<com.y.w.ywker.views.IOSSwitchView-->
+            <!--android:id="@+id/setting_switch_order_replay"-->
+            <!--style="@style/comm_switch_btn"-->
+            <!--app:tintColor="#00ff00"-->
+            <!--app:thumbTintColor="#ffffff"-->
+            <!--app:isOn="false"-->
+            <!--/>-->
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/setting_switch_order_replay"
+            style="@style/SwitchButtonMD"
+            android:layout_width="60dp"
+            android:layout_height="32dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_marginLeft="32dp"
+            android:text="工单操作"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <!--<com.y.w.ywker.views.IOSSwitchView-->
+            <!--android:id="@+id/setting_switch_order_handle"-->
+            <!--style="@style/comm_switch_btn"-->
+            <!--app:tintColor="#00ff00"-->
+            <!--app:thumbTintColor="#ffffff"-->
+            <!--app:isOn="false"-->
+            <!--/>-->
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/setting_switch_order_handle"
+            style="@style/SwitchButtonMD"
+            android:layout_width="60dp"
+            android:layout_height="32dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:text="通知范围"
+        android:textColor="#000"
+        android:textSize="18sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_comm_gray"
+        />
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_marginLeft="32dp"
+            android:text="站内消息"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <!--<com.y.w.ywker.views.IOSSwitchView-->
+            <!--android:id="@+id/setting_switch_inner_msg"-->
+            <!--style="@style/comm_switch_btn"-->
+            <!--app:tintColor="#00ff00"-->
+            <!--app:thumbTintColor="#ffffff"-->
+            <!--app:isOn="false"-->
+            <!--/>-->
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/setting_switch_inner_msg"
+            style="@style/SwitchButtonMD"
+            android:layout_width="60dp"
+            android:layout_height="32dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_marginLeft="32dp"
+            android:text="系统消息"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <!--<com.y.w.ywker.views.IOSSwitchView-->
+            <!--android:id="@+id/setting_switch_system_msg"-->
+            <!--app:tintColor="#00ff00"-->
+            <!--android:layout_width="42dp"-->
+            <!--android:layout_height="28dp"-->
+            <!--android:layout_marginRight="32dp"-->
+            <!--app:thumbTintColor="#ffffff"-->
+            <!--app:isOn="false"-->
+            <!--/>-->
+
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/setting_switch_system_msg"
+            style="@style/SwitchButtonMD"
+            android:layout_width="60dp"
+            android:layout_height="32dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+
+    <com.y.w.ywker.views.CircleProgressBar
+        android:layout_margin="8dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/search_result_item_footer_progress"
+        app:mlpb_progress_stoke_width="3dp"
+        app:mlpb_progress_color="#566da9"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:id="@+id/search_result_item_footer_tip"
+        android:textSize="14sp"
+        android:text="主淫,数据加载完毕了"
+        android:textColor="@color/color_comm_gray"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+</RelativeLayout>

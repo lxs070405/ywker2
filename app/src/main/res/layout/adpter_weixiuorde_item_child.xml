@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginBottom="1dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+   <!-- android:background="@drawable/comm_selector_bg"-->
+
+    <LinearLayout
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/comm_selector_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:background="@drawable/ordernumber_bg"
+                android:id="@+id/tv_orderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="34564"
+                android:textColor="#fff"
+                />
+            <TextView
+                android:id="@+id/tv_OrderTitle"
+                style="@style/lxs_textviewstyle"
+                android:layout_marginLeft="0dp"
+                android:text="工商电子商行是对按时电弧撒大华为UI和是电话卡适合多开is复合肥hi父爱"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_weixiuType"
+                android:textColor="#343434"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="打印机"
+                />
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/lxs_textviewstyle"
+                android:text="2016/15/15"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+        <TextView
+            android:background="#55cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true" />
+
+
+
+</RelativeLayout>

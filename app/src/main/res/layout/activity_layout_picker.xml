@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_comm_activity_toolbar"
+            >
+        </include>
+        <ImageView
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_back"
+            android:id="@+id/btn_picker_conact_bakc"
+            />
+
+
+
+        <TextView
+            android:id="@+id/comm_btn_picker_done"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:text="完成"
+            />
+
+        <CheckBox
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/comm_btn_picker_done"
+            android:id="@+id/all_selected_picker_cbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+            android:checked="false"
+            android:layout_gravity="center_vertical"
+            style="@style/comm_cbx_style"
+            />
+
+    </RelativeLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/layout_comm_swiprefresh_recylerview"
+        />
+
+</LinearLayout>

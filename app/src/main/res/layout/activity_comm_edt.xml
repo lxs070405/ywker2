@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_comm_gray"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <include
+            layout="@layout/layout_comm_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            style="@style/comm_activity_back_btn_style"
+            android:clickable="true"
+            android:id="@+id/activity_comm_edt_back"/>
+        <TextView
+            android:clickable="true"
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/activity_comm_edt_done"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:text="完成"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_in_centerlayout_drawable"
+        >
+        <EditText
+            android:padding="4dp"
+            android:gravity="left"
+            android:layout_marginTop="16dp"
+            android:id="@+id/dialog_comm_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="15"
+            android:textSize="16sp"
+            android:textColorHint="@color/text_comm_gray"
+            android:textColor="#000"
+            android:background="#00000000"
+            android:minHeight="200dp"
+            />
+    </LinearLayout>
+</LinearLayout>

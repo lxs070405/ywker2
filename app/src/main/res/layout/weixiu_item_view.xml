@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_device"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="#66cccccc"
+            android:padding="16dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="18sp"
+                android:id="@+id/tv_devieceName"
+                android:text="设备"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_delete"
+                android:gravity="end"
+                android:textSize="18sp"
+                android:text="删除"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            >
+            <TextView
+                android:text="设备信息"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_SheBeiXinXi"
+                android:textSize="18sp"
+                android:gravity="end"
+                android:text="打印机,联想,型号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+            <TextView
+                android:padding="16dp"
+                android:text="维修进度"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:padding="16dp"
+                android:id="@+id/tv_WeiXiuJinDu"
+                android:textSize="18sp"
+                android:gravity="end"
+                android:text="请选择"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:padding="16dp"
+                android:text="更换零件"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_addlingjian"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:padding="16dp"
+                    android:id="@+id/tv_AddLingJian"
+                    android:gravity="end"
+                    android:text="添加零件"
+                    android:textSize="18sp"
+                    android:textColor="#63B8FF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <TextView
+                android:paddingLeft="16dp"
+                android:text="维修总结"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:id="@+id/et_Zongjie"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@null"
+                    android:gravity="start"
+                    android:hint="请输入维修总结(必填)"
+                    android:textColorHint="#ccc"
+                    android:textColor="#7e7e7e"
+                    />
+                <TextView
+                    android:id="@+id/tv_zongjie"
+                    android:padding="10dp"
+                    android:gravity="end"
+                    android:text="常用总结"
+                    android:textSize="18sp"
+                    android:textColor="#63B8FF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/et_Zongjie"
+                    android:layout_alignEnd="@+id/et_Zongjie" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            >
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/image1"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/image2"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

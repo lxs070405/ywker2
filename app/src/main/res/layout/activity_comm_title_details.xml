@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_comm_gray"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <include
+            layout="@layout/layout_comm_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            style="@style/comm_activity_back_btn_style"
+            android:clickable="true"
+            android:id="@+id/activity_order_title_back"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_in_centerlayout_drawable"
+        >
+
+        <TextView
+            android:padding="8dp"
+            android:id="@+id/order_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:background="#00000000"
+            android:minHeight="200dp"
+            />
+    </LinearLayout>
+</LinearLayout>

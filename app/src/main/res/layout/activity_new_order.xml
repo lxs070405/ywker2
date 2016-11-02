@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_comm_gray"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <include
+            layout="@layout/layout_comm_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            style="@style/comm_activity_back_btn_style"
+            android:clickable="true"
+            android:id="@+id/new_order_back"/>
+
+        <TextView
+
+            android:clickable="true"
+            android:layout_marginRight="6dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/new_order_public"
+            android:layout_alignParentRight="true"
+            android:layout_width="80dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:text="发布"
+            android:layout_height="80dp" />
+
+        <TextView
+            android:text="新建工单"
+            style="@style/comm_activity_title_style"
+            android:id="@+id/titledsc" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/new_order_l_1"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_marginTop="16dp"
+                >
+                <TextView
+                    android:id="@+id/new_order_arrrow1_text1"
+                    style="@style/comm_left_textview_style"
+                    android:text="标题"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow1_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="必填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/new_order_l_3"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_marginTop="16dp"
+                >
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:id="@+id/new_order_arrrow3_text1"
+                    android:text="客户名称"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow3_text2"
+                    style="@style/comm_right_textview_style"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:text="必填项"
+                    />
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <com.y.w.ywker.views.EditFocusLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/comm_selector_bg"
+                >
+                <TextView
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="客户联系人"
+                    android:textSize="14sp"
+                    android:textColor="@color/commo_text_color"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="3dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    >
+                    <EditText
+                        android:id="@+id/et_SuerName"
+                        android:padding="8dp"
+                        android:gravity="end"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="14sp"
+                        android:layout_marginRight="26dp"
+                        android:hint="请输入客户人名称(必填)"
+                        android:textColorHint="#c7c7c7"
+                        android:textColor="#c7c7c7"
+                        android:background="#ffffff"
+                        android:minHeight="30dp"
+                        />
+                </LinearLayout>
+            </com.y.w.ywker.views.EditFocusLayout>
+
+            <com.y.w.ywker.views.EditFocusLayout
+                android:background="@drawable/comm_selector_bg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                >
+                <TextView
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="联系方式"
+                    android:textSize="14sp"
+                    android:textColor="@color/commo_text_color"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    >
+                    <EditText
+                        android:id="@+id/et_SureConacts"
+                        android:padding="8dp"
+                        android:gravity="end"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入联系人电话(必填)"
+                        android:textColorHint="#c7c7c7"
+                        android:layout_marginRight="26dp"
+                        android:textSize="14sp"
+                        android:textColor="#c7c7c7"
+                        android:background="#ffffff"
+                        android:minHeight="30dp"
+                        />
+                </LinearLayout>
+            </com.y.w.ywker.views.EditFocusLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/new_order_l_client_adress"
+                style="@style/comm_new_order_comm_layout_style"
+                >
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="客户地址"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_client_adress_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="选填项"
+                    />
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/new_order_l_client_connect"
+                style="@style/comm_new_order_comm_layout_style"
+                >
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="客户联系人"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_client_connect_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="选填项"
+                    />
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/new_order_l_4"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:id="@+id/new_order_arrrow4_text1"
+                    android:text="工单状态"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow4_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="选填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/new_order_l_5"
+                style="@style/comm_new_order_comm_layout_style"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/new_order_arrrow5_text1"
+                    style="@style/comm_left_textview_style"
+                    android:text="工单类型"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow5_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="选填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/new_order_l_6"
+                android:visibility="gone"
+                style="@style/comm_new_order_comm_layout_style"
+                >
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="优先级"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow6_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="标准"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/new_order_l_7"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="受理人"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow7_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="必填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/new_order_l_8"
+                style="@style/comm_new_order_comm_layout_style"
+                >
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="受理人"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow8_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="选填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <com.y.w.ywker.views.EditFocusLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/new_order_l_2"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/new_order_arrrow2_text1"
+                    style="@style/comm_left_textview_style"
+                    android:text="描述"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    >
+                    <EditText
+                        android:id="@+id/et_desc"
+                        android:padding="8dp"
+                        android:gravity="end"
+                        android:maxLength="80"
+                        android:layout_marginRight="26dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入描述信息(必填 限80字以内)"
+                        android:textColorHint="#c7c7c7"
+                        android:textSize="14sp"
+                        android:textColor="#c7c7c7"
+                        android:background="#ffffff"
+                        android:minHeight="60dp"
+                        />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/new_order_arrrow2_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="必填项"
+                    />
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </com.y.w.ywker.views.EditFocusLayout>
+
+            <LinearLayout
+                android:id="@+id/new_order_l_9"
+                style="@style/comm_new_order_comm_layout_style"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="关注人"
+                    />
+
+                <TextView
+                    android:id="@+id/new_order_arrrow9_text2"
+                    style="@style/comm_right_textview_style"
+                    android:text="选填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

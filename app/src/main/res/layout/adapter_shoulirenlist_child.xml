@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="65dp"
+    android:background="@drawable/list_item_selector" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:layout_alignParentTop="true"
+        android:background="#F0F0F0" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6.0dip"
+        android:layout_centerVertical="true"
+        android:paddingTop="6.0dip" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:scaleType="centerCrop"
+            android:src="@drawable/k" />
+
+        <TextView
+            android:id="@+id/contact_list_item_name"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="18.0dip"
+            android:layout_toRightOf="@id/icon"
+            android:drawableRight="@drawable/ic_phone"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:includeFontPadding="false"
+            android:padding="0.0dip"
+            android:singleLine="true"
+            android:text="sadsadf"
+            android:textColor="#000"
+            android:textSize="16.0sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

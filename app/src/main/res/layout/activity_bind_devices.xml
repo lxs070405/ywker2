@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/layout_comm_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_back"
+            android:id="@+id/btn_bind_devices_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:background="@drawable/login_in_centerlayout_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="64dp"
+        >
+        <EditText
+            android:textColor="#000"
+            android:id="@+id/edt_bind_devices"
+            android:hint="请输入设备码"
+            style="@style/comm_edt_style"
+            android:layout_height="match_parent"
+            />
+
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#d6d6d6"
+            android:text="或 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/btn_bind_devices_scan_qr"
+            android:layout_marginLeft="2dp"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:textColor="@color/colorPrimary"
+            android:text="扫描二维码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:text="确定"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:background="@drawable/login_in_btn_drawable"
+        android:layout_margin="16dp"
+        android:id="@+id/btn_bind_devices_sure"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+    </LinearLayout>
+        <ListView
+            android:background="#743"
+            android:visibility="gone"
+            android:id="@+id/listview"
+            android:listSelector="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</LinearLayout>

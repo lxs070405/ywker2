@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/comm_selector_bg"
+    >
+
+    <ImageView
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/edit_hd"
+        android:id="@+id/msg_list_item_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/msg_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="fjiajfijdi"
+                android:singleLine="true"
+                />
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/msg_item_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="j"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:singleLine="true"
+                android:background="@drawable/msg_list_unread_num"
+                />
+            <TextView
+                android:id="@+id/msg_item_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="fjiajfijdi"
+                android:singleLine="true"
+                android:gravity="right"
+                android:layout_gravity="right|center_vertical"
+                android:paddingRight="8dp"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:singleLine="true"
+            android:id="@+id/msg_item_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="fjiajfijdi"
+            />
+    </LinearLayout>
+
+</LinearLayout>

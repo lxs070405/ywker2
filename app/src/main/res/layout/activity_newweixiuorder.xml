@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_comm_gray"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <include
+            layout="@layout/layout_comm_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            style="@style/comm_activity_back_btn_style"
+            android:clickable="true"
+            android:id="@+id/new_order_back"/>
+
+        <TextView
+
+            android:clickable="true"
+            android:layout_marginRight="6dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/new_order_public"
+            android:layout_alignParentRight="true"
+            android:layout_width="80dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:text="发布"
+            android:layout_height="80dp" />
+
+        <TextView
+            android:text="新建维修"
+            style="@style/comm_activity_title_style"
+            android:id="@+id/titledsc" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_LeiXing"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_marginTop="16dp"
+                >
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="设备类型"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_leiXing"
+                    style="@style/comm_right_textview_style"
+                    android:text="必填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_KeHuName"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="客户名称" />
+
+                <TextView
+                    android:id="@+id/tv_KeHuName"
+                    style="@style/comm_right_textview_style"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:text="必填项"
+                    />
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+            <com.y.w.ywker.views.EditFocusLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/comm_selector_bg"
+                >
+                <TextView
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="客户联系人"
+                    android:textSize="14sp"
+                    android:textColor="@color/commo_text_color"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="3dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    >
+                    <EditText
+                        android:id="@+id/et_SuerName"
+                        android:padding="8dp"
+                        android:gravity="end"
+                        android:layout_marginRight="26dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="14sp"
+                        android:hint="请输入客户人名称(必填)"
+                        android:textColorHint="#c7c7c7"
+                        android:textColor="#c7c7c7"
+                        android:background="#ffffff"
+                        android:minHeight="30dp"
+                        />
+                </LinearLayout>
+            </com.y.w.ywker.views.EditFocusLayout>
+
+            <com.y.w.ywker.views.EditFocusLayout
+                android:background="@drawable/comm_selector_bg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                >
+                <TextView
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="联系方式"
+                    android:textSize="14sp"
+                    android:textColor="@color/commo_text_color"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    >
+                    <EditText
+                        android:id="@+id/et_SureConacts"
+                        android:padding="8dp"
+                        android:gravity="end"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:layout_marginRight="26dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入联系人电话(必填)"
+                        android:textColorHint="#c7c7c7"
+                        android:textSize="14sp"
+                        android:textColor="#c7c7c7"
+                        android:background="#ffffff"
+                        android:minHeight="30dp"
+                        />
+
+                </LinearLayout>
+            </com.y.w.ywker.views.EditFocusLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_ShouLiRen"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    style="@style/comm_left_textview_style"
+                    android:text="受理人"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_ShouLiRen"
+                    style="@style/comm_right_textview_style"
+                    android:text="必填项"
+                    />
+
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </LinearLayout>
+
+
+            <com.y.w.ywker.views.EditFocusLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                style="@style/comm_new_order_comm_layout_style"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/new_order_arrrow2_text1"
+                    style="@style/comm_left_textview_style"
+                    android:text="描述"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    >
+                    <EditText
+                        android:id="@+id/et_desc"
+                        android:padding="8dp"
+                        android:gravity="end"
+                        android:maxLength="80"
+                        android:layout_marginRight="26dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="请输入描述信息(必填 限80字以内)"
+                        android:textColorHint="#c7c7c7"
+                        android:textSize="14sp"
+                        android:textColor="#c7c7c7"
+                        android:background="#ffffff"
+                        android:minHeight="60dp"
+                        />
+                </LinearLayout>
+                <ImageView
+                    style="@style/comm_arrow_right_img_style"
+                    />
+            </com.y.w.ywker.views.EditFocusLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

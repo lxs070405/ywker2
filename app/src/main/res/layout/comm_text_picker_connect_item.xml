@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/comm_new_order_comm_layout_style"
+    android:gravity="center_vertical"
+    >
+    <TextView
+        android:id="@+id/comm_text_picker_text1"
+        style="@style/comm_left_textview_style"
+        android:textSize="14sp"
+        />
+    <TextView
+        style="@style/comm_right_textview_style"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        />
+    <CheckBox
+        android:clickable="false"
+        android:id="@+id/comm_picker_cbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:checked="false"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        style="@style/comm_cbx_style"
+        />
+</LinearLayout>

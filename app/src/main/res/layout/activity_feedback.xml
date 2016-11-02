@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_comm_activity_toolbar"
+            />
+
+        <ImageView
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/feed_back_btn_back"
+            style="@style/comm_activity_back_btn_style" />
+
+        <TextView
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:text="保存"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:id="@+id/feed_back_btn_sure"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/login_in_centerlayout_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="输入反馈意见"
+            android:id="@+id/edt_feed_back"
+            style="@style/comm_edt_style"
+            android:maxLength="10"
+            android:minHeight="120dp"
+            android:layout_height="120dp"
+            android:gravity="left"
+            android:padding="4dp"
+            />
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_comm_gray"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/layout_comm_activity_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+        <ImageView
+            android:id="@+id/order_list_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            />
+
+        <ImageView
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/sousoua"
+            android:id="@+id/order_search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/order_list_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </android.support.v7.widget.RecyclerView>
+
+        <include
+            android:layout_gravity="center"
+            android:id="@+id/order_list_empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/comm_empty_view"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

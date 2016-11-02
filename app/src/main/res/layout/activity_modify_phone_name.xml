@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_comm_activity_toolbar"
+            />
+
+        <ImageView
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/modify_name_back"
+            style="@style/comm_activity_back_btn_style" />
+
+        <TextView
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:text="保存"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:id="@+id/modify_name_phone_sure"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/login_in_centerlayout_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="输入号码"
+            android:id="@+id/edt_phone_name_sure_pwd"
+            style="@style/comm_edt_style"
+            android:textColor="#000"
+            />
+    </FrameLayout>
+</LinearLayout>

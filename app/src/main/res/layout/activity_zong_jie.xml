@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.y.w.ywker.activity.ActivityZongJie">
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="#EEEEEE"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/layout_comm_toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="?attr/actionBarSize"
+            >
+        </android.support.v7.widget.Toolbar>
+        <TextView
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="工作总结"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/btn_back_devices_info"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:id="@+id/tv_post"
+            android:layout_alignParentRight="true"
+            android:text="完成"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <EditText
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/et_Zongjie"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@null"
+        android:gravity="start"
+        android:hint="填写工作总结并上传图片(必填)"
+        android:textColorHint="#ccc"
+        android:textColor="@color/commo_text_color"
+        />
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/image1"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/image2"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/image4"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/icon_addpic_unfocused"
+            />
+    </LinearLayout>
+
+      <!--  <com.y.w.ywker.views.MyGridView
+            android:layout_marginTop="28dp"
+            android:layout_marginLeft="16dp"
+            android:id="@+id/gridview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numColumns="auto_fit"
+            android:columnWidth="100dp"
+            android:stretchMode="columnWidth"
+            >
+        </com.y.w.ywker.views.MyGridView>-->
+
+    <GridView
+        android:layout_marginLeft="16dp"
+        android:id="@+id/gridview"
+        android:numColumns="auto_fit"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="15dp"
+        android:horizontalSpacing="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_marginLeft="16dp"
+            android:id="@+id/btn_addAseet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="增加设备"
+            android:background="#4a86e8"
+            />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="5dp"
+            android:id="@+id/recyclerview"
+            android:background="#EEEEEE"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_bigImg"
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_bigImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</RelativeLayout>

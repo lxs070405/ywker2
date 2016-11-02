@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_comm_gray"
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimary" >
+
+            <ImageView
+                android:layout_marginLeft="16dp"
+                android:id="@+id/client_connect_details_img_back"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_back" />
+            <TextView
+                android:text="联系人信息"
+                android:id="@+id/common_title_msg"
+                style="@style/comm_activity_title_style" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+        <LinearLayout
+            style="@style/comm_new_order_comm_layout_style"
+            android:layout_marginTop="16dp"
+            >
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="客户联系人"
+                />
+
+            <TextView
+                android:id="@+id/connect_details_arrrow1_text2"
+                style="@style/comm_right_textview_style"
+                android:text=""
+                android:layout_marginRight="16dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/comm_new_order_comm_layout_style"
+            >
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="所在部门"
+                />
+
+            <TextView
+                android:id="@+id/connect_details_arrrow2_text2"
+                style="@style/comm_right_textview_style"
+                android:text=""
+                android:layout_marginRight="16dp"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/new_order_l_3"
+            style="@style/comm_new_order_comm_layout_style"
+            >
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="联系电话"
+                />
+
+            <TextView
+                android:id="@+id/connect_details_arrrow3_text2"
+                style="@style/comm_right_textview_style"
+                android:text=""
+                android:layout_marginRight="16dp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/comm_new_order_comm_layout_style"
+            >
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="邮箱"
+                />
+
+            <TextView
+                android:id="@+id/connect_details_arrow4_text2"
+                style="@style/comm_right_textview_style"
+                android:text=""
+                android:layout_marginRight="16dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/comm_new_order_comm_layout_style"
+            >
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="微信"
+                />
+
+            <TextView
+                android:id="@+id/connect_details_arrow5_text2"
+                style="@style/comm_right_textview_style"
+                android:text=""
+                android:layout_marginRight="16dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>

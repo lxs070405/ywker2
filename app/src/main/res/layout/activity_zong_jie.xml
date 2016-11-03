@@ -126,6 +126,7 @@
         </com.y.w.ywker.views.MyGridView>-->
 
     <GridView
+        android:visibility="gone"
         android:layout_marginLeft="16dp"
         android:id="@+id/gridview"
         android:numColumns="auto_fit"
@@ -143,18 +144,19 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <Button
+        <TextView
             android:layout_marginLeft="16dp"
             android:id="@+id/btn_addAseet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="增加设备"
-            android:background="#4a86e8"
+            android:padding="10dp"
+            android:background="@drawable/ordernumber_bg"
             />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="16dp"
             android:id="@+id/recyclerview"
             android:background="#EEEEEE"
             android:scrollbars="vertical"

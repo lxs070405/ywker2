@@ -144,14 +144,14 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                 edit.commit();
                 result += ",";
                 result += clientEntryList.get(position).getClientAdr();
-                mRequestCode = ConstValues.RESULT_FOR_PICKER_CLIENT_CHILDREN;
+                mRequestCode =ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT;// ConstValues.RESULT_FOR_PICKER_CLIENT_CHILDREN;
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT:
                 clientId = servicesEntryList.get(position).getID();
                 result = servicesEntryList.get(position).getTeamName();
                 edit.putString("ClientCode1", clientEntryList.get(position).getClientCode());
                 edit.commit();
-                mRequestCode = ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN;
+                mRequestCode = ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT;//ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN;
                 break;
         }
 //        if(ConstValues.isnew){
@@ -160,7 +160,7 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
             result = result.split(",")[0];
             i.putExtra("result",result);
             i.putExtra("_ids", clientId + "," + clientEntryList.get(position).getID()+","+clientEntryList.get(position).getClientCode());
-            setResult(ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT, i);
+            setResult(mRequestCode, i);// mRequestCode
             finish();
 //        }
 //        else {

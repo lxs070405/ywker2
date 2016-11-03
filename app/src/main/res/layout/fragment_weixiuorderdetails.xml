@@ -131,14 +131,15 @@
                     android:orientation="vertical"
                     android:overScrollMode="never"
                     />
-                <Button
+                <TextView
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="16dp"
                     android:id="@+id/btn_addAseet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="增加设备"
-                    android:background="#4a86e8"
+                    android:padding="10dp"
+                    android:background="@drawable/ordernumber_bg"
                     />
 
                 <Button

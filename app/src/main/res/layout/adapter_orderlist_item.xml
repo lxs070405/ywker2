@@ -17,7 +17,7 @@
         >
         <TextView
             android:layout_marginLeft="10dp"
-            android:background="@drawable/ordertype_bg"
+            android:background="@drawable/ordernumber_bg"
             android:id="@+id/dynamic_item_author"
             android:textSize="14sp"
             android:textColor="#fff"

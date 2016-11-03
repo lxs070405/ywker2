@@ -72,7 +72,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
     @Bind(R.id.btn_addAseet)
-    Button btnAddAseet;
+    TextView btnAddAseet;
     @Bind(R.id.btn_caozuo)
     Button btnCaozuo;
     private String orderid = "";

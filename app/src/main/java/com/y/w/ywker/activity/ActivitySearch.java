@@ -20,17 +20,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.y.w.ywker.ChildSelectorActivity;
 import com.y.w.ywker.ConstValues;
 import com.y.w.ywker.R;
 import com.y.w.ywker.adapters.ParentItemAdapter;
 import com.y.w.ywker.entry.ClientEntry;
 import com.y.w.ywker.entry.DevicesNameEntry;
 import com.y.w.ywker.entry.OrderListEntry;
-import com.y.w.ywker.entry.YBasicNameValuePair;
 import com.y.w.ywker.interf.OnCommAdapterItemClickListener;
 import com.y.w.ywker.utils.OfflineDataManager;
-import com.y.w.ywker.utils.Utils;
 import com.y.w.ywker.utils.YHttpManagerUtils;
 
 import java.lang.ref.WeakReference;
@@ -247,12 +244,17 @@ public class ActivitySearch extends SuperActivity implements OnCommAdapterItemCl
             ClientEntry entry = clientList.get(position);
             clientId = entry.getID();
 
-            Utils.start_ActivityResult(this, ChildSelectorActivity.class, requestCode,
-                    new YBasicNameValuePair[]{
-                            new YBasicNameValuePair("mainID", clientId),
-                            new YBasicNameValuePair("orderId", orderId),
-                            new YBasicNameValuePair("result",entry.getClientName() + "," + entry.getClientAdr())
-                    });
+            Intent i = new Intent();
+            i.putExtra("result",entry.getClientName());
+            i.putExtra("_ids", clientId);
+            setResult(ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT, i);
+            finish();
+//            Utils.start_ActivityResult(this, ChildSelectorActivity.class, requestCode,
+//                    new YBasicNameValuePair[]{
+//                            new YBasicNameValuePair("mainID", clientId),
+//                            new YBasicNameValuePair("orderId", orderId),
+//                            new YBasicNameValuePair("result",entry.getClientName() + "," + entry.getClientAdr())
+//                    });
         } else if (requestCode == ConstValues.RESULT_SEARCH_DEVIDES) {//设备
             //需要有返回值
             String ids = devicesList.get(position).getID() + "";

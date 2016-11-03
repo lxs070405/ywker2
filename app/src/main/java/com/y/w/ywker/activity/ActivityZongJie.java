@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -86,7 +85,7 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
     @Bind(R.id.image4)
     ImageView addImage;
     @Bind(R.id.btn_addAseet)
-    Button btnAddAseet;
+    TextView btnAddAseet;
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
     @Bind(R.id.ll_image)

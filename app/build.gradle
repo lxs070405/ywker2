@@ -8,8 +8,8 @@ android {
         applicationId "com.y.w.ywker"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 40
-        versionName "易维客3.4.7"
+        versionCode 41
+        versionName "易维客3.4.8"
     }
     buildTypes {
         release {

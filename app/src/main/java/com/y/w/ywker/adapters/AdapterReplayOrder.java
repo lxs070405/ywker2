@@ -67,6 +67,9 @@ public class AdapterReplayOrder extends RecyclerView.Adapter<RecyclerView.ViewHo
             notifyDataSetChanged();
         }
     }
+    public int getChatDataSize(){
+        return lists.size();
+    }
 
     public void removeEntry(ReplayMsgEntry entry){
         if (lists != null && lists.contains(entry)){

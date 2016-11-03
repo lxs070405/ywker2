@@ -109,7 +109,7 @@ public class ActivityOrderList extends SuperActivity implements SwipeRefreshLayo
     }
 
     private MaterialDialog dialogTip;
-    private Handler mHandler = new MyHandler(this);
+    private Handler mHandler = new MyHandler(this,1);
 
     @Override
     public void onRefresh() {
@@ -122,6 +122,8 @@ public class ActivityOrderList extends SuperActivity implements SwipeRefreshLayo
 
     @Override
     public void onClickOrder(String id,String orderTitle,String orderLevel,String orderStatus) {
+        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.isRed_URL,id), new MyHandler(this,2), this.getClass().getName());
+        httpManagerUtils.startRequest();
         Utils.start_Activity(this,ActivityOrderReplayDetails.class,new YBasicNameValuePair[]{
                 new YBasicNameValuePair("order_id",id),
                 new YBasicNameValuePair("order_title",orderTitle),
@@ -138,8 +140,10 @@ public class ActivityOrderList extends SuperActivity implements SwipeRefreshLayo
 
         WeakReference<AppCompatActivity> mFragmentReference;
 
-        public MyHandler(AppCompatActivity activitiy) {
+        int i;
+        public MyHandler(AppCompatActivity activitiy,int i) {
             mFragmentReference = new WeakReference<AppCompatActivity>(activitiy);
+            this.i = i;
         }
 
         @Override
@@ -153,6 +157,9 @@ public class ActivityOrderList extends SuperActivity implements SwipeRefreshLayo
 
                 switch (msg.what) {
                     case ConstValues.MSG_FAILED:
+                        if(i == 2){
+                            return;
+                        }
                         emptyView.setVisibility(View.VISIBLE);
                         dialogTip = new MaterialDialog(ActivityOrderList.this)
                                 .setTitle("提示")
@@ -174,13 +181,22 @@ public class ActivityOrderList extends SuperActivity implements SwipeRefreshLayo
                         LOG.e(getBaseContext(), "网络不可用.");
                         break;
                     case ConstValues.MSG_ERROR:
+                        if(i == 2){
+                            return;
+                        }
                         emptyView.setVisibility(View.VISIBLE);
                         break;
                     case ConstValues.MSG_JSON_FORMAT_WRONG:
+                        if(i == 2){
+                            return;
+                        }
                         emptyView.setVisibility(View.VISIBLE);
                         LOG.e(getBaseContext(), "Json 格式不正确.");
                         break;
                     case ConstValues.MSG_SUCESS:
+                        if(i == 2){
+                            return;
+                        }
                         emptyView.setVisibility(View.GONE);
                         String json = (String) msg.obj;
                         parsData(json);

@@ -358,7 +358,7 @@ public class FragmentOrderReplay extends Fragment implements SwipeRefreshLayout.
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            layoutCommSwipeRefreshRecyclerview.smoothScrollToPosition(adapter.getChatDataSize());
+//            layoutCommSwipeRefreshRecyclerview.smoothScrollToPosition(adapter.getChatDataSize());
             if (charSequence.length() == 0) {
                 orderDetailsReplayBtnSend.setVisibility(View.GONE);
                 orderChatBtnAdd.setVisibility(View.VISIBLE);

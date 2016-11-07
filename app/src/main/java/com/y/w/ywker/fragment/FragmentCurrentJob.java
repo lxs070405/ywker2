@@ -85,6 +85,14 @@ public class FragmentCurrentJob extends Fragment implements SwipeRefreshLayout.O
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
+        if(adapter != null)
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onRefresh() {
         if(ConstValues.isStartRefsh){
             maxId = "0";
@@ -173,6 +181,7 @@ public class FragmentCurrentJob extends Fragment implements SwipeRefreshLayout.O
         list =  gson.fromJson(json, listType);
         if(list != null && list.size() > 0){
             adapter.addData(list);
+            adapter.notifyDataSetChanged();
         }
         if(adapter != null)
         adapter.notifyDataSetChanged();

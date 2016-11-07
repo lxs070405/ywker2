@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.y.w.ywker.ActivityPickerTeam;
 import com.y.w.ywker.ConstValues;
 import com.y.w.ywker.R;
 import com.y.w.ywker.entry.JiHuaEntry;
@@ -163,17 +164,20 @@ public class ActivityXunJianOver extends SuperActivity {
      * 获取人员列表信息
      */
     private void getUserData() {
-        Utils.start_ActivityResult(this,ActivityContacts.class,ConstValues.RESULT_FOR_CONTACTS, new YBasicNameValuePair[]{
-                        new YBasicNameValuePair("xunjian", "1")});
+//        Utils.start_ActivityResult(this,ActivityContacts.class,ConstValues.RESULT_FOR_CONTACTS, new YBasicNameValuePair[]{
+//                        new YBasicNameValuePair("xunjian", "1")});
+        Utils.start_ActivityResult(this, ActivityPickerTeam.class, ConstValues.RESULT_FOR_CONTACTS,
+                new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择服务组")
+                });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ConstValues.RESULT_FOR_CONTACTS && data != null) {
-            String userId = data.getStringExtra("userId");
-            String UserName = data.getStringExtra("UserName");
-            map.put("NextInspectPerson", userId);
-            tvZhiXingRen.setText(UserName);
+            String ids = data.getStringExtra("_ids");
+            String result = data.getStringExtra("result");
+            map.put("NextInspectPerson", ids);
+            tvZhiXingRen.setText(result);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

@@ -59,30 +59,22 @@
                 android:text="客户确认人"
                 android:textColor="@color/commo_text_color"
                 />
-            <LinearLayout
-                android:layout_marginTop="6dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="6dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/login_in_centerlayout_drawable"
-                >
+
                 <EditText
+                    android:layout_marginTop="8dp"
+                    android:background="@null"
                     android:id="@+id/et_SuerName"
                     android:padding="8dp"
                     android:gravity="end"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="16sp"
-
                     android:hint="请输入客户确认人名称(必填)"
                     android:textColorHint="#666666"
                     android:textColor="#000"
-                    android:background="#fffff7"
                     android:minHeight="30dp"
                     />
-            </LinearLayout>
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -106,19 +98,13 @@
                 android:text="联系方式"
                 android:textColor="@color/commo_text_color"
                 />
-            <LinearLayout
-                android:layout_marginTop="6dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="6dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/login_in_centerlayout_drawable"
-                >
+
                 <EditText
+                    android:background="@null"
                     android:id="@+id/et_SureConacts"
                     android:padding="8dp"
                     android:gravity="end"
+                    android:layout_marginTop="8dp"
                     android:inputType="number"
                     android:maxLength="12"
                     android:layout_width="match_parent"
@@ -127,10 +113,9 @@
                     android:textColorHint="#666666"
                     android:textSize="16sp"
                     android:textColor="#000"
-                    android:background="#fffff7"
                     android:minHeight="30dp"
                     />
-            </LinearLayout>
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -173,7 +158,7 @@
             android:layout_height="1dp"
             android:background="#c8c8c8"
             />
-        <LinearLayout
+        <com.y.w.ywker.views.EditFocusLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -197,6 +182,7 @@
                 android:background="@drawable/login_in_centerlayout_drawable"
                 >
                 <EditText
+                    android:background="@null"
                     android:padding="8dp"
                     android:gravity="start"
                     android:id="@+id/et_zongjie"
@@ -206,11 +192,10 @@
                     android:hint="巡检总结概述一下"
                     android:textColorHint="#666666"
                     android:textColor="#000"
-                    android:background="#fffff7"
                     android:minHeight="100dp"
                     />
             </LinearLayout>
-        </LinearLayout>
+        </com.y.w.ywker.views.EditFocusLayout>
 
         <View
             android:layout_marginTop="10dp"

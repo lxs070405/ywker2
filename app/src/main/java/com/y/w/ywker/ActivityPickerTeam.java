@@ -156,9 +156,9 @@ public class ActivityPickerTeam extends SuperActivity implements OnCommAdapterIt
     public void loadData() {
         String mainId = OfflineDataManager.getInstance(this).getMainID();
         String url = "";
-        if (requestCode == ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT) {
+//        if (requestCode == ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT) {
             url = String.format(ConstValues.SHOULIREN_URL, mainId);
-        }
+//        }
         showLoading();
         httpManagerUtils = new YHttpManagerUtils(this, url, mHandler, this.getClass().getName());
         httpManagerUtils.startRequest();
@@ -262,10 +262,11 @@ public class ActivityPickerTeam extends SuperActivity implements OnCommAdapterIt
                             Toast.makeText(ActivityPickerTeam.this, "修改成功", Toast.LENGTH_SHORT).show();
                             setForResult(clientId, result);
                         } else {
-                            if (requestCode == ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT) {
+//                            if (requestCode == ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT) {
                                 handleServices((String) msg.obj);
-                            }
+//                            }
                             initlistener();
+                            if(adapter != null)
                             adapter.notifyDataSetChanged();
                         }
                         break;

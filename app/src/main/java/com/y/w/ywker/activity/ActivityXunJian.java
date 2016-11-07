@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.y.w.ywker.R;
@@ -59,11 +58,13 @@ public class ActivityXunJian extends SuperActivity {
      * 切换到第一个页面
      */
     public void setIndex(){
-        fragmentCurrentJob.loadData();
         xunjianViewpager.setCurrentItem(0);
+        fragmentCurrentJob.loadData();
     }
 
-
+    public void RefreshCurrentJobData(){
+        fragmentCurrentJob.loadData();
+    }
 
     @OnClick({R.id.order_list_back, R.id.order_search_btn, R.id.xunjain_tab})
     public void onClick(View view) {
@@ -71,9 +72,9 @@ public class ActivityXunJian extends SuperActivity {
             case R.id.order_list_back:
                 finish();
                 break;
-            case R.id.order_search_btn:
-                Toast.makeText(this,"此功能有待开发 敬请期待",Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.order_search_btn:
+//                Toast.makeText(this,"此功能有待开发 敬请期待",Toast.LENGTH_SHORT).show();
+//                break;
 //            case R.id.xunjain_tab:
 //                break;
         }

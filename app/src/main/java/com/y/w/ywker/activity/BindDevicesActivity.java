@@ -249,9 +249,12 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
 
                         handData(result);
                         btnBindDevicesSure.setEnabled(true);
-                        if(fromSouce.equals("4")){
+                        if(fromSouce.equals("4")||fromSouce.equals("3")){
                             btnBindDevicesSure.setText("增加设备信息(已绑定)");
-                        }else {
+                        }else if(fromSouce.equals("2")){
+                            btnBindDevicesSure.setText("回复设备信息(已绑定)");
+                        }
+                        else {
                             btnBindDevicesSure.setText("查看设备信息(已绑定)");
                         }
 

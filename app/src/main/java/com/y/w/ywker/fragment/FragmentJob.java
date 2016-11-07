@@ -130,11 +130,13 @@ public class FragmentJob extends Fragment implements SwipeRefreshLayout.OnRefres
                         bindMap.put("PatrolID",list.get(position).getID());
                         YHttpManagerUtils managerUtils = new YHttpManagerUtils(getContext(), ConstValues.POST_START_XUNJIAN,new MyHandler(getParentFragment(),2), getClass().getName());
                         managerUtils.startPostRequest(bindMap);
+                        itemposition = position;
                         ActivityXunJian activityXunJian = (ActivityXunJian) getActivity();
                         list.remove(position);
                         adapter.notifyDataSetChanged();
                         ConstValues.isStartRefsh = true;
                         activityXunJian.setIndex();
+//                        activityXunJian.RefreshCurrentJobData();
                         Log.e("lxs", "onItemClick:post请求网址: "+ ConstValues.POST_START_XUNJIAN);
                         dialogTip.dismiss();
                     }
@@ -148,7 +150,7 @@ public class FragmentJob extends Fragment implements SwipeRefreshLayout.OnRefres
 
     }
 
-
+    private int itemposition;
     class MyHandler extends Handler {
 
         WeakReference<Fragment> mFragmentReference;
@@ -197,6 +199,7 @@ public class FragmentJob extends Fragment implements SwipeRefreshLayout.OnRefres
                             handleData((String) msg.obj);
                         }
                        if(type == 2){
+
 //                           if((int)msg.obj > 0){
                                Toast.makeText(getContext(), "执行成功", Toast.LENGTH_SHORT).show();
 //                           }

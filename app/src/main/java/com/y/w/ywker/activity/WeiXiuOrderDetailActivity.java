@@ -340,10 +340,12 @@ public class WeiXiuOrderDetailActivity extends SuperActivity {
 //                    //发起人
 //                    myRole = 0;
 //                }
-                if (entry.getAcceptName().equals(userEntry.getUserName())) {
+                if (entry.getAcceptName() != null &&entry.getAcceptName().equals(userEntry.getUserName())) {
                     //受理人
                     myRole = 1;
                 } else if (entry.getTaskStatus().equals("未受理")) {//未受理状态
+                    myRole = 1;
+                }else if(entry.getAcceptName() == null){
                     myRole = 1;
                 }
 

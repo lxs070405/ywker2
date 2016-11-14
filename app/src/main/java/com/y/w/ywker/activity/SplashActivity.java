@@ -62,6 +62,9 @@ public class SplashActivity extends SuperActivity {
                    @Override
                    public void run() {
                        finish();
+                       if( offlineDataManager.getIsFristUse()){
+                           Utils.start_Activity(SplashActivity.this, ActivityYinDaoPage.class, new YBasicNameValuePair[]{});
+                       }else
                        Utils.start_Activity(SplashActivity.this, LoginActivity.class, new YBasicNameValuePair[]{});
                    }
                }, 1500);

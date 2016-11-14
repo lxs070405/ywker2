@@ -343,9 +343,10 @@ public class NewWeiXiuOrderActivity extends SuperActivity {
                 }
                 if (ids != null && ids.contains(",")) {
                     String clientIds[] = ids.split(",");
-                    if (clientIds != null && clientIds.length >= 2) {
-                        map.put(keyClientId, clientIds[0]);
-                    }
+                    map.put(keyClientId, clientIds[0]);
+//                    if (clientIds != null && clientIds.length >= 2) {
+//                        map.put(keyClientId, clientIds[0]);
+//                    }
                 }
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT://受理服务组

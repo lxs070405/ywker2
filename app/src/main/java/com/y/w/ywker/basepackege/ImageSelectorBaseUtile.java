@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.y.w.ywker.ConstValues;
+import com.y.w.ywker.R;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
@@ -32,7 +33,7 @@ public class ImageSelectorBaseUtile {
                 // 使用沉浸式状态栏
                 .statusBarColor(Color.parseColor("#3F51B5"))
                 // 返回图标ResId
-                .backResId(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha)
+                .backResId(R.drawable.icon_back)
                 .title("图片")
                 .titleColor(Color.WHITE)
                 .titleBgColor(Color.parseColor("#3F51B5"))

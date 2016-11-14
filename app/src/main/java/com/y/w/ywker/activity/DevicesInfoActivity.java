@@ -486,6 +486,9 @@ public class DevicesInfoActivity extends SuperActivity {
                 in.putExtra("mode","2");
                 in.putExtra("ClientID",bindMap.get("ClientID"));
                 startActivityForResult(in, ConstValues.RESULT_FOR_DEVICES_XINGHAO);
+                if(beizhu != null){
+                    tvXunJianDsc.setText(beizhu);
+                }
                 break;
             case R.id.devices_info_devices_name_layout://设备类型
 
@@ -812,6 +815,7 @@ public class DevicesInfoActivity extends SuperActivity {
     String ids = "";
     String result = "";
     String AssetID = "";
+    String beizhu = null;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -938,7 +942,18 @@ public class DevicesInfoActivity extends SuperActivity {
             case ConstValues.RESULT_FOR_DEVICES_XINGHAO://型号
                 if (ids != null && !ids.equals("")) {
                     bindMap.put("ModelID", ids);
-                    bindMap.put("AssetID",AssetID);
+                    if(AssetID != null){
+                        final String[] str = AssetID.split("$");
+                        if(str.length == 2){
+                            bindMap.put("AssetID",str[0]);
+                            beizhu = str[1];
+                        }else {
+                            bindMap.put("AssetID",str[0]);
+                        }
+
+                    }
+//                    bindMap.put("AssetID",AssetID);
+                    Log.e("lxs", "onActivityResult:AssetID "+AssetID );
                 }
 
                 if (result != null && !result.equals("")) {

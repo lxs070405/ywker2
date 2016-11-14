@@ -65,6 +65,7 @@ public class FragmentGongNengList extends Fragment {
 
     private int[] icon ={R.drawable.xunjian,R.drawable.weixiu,R.drawable.pandian,R.drawable.renwu,R.drawable.kuozhan};
     private String[] iconName ={"巡检","维修","盘点","任务","扩展"};
+
     public List<Map<String, Object>> getData(){
         List<Map<String, Object>> data_list = new ArrayList<Map<String, Object>>();
         //cion和iconName的长度是相同的，这里任选其一都可以

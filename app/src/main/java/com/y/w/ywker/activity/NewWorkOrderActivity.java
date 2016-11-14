@@ -158,22 +158,10 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
     private String ids ="";
     @OnClick({R.id.new_order_public})
     public void onPublic(View view) {
-        newOrderPublic.setClickable(false);
+//        newOrderPublic.setClickable(false);
         map.put(keySheetDetails, etDesc.getText().toString().trim());
-        /**
-         * 判断描述
-         */
-        if (map.get(keySheetDetails).equals("")) {
-            Toast.makeText(this, "请填写描述", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        /**
-         * 判断客户
-         */
-        if (map.get(keyClientId).equals("")) {
-            Toast.makeText(this, "请填写客户信息", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
+
         String lianxiren = etSuerName.getText().toString();
         if (TextUtils.isEmpty(lianxiren)) {
             Toast.makeText(this, "请填写客户联系人", Toast.LENGTH_SHORT).show();
@@ -182,6 +170,13 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
         String phone = etSureConacts.getText().toString();
         if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "请填写联系人电话", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        /**
+         * 判断描述
+         */
+        if (map.get(keySheetDetails).equals("")) {
+            Toast.makeText(this, "请填写描述", Toast.LENGTH_SHORT).show();
             return;
         }
 //        if(!CheckUtils.isPhoneNumberValid(phone)){
@@ -197,6 +192,13 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
                 Toast.makeText(getBaseContext(), "请选择受理人", Toast.LENGTH_SHORT).show();
                 return;
             }
+        }
+        /**
+         * 判断客户
+         */
+        if (newOrderArrrow3Text2.getText().toString().isEmpty()) {
+            Toast.makeText(this, "请填写客户信息", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         /**
@@ -314,7 +316,7 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
         map.put(keyManId, String.valueOf(""));
         map.put(keyClientConactId, String.valueOf(""));
         map.put(keySheetTitle, String.valueOf(""));
-        map.put(keyClientId, String.valueOf(""));
+//        map.put(keyClientId, String.valueOf(""));
         map.put(keySheetDetails, String.valueOf(""));
         map.put(keySheetLevel, "03");
 //        if(newOrderArrrow4Text2.getText().toString().equals("无")){
@@ -627,10 +629,13 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
                 }
                 if (ids != null && ids.contains(",")) {
                     String clientIds[] = ids.split(",");
-                    if (clientIds != null && clientIds.length >= 2) {
-                        map.put(keyClientId, clientIds[0]);
-                        map.put(keyClientConactId, clientIds[1]);
-                    }
+                    Log.e("lxs", "onActivityResult:clientIds "+clientIds[0] );
+                    map.put(keyClientId, clientIds[0]);
+//                    if (clientIds != null && clientIds.length >= 2) {
+//                        map.put(keyClientId, clientIds[0]);
+//                        Log.e("lxs", "onActivityResult:keyClientId "+clientIds[0] );
+////                        map.put(keyClientConactId, clientIds[1]);
+//                    }
                 }
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT://受理服务组

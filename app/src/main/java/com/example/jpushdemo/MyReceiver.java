@@ -110,17 +110,17 @@ public class MyReceiver extends BroadcastReceiver {
 
 		String title = "";
 		if (type.equals("1")){
-			title = "工单状态改变了";
+//			title = "工单状态改变了";
 			if (!OfflineDataManager.getInstance(ctx).getOrderDynamicOn()){
 				return;
 			}
 		}else if (type.equals("2")){
-			title = "工单有新回复了";
+			title = "新回复";
 			if (!OfflineDataManager.getInstance(ctx).getOrderReplayOn()){
 				return;
 			}
 		}else if(type.equals("3")){
-			title = "工单修改了";
+//			title = "工单修改了";
 			if (!OfflineDataManager.getInstance(ctx).getOrderHandleOn()){
 				return;
 			}

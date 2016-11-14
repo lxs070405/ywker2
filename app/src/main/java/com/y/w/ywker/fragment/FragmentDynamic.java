@@ -47,6 +47,7 @@ public class FragmentDynamic extends Fragment implements OnCommAdapterItemClickL
     @Bind(R.id.layout_swipe_refresh_empty_view)
     View emptyView;
 
+
     private DynamicAdapter adapter;
 
     /**
@@ -91,7 +92,8 @@ public class FragmentDynamic extends Fragment implements OnCommAdapterItemClickL
                     //加载更多
                     isLoading = true;
                     if (!dynamicEntryList.isEmpty()) {
-                        loadData(dynamicEntryList.get(dynamicEntryList.size() - 1).getID() + "");
+//                        loadData(dynamicEntryList.get(dynamicEntryList.size() - 1).getID() + "");
+                        loadData("0");
                         adapter.notifyDataSetChanged();
                     }
                 }
@@ -186,7 +188,8 @@ public class FragmentDynamic extends Fragment implements OnCommAdapterItemClickL
     @Override
     public void onRefresh() {
         if (dynamicEntryList != null && !dynamicEntryList.isEmpty()){
-            loadNewsData(dynamicEntryList.get(0).getID() + "");
+//            loadNewsData(dynamicEntryList.get(0).getID() + "");
+            loadNewsData( "0");
             if (adapter != null)
                 adapter.notifyDataSetChanged();
         }else{
@@ -290,6 +293,7 @@ public class FragmentDynamic extends Fragment implements OnCommAdapterItemClickL
         }.getType();
         List<DynamicEntry> _list = gson.fromJson(json, type);
         if (_list != null && !_list.isEmpty()){
+//            adapter.setIsStartLoad(false);
             if (isLoading){//加载更多
                 isLoading = false;
                 dynamicEntryList.addAll(_list);

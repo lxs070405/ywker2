@@ -509,15 +509,19 @@ public class ActivityOrderReplayDetails extends SuperActivity {
         httpManagerUtils = new YHttpManagerUtils(this, ConstValues.ORDER_MODIFY_URL, mHandler, getClass().getSimpleName());
         OfflineDataManager offlineDataManager = OfflineDataManager.getInstance(this);
         HashMap<String, String> mapModify = new HashMap<String, String>();
+        String updataType = "UpdateState";
         if (ShouLiRenId.equals("0")) {
             ShouLiRenId = offlineDataManager.getUserID();
         }
+//        else {
+//            updataType = "UpdateStateAccept";
+//        }
         mapModify.put("ID", orderid);
         mapModify.put("MainID", offlineDataManager.getMainID());
         mapModify.put("UserID", ShouLiRenId);
         mapModify.put("UpdateDime", TimeUtils.getTime(System.currentTimeMillis()));
         mapModify.put("UpdateDetail", msg);
-        mapModify.put("UpdateType", "UpdateState");
+        mapModify.put("UpdateType", updataType);
         mapModify.put("SendAdr", "");
         for (String key : mapModify.keySet()) {
             LOG.e(this, key + " : " + mapModify.get(key));

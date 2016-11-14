@@ -243,11 +243,10 @@ public class ActivitySearch extends SuperActivity implements OnCommAdapterItemCl
              */
             ClientEntry entry = clientList.get(position);
             clientId = entry.getID();
-
             Intent i = new Intent();
+            i.putExtra("_ids",clientId+",");
             i.putExtra("result",entry.getClientName());
-            i.putExtra("_ids", clientId);
-            setResult(ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT, i);
+            setResult(1, i);
             finish();
 //            Utils.start_ActivityResult(this, ChildSelectorActivity.class, requestCode,
 //                    new YBasicNameValuePair[]{

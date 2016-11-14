@@ -50,7 +50,9 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public boolean isStartLoad() {
         return startLoad;
     }
-
+    public void setIsStartLoad(boolean isLoad){
+        startLoad = isLoad;
+    }
     public void setStartLoad(boolean startLoad) {
         this.startLoad = startLoad;
     }
@@ -71,6 +73,13 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      */
     public void addAll(List<DynamicEntry> _dynamicEntryList){
         if (_dynamicEntryList != null && !_dynamicEntryList.isEmpty()){
+            if(dynamicEntryList.size() > 0){
+                dynamicEntryList.clear();
+            }
+//            for (DynamicEntry entry : _dynamicEntryList) {
+//                dynamicEntryList.contains(entry);
+//                dynamicEntryList.remove(entry);
+//            }
             dynamicEntryList.addAll(_dynamicEntryList);
             notifyDataSetChanged();
         }
@@ -82,6 +91,9 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      */
     public void addRefreshData(List<DynamicEntry> _dynamicEntryList){
         if (_dynamicEntryList != null && !_dynamicEntryList.isEmpty()){
+           if(dynamicEntryList.size() > 0){
+               dynamicEntryList.clear();
+           }
             dynamicEntryList.addAll(0,_dynamicEntryList);
             notifyDataSetChanged();
         }
@@ -189,8 +201,9 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             progressBar = (CircleProgressBar) itemView.findViewById(R.id.search_result_item_footer_progress);
             tip = (TextView) itemView.findViewById(R.id.search_result_item_footer_tip);
-            if (isStartLoad()){
+            if (isStartLoad()&& dynamicEntryList.size() >= 10){
                 progressBar.setVisibility(View.VISIBLE);
+
                 tip.setVisibility(View.GONE);
             }else{
                 progressBar.setVisibility(View.GONE);

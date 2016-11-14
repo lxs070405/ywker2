@@ -24,10 +24,26 @@ public class OfflineDataManager {
         this.ctx = ctx;
         sh = ctx.getSharedPreferences("offlinedata",0);
     }
+
+    /**
+     * 是否是第一次使用
+     * @param Str
+     */
+    public  void saveIsFristUse(boolean Str){
+        sh.edit().putBoolean("IsFristUse",Str).commit();
+    }
+    public boolean getIsFristUse(){
+        return sh.getBoolean("IsFristUse",true);
+    }
+
+    /**
+     * 是否完成
+     * @param Str
+     */
     public  void saveIsFinish(String Str){
         sh.edit().putString("IsFinish",Str).commit();
     }
-    public String getIIsFinish(){
+    public String getIsFinish(){
         return sh.getString("IsFinish","");
     }
 

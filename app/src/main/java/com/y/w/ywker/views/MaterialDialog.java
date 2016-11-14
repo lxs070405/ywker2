@@ -535,6 +535,7 @@ public class MaterialDialog {
         }
 
 
+        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         public void setBackground(Drawable drawable) {
             LinearLayout linearLayout
                     = (LinearLayout) mAlertDialogWindow.findViewById(

@@ -4,29 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_comm_gray"
     >
-    <LinearLayout
-        android:id="@+id/personial_item_user_layout"
-        android:gravity="center_vertical"
-        style="@style/comm_new_order_comm_layout_style"
-        >
 
-        <ImageView
-            android:src="@drawable/my_my"
-            android:layout_marginLeft="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginLeft="16dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:text="联系人"
-            android:textColor="#000"
-            android:layout_height="wrap_content" />
-        <ImageView
-            style="@style/comm_arrow_right_img_style"
-            />
-       </LinearLayout>
     <LinearLayout
         android:id="@+id/personial_item_notify_layout"
         android:gravity="center_vertical"
@@ -61,6 +39,31 @@
             android:layout_margin="12dp"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/personial_item_user_layout"
+        android:gravity="center_vertical"
+        style="@style/comm_new_order_comm_layout_style"
+        >
+
+        <ImageView
+            android:src="@drawable/my_my"
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="联系人"
+            android:textColor="#000"
+            android:layout_height="wrap_content" />
+        <ImageView
+            style="@style/comm_arrow_right_img_style"
+            />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/personial_item_userinfo_layout"
         android:gravity="center_vertical"
@@ -107,29 +110,7 @@
             style="@style/comm_arrow_right_img_style"
             />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/personial_item_setting_layout"
-        android:gravity="center_vertical"
-    style="@style/comm_new_order_comm_layout_style"
-    >
 
-    <ImageView
-        android:src="@drawable/my_set"
-        android:layout_marginLeft="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginLeft="16dp"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:textSize="14sp"
-        android:text="设置"
-        android:textColor="#000"
-        android:layout_height="wrap_content" />
-    <ImageView
-        style="@style/comm_arrow_right_img_style"
-        />
-</LinearLayout>
     <LinearLayout
         android:id="@+id/personial_item_about_layout"
         android:gravity="center_vertical"
@@ -153,5 +134,29 @@
         style="@style/comm_arrow_right_img_style"
         />
 </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/personial_item_setting_layout"
+        android:gravity="center_vertical"
+        style="@style/comm_new_order_comm_layout_style"
+        >
+
+        <ImageView
+            android:src="@drawable/my_set"
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="设置"
+            android:textColor="#000"
+            android:layout_height="wrap_content" />
+        <ImageView
+            style="@style/comm_arrow_right_img_style"
+            />
+    </LinearLayout>
 </LinearLayout>
 

@@ -80,7 +80,7 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                 new YBasicNameValuePair[]{
                         new YBasicNameValuePair("orderId",orderId),
                         new YBasicNameValuePair("oldermsg",olderMsg)
-        });
+                });
     }
 
     @Override
@@ -144,24 +144,24 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                 edit.commit();
                 result += ",";
                 result += clientEntryList.get(position).getClientAdr();
-                mRequestCode =ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT;// ConstValues.RESULT_FOR_PICKER_CLIENT_CHILDREN;
+                mRequestCode = ConstValues.RESULT_FOR_PICKER_CLIENT_CHILDREN;
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT:
                 clientId = servicesEntryList.get(position).getID();
                 result = servicesEntryList.get(position).getTeamName();
                 edit.putString("ClientCode1", clientEntryList.get(position).getClientCode());
                 edit.commit();
-                mRequestCode = ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT;//ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN;
+                mRequestCode = ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN;
                 break;
         }
 //        if(ConstValues.isnew){
-            Intent i = new Intent();
-            Log.e("lxs", "onItemClick:一级菜单结果 "+result );
-            result = result.split(",")[0];
-            i.putExtra("result",result);
-            i.putExtra("_ids", clientId + "," + clientEntryList.get(position).getID()+","+clientEntryList.get(position).getClientCode());
-            setResult(mRequestCode, i);// mRequestCode
-            finish();
+        Intent i = new Intent();
+        Log.e("lxs", "onItemClick:一级菜单结果 "+result );
+        result = result.split(",")[0];
+        i.putExtra("result",result);
+        i.putExtra("_ids", clientId + "," + clientEntryList.get(position).getID()+","+clientEntryList.get(position).getClientCode());
+        setResult(ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT, i);
+        finish();
 //        }
 //        else {
 //            Utils.start_ActivityResult(ParentSelectorActivity.this, ChildSelectorActivity.class, mRequestCode,
@@ -218,8 +218,8 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                         adapter.setListener(ParentSelectorActivity.this);
                         layoutCommSwipeRefreshRecyclerview.setAdapter(adapter);
                         if (adapterList != null && olderMsg != null && olderMsg.contains(",")){
-                                LOG.e(ParentSelectorActivity.this, "olderMsg = " + olderMsg);
-                                String []msgs = olderMsg.split(",");
+                            LOG.e(ParentSelectorActivity.this, "olderMsg = " + olderMsg);
+                            String []msgs = olderMsg.split(",");
                             if (msgs != null && msgs.length > 0 && !msgs[0].equals("")){
                                 int index = Arrays.binarySearch(adapterList.toArray(),msgs[0]);
                                 if (index >=0 ){
@@ -242,7 +242,6 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
         if (data == null){
             return;
         }
-
         setResult(resultCode,data);
         finish();
     }

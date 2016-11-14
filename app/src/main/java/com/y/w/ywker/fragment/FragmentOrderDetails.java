@@ -298,7 +298,8 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
         mapModify.put("UpdateDime", TimeUtils.getTime(System.currentTimeMillis()));
         mapModify.put("UpdateDetail", msg);
         mapModify.put("UpdateType", "UpdateState");
-        mapModify.put("SendAdr", "");
+//        mapModify.put("SendAdr", "");
+        mapModify.put("SendAdr", locationArr);
         for (String key : mapModify.keySet()) {
             LOG.e(getContext(), key + " : " + mapModify.get(key));
         }
@@ -396,11 +397,11 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
 //                                   isReplay = true;
 //                                }
 
-                                if( !locationArr.isEmpty()){//isReplay &&
-                                    map.put("Detail",locationArr);
-                                    httpManagerUtils.setUrl(ConstValues.REPLAY_ORDERS_URL);
-                                    httpManagerUtils.startPostRequest(map);
-                                }
+//                                if( !locationArr.isEmpty()){//isReplay &&
+//                                    map.put("Detail",locationArr);
+//                                    httpManagerUtils.setUrl(ConstValues.REPLAY_ORDERS_URL);
+//                                    httpManagerUtils.startPostRequest(map);
+//                                }
                                 break;
                             }
                         }

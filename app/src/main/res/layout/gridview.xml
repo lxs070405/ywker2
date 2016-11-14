@@ -27,7 +27,7 @@
             -->
             <com.y.w.ywker.views.MyGridView
                 android:id="@+id/gridview"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:numColumns="auto_fit"
                 android:columnWidth="100dp"

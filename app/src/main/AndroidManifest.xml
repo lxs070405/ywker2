@@ -442,17 +442,22 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/YwkerBaseTheme" />
-        <activity android:name=".activity.WeiXiuOrderDetailActivity"
+        <activity
+            android:name=".activity.WeiXiuOrderDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/YwkerBaseTheme"
-            />
-        <activity android:name=".activity.ActivityWeXiuZongJie"
+            android:theme="@style/YwkerBaseTheme" />
+        <activity
+            android:name=".activity.ActivityWeXiuZongJie"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/YwkerBaseTheme"
-            />
-        <activity android:name=".activity.ActivityWeiXiuOrderListPage"
+            android:theme="@style/YwkerBaseTheme" />
+        <activity
+            android:name=".activity.ActivityWeiXiuOrderListPage"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/YwkerBaseTheme" />
+        <activity android:name=".activity.ActivityYinDaoPage"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/YwkerBaseTheme"

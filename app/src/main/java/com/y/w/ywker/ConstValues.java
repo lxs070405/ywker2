@@ -99,9 +99,10 @@ public class ConstValues {
      * 基础URL
      */
 //    public static String BASE_URL = "http://123.56.153.172:8888/";
-    public static String BASE_URL = "http://123.56.153.172:8801/";
-//    public static String BASE_URL = "http://192.168.1.149:8801/";
+//    public static String BASE_URL = "http://123.56.153.172:8801/";
+    public static String BASE_URL = "http://192.168.1.149:8801/";
 //    public static String BASE_URL = "http://192.168.1.15:8801/";
+//    public static String BASE_URL = "http://192.168.1.17:8801/";
 
 
 

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bannerlayout/bannerlayout.iml" filepath="$PROJECT_DIR$/bannerlayout/bannerlayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/imageselectorlibrary/imageselectorlibrary.iml" filepath="$PROJECT_DIR$/imageselectorlibrary/imageselectorlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/stickyrecyclerviewlibrary/stickyrecyclerviewlibrary.iml" filepath="$PROJECT_DIR$/stickyrecyclerviewlibrary/stickyrecyclerviewlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/ywker.iml" filepath="$PROJECT_DIR$/ywker.iml" />

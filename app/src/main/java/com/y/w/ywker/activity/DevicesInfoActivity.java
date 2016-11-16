@@ -446,8 +446,8 @@ public class DevicesInfoActivity extends SuperActivity {
 //                break;
             case R.id.devices_info_client_layout://客户
 //                ConstValues.isnew = false;
-                Utils.start_ActivityResult(this, ParentSelectorActivity.class, ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,
-                        new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择客户")});
+               Utils.start_ActivityResult(this, ParentSelectorActivity.class, ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,//ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,
+                         new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择客户")});
                 break;
 
             case R.id.devices_info_pinpai_layout:
@@ -579,6 +579,11 @@ public class DevicesInfoActivity extends SuperActivity {
         httpManagerUtils = new YHttpManagerUtils(this, ConstValues.BIND_DEVICES_URL, new MyHandler(this, 1), getClass().getSimpleName());
         HashMap<String, String> bindmapdata = new HashMap<String, String>();
         bindmapdata.put("ID", codeId);
+        String astr = bindMap.get("AssetID");
+        Log.e("lxs", "bindDevices:astr---- "+astr);
+        if(astr.contains("$")){
+            bindmapdata.put("AssetID",astr.replace("$",""));
+        }else
         bindmapdata.put("AssetID", bindMap.get("AssetID"));
         bindmapdata.put("AssetXuLie", bindMap.get("AssetXuLie"));
         bindmapdata.put("Remark", tvXunJianDsc.getText().toString());
@@ -892,6 +897,7 @@ public class DevicesInfoActivity extends SuperActivity {
                 break;
 
             case ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT:
+                Log.e("lxs", "onActivityResult:设备绑定 "+result+",ids---"+ids );
                 if (result != null) {
                     devicesInfoClientNameTv.setText(result);
                 }
@@ -904,42 +910,59 @@ public class DevicesInfoActivity extends SuperActivity {
                         edit.putString("ClientID", clientIds[0]);
                         edit.putString("ClientCode", clientIds[1]);
                         edit.commit();
+                    }else {
+                        bindMap.put("ClientID", clientIds[0]);
                     }
+                    result = null;
+                    ids = null;
                 }
                 break;
             case ConstValues.RESULT_FOR_DEVICES_TYPE:
 //                Log.e("lxs", "设备详情页onActivityResult: " + "设备类型名称返回" + result
 //                +"keyTypeID---->"+ids);
-                devicesInfoNameTv.setText(result);
+
+
                 if(ids != null){
                     bindMap.put("keyTypeID", ids);
+                    devicesInfoNameTv.setText(result);
                 }
 
+                result = null;
+                ids = null;
                 break;
-            case ConstValues.RESULT_FOR_DEVICES_NAME:
-
-                if (ids != null && !ids.equals("")) {
-                    bindMap.put("AssetID", ids);
-                }
+//            case ConstValues.RESULT_FOR_DEVICES_NAME:
 //
-//                if (result != null && !result.equals("")) {
-//                    bindMap.put("AssetName", result);
-//                    devicesInfoNameTv.setText(result);
-//                    edit.putString("AseetName", result);
-//                    edit.commit();
+//                if (ids != null && !ids.equals("")) {
+////                    String[] str = null;
+////                    if(ids.contains("$")){
+////                        str= ids.split("$");
+////                        bindMap.put("AssetID", str[0]);
+////                    }else
+//                    bindMap.put("AssetID", ids);
 //                }
-                break;
+////
+////                if (result != null && !result.equals("")) {
+////                    bindMap.put("AssetName", result);
+////                    devicesInfoNameTv.setText(result);
+////                    edit.putString("AseetName", result);
+////                    edit.commit();
+////                }
+//                break;
             case ConstValues.RESULT_FOR_DEVICES_PINPAI:
+                Log.e("lxs", "onActivityResult: 品牌"+ids+",result----"+result+",AssetID---"+AssetID );
                 if (ids != null && !ids.equals("")) {
                     bindMap.put("BrandID", ids);
+                    if (result != null && !result.equals("")) {
+                        devicesInfoPinpaiTv.setText(result);
+//                        edit.putString("PinPai", result);
+//                        edit.commit();
+                    }
                 }
-                if (result != null && !result.equals("")) {
-                    devicesInfoPinpaiTv.setText(result);
-                    edit.putString("PinPai", result);
-                    edit.commit();
-                }
+                result = null;
+                ids = null;
                 break;
             case ConstValues.RESULT_FOR_DEVICES_XINGHAO://型号
+                Log.e("lxs", "onActivityResult: "+ids+",result----"+result+",AssetID---"+AssetID );
                 if (ids != null && !ids.equals("")) {
                     bindMap.put("ModelID", ids);
                     if(AssetID != null){
@@ -950,23 +973,25 @@ public class DevicesInfoActivity extends SuperActivity {
                         }else {
                             bindMap.put("AssetID",str[0]);
                         }
-
+                        if (result != null && !result.equals("")) {
+                            devicesInfoXinghaoTv.setText(result);
+//                            edit.putString("XingHao", result);
+//                            edit.commit();
+                        }
                     }
 //                    bindMap.put("AssetID",AssetID);
                     Log.e("lxs", "onActivityResult:AssetID "+AssetID );
                 }
 
-                if (result != null && !result.equals("")) {
-                    devicesInfoXinghaoTv.setText(result);
-                    edit.putString("XingHao", result);
-                    edit.commit();
-                }
+
                 break;
             case ConstValues.RESULT_FOR_DEVICES_XULIEHAO:
                 if (result != null && !result.equals("")) {
                     devicesInfoXuliehaoTv.setText(result);
                     bindMap.put("AssetXuLie", result);
                 }
+                result = null;
+                ids = null;
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);

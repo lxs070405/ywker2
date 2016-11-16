@@ -34,7 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ActivityXunJianLook extends SuperActivity implements AdapterView.OnItemClickListener {
+public class ActivityXunJianLook extends SuperActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
 
     @Bind(R.id.layout_comm_toolbar)
@@ -67,7 +67,7 @@ public class ActivityXunJianLook extends SuperActivity implements AdapterView.On
         mainId = offlineDataManager.getMainID();
        String position =  getIntent().getStringExtra("position");
         ConstValues.planId = position;
-        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_XUNJIAN_LISTDetail, position,mainId), new MyHandler(this), this.getClass().getName());
+        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_XUNJIAN_LISTDetail, position,mainId), new MyHandler(this,1), this.getClass().getName());
         httpManagerUtils.startRequest();
 
     }
@@ -79,6 +79,15 @@ public class ActivityXunJianLook extends SuperActivity implements AdapterView.On
                 new YBasicNameValuePair("AssetRecordId",list.get(position).getAssetRecordId())});
     }
 
+    private XunJianDetailEntry deletEntry;
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+         deletEntry = list.get(position);
+        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_deletxunjianshebei_URL, list.get(position).getAssetRecordId()), new MyHandler(this,2), this.getClass().getName());
+        httpManagerUtils.startRequest();
+        return true;
+    }
 
 
     private class MyAdapter extends BaseAdapter{
@@ -172,8 +181,10 @@ public class ActivityXunJianLook extends SuperActivity implements AdapterView.On
 
     class MyHandler extends Handler {
         WeakReference<AppCompatActivity> mFragmentReference;
-        public MyHandler(AppCompatActivity activitiy) {
+        int i;
+        public MyHandler(AppCompatActivity activitiy,int i) {
             mFragmentReference = new WeakReference<AppCompatActivity>(activitiy);
+            this.i = i;
         }
         @Override
         public void handleMessage(Message msg) {
@@ -189,6 +200,14 @@ public class ActivityXunJianLook extends SuperActivity implements AdapterView.On
                     case ConstValues.MSG_JSON_FORMAT_WRONG:
                         break;
                     case ConstValues.MSG_SUCESS:
+                        if(i == 2){
+                            Toast.makeText(ActivityXunJianLook.this,"删除成功",Toast.LENGTH_SHORT).show();
+                            if(myadapter != null && deletEntry != null && list != null ){
+                                list.remove(deletEntry);
+                                myadapter.notifyDataSetChanged();
+                            }
+                            return;
+                        }
                         handleData((String) msg.obj);
                         break;
                 }
@@ -212,6 +231,7 @@ public class ActivityXunJianLook extends SuperActivity implements AdapterView.On
                 myadapter = new MyAdapter();
                 listview.setAdapter(myadapter);
                 listview.setOnItemClickListener(this);
+                listview.setOnItemLongClickListener(this);
             }
 
         }

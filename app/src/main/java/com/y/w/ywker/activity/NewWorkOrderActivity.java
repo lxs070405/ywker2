@@ -610,7 +610,7 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
 //                }
 //                break;
             case ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT://客户
-
+                Log.e("lxs", "onActivityResult:clientIds "+result+",ids--"+ids );
                 if (result != null) {
 //                    String results[] = result.split(",");
 //                    if (results != null && results.length == 3) {
@@ -639,6 +639,8 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
                 }
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT://受理服务组
+
+
                 if (ids != null && !ids.equals("")) {
                     String[] idssplit = ids.split(",");
                     map.put(keyTeamId, idssplit[0]);

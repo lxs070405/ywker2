@@ -159,11 +159,12 @@
                     android:layout_height="1dp"
                     android:background="#c8c8c8"
                     />
+
                 <LinearLayout
                     android:id="@+id/ll_xuliehao"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -182,11 +183,12 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="hf200018998989"
+                        android:text="Lv2220"
                         android:textSize="16sp"
                         android:textColor="#c7c7c7"
                         />
                 </LinearLayout>
+
                 <View
 
                     android:layout_width="match_parent"

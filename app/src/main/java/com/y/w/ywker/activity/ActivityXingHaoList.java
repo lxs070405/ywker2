@@ -52,12 +52,13 @@ public class ActivityXingHaoList extends SuperActivity {
     private String TypeID;
     private String BrandID;
     private String ClientID;
+    private String mode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xing_hao_list);
         ButterKnife.bind(this);
-        String mode = getIntent().getStringExtra("mode");
+       mode = getIntent().getStringExtra("mode");
         MainID = getIntent().getStringExtra("MainID");
         if (mode.equals("1")) {
             tvTitle.setText("选择品牌");
@@ -131,7 +132,10 @@ public class ActivityXingHaoList extends SuperActivity {
                                 parseModeData(json);
                             }
                             if(type == 4){
-                                if(intent != null){
+                                if(intent != null&&  mode.equals("2")){
+                                  Intent  intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
+                                    intent.putExtra("_ids", modleId);
+                                    intent.putExtra("result", modleName);
                                     intent.putExtra("AssetID",(String)msg.obj);
                                     Log.e("lxs", "handleMessage: 型号页面传递"+(String)msg.obj);
                                     setResult(ConstValues.RESULT_FOR_DEVICES_XINGHAO, intent);
@@ -157,13 +161,20 @@ public class ActivityXingHaoList extends SuperActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String modleId = modeEntryList.get(position).getID();
                     String modleName = modeEntryList.get(position).getBrandName();
-                    Intent intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
-                    intent.putExtra("_ids", modleId);
-                    intent.putExtra("result", modleName);
+
 //                    Log.e("lxs", "设备品牌页: parseModeData" + "设备品牌名称返回" + modleId
 //                            +"BrandID---->"+modleId);
-                    setResult(ConstValues.RESULT_FOR_DEVICES_PINPAI, intent);
-                    finish();
+                    if(mode.equals("1")){
+                        Intent intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
+                        intent.putExtra("_ids", modleId);
+                        intent.putExtra("result", modleName);
+                        setResult(ConstValues.RESULT_FOR_DEVICES_PINPAI, intent);
+                        modleId= "";
+                        modleName= "";
+                        finish();
+
+                    }
+
                 }
             });
         }
@@ -181,7 +192,8 @@ public class ActivityXingHaoList extends SuperActivity {
         xinghaoEntryList = gson.fromJson(json, type);
         setLisener();
     }
-
+    String modleId;
+    String modleName;
     private void setLisener() {
         if (xinghaoEntryList != null && xinghaoEntryList.size() > 0) {
             Log.e("lxs", "parseData: "+xinghaoEntryList.size());
@@ -189,13 +201,11 @@ public class ActivityXingHaoList extends SuperActivity {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String modleId = xinghaoEntryList.get(position).getID();
-                    String modleName = xinghaoEntryList.get(position).getModelName();
+                    modleId = xinghaoEntryList.get(position).getID();
+                     modleName = xinghaoEntryList.get(position).getModelName();
                     httpManagerUtils = new YHttpManagerUtils(ActivityXingHaoList.this, String.format(ConstValues.GET_ASEETID_URL, MainID, TypeID, BrandID, modleId,ClientID), new MyHandler(ActivityXingHaoList.this, 4), this.getClass().getName());
                     httpManagerUtils.startRequest();
-                    intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
-                    intent.putExtra("_ids", modleId);
-                    intent.putExtra("result", modleName);
+
                 }
             });
         }

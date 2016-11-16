@@ -50,6 +50,7 @@ public class ActivityXunJian extends SuperActivity {
         OfflineDataManager offlineDataManager = OfflineDataManager.getInstance(this);
         mainId = offlineDataManager.getMainID();
         userId = offlineDataManager.getUserID();
+
         xunjianViewpager.setAdapter(new XunJianFragmentPagerAdapter(getSupportFragmentManager()));
         xunjainTab.setViewPager(xunjianViewpager);
     }

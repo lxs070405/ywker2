@@ -99,8 +99,8 @@ public class ConstValues {
      * 基础URL
      */
 //    public static String BASE_URL = "http://123.56.153.172:8888/";
-//    public static String BASE_URL = "http://123.56.153.172:8801/";
-    public static String BASE_URL = "http://192.168.1.149:8801/";
+    public static String BASE_URL = "http://123.56.153.172:8801/";
+//    public static String BASE_URL = "http://192.168.1.149:8801/";
 //    public static String BASE_URL = "http://192.168.1.15:8801/";
 //    public static String BASE_URL = "http://192.168.1.17:8801/";
 
@@ -191,6 +191,7 @@ public class ConstValues {
      */
     public static String GET_XUNJIAN_LISTDetail = BASE_URL + "InspectPlan/getInspectPlanDetail?planId=%s&mainId=%s";
     public static String GET_DETAIL_URL = BASE_URL + "InspectPlan/LookInspectAsset?AssetRecordId=%s";
+    public static String GET_deletxunjianshebei_URL = BASE_URL + "InspectPlan/InspectionDeleteAsset?AssetRecordId=%s";
     public static String GET_JIHUA_URL = BASE_URL + "InspectPlan/GetNextInspectData?PlanId=%s";
     public static String POST_START_XUNJIAN = BASE_URL + "InspectPlan/StartExecutePlan";
     public static String POST_OVER_XUNJIAN = BASE_URL + "InspectPlan/CompleteInspection";

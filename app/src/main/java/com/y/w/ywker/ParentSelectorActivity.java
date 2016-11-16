@@ -135,7 +135,7 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
 
         String clientId = "";
         String result = "";
-        int mRequestCode = -1;
+        int mRequestCode = 2;
         switch (requestCode){
             case ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT:
                 clientId = clientEntryList.get(position).getID();
@@ -145,6 +145,13 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                 result += ",";
                 result += clientEntryList.get(position).getClientAdr();
                 mRequestCode = ConstValues.RESULT_FOR_PICKER_CLIENT_CHILDREN;
+                Intent i = new Intent();
+                Log.e("lxs", "onItemClick:一级菜单结果 "+result+ clientId  );
+                result = result.split(",")[0];
+                i.putExtra("result",result);
+                i.putExtra("_ids", clientId + "," + clientEntryList.get(position).getID()+","+clientEntryList.get(position).getClientCode());
+                setResult(ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT, i);
+                finish();
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT:
                 clientId = servicesEntryList.get(position).getID();
@@ -152,16 +159,23 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                 edit.putString("ClientCode1", clientEntryList.get(position).getClientCode());
                 edit.commit();
                 mRequestCode = ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN;
+                Intent in = new Intent();
+                Log.e("lxs", "onItemClick:一级菜单结果 "+result+ clientId  );
+                result = result.split(",")[0];
+                in.putExtra("result",result);
+                in.putExtra("_ids", clientId + "," + clientEntryList.get(position).getID()+","+clientEntryList.get(position).getClientCode());
+                setResult(ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN, in);
+                finish();
                 break;
         }
 //        if(ConstValues.isnew){
-        Intent i = new Intent();
-        Log.e("lxs", "onItemClick:一级菜单结果 "+result );
-        result = result.split(",")[0];
-        i.putExtra("result",result);
-        i.putExtra("_ids", clientId + "," + clientEntryList.get(position).getID()+","+clientEntryList.get(position).getClientCode());
-        setResult(ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT, i);
-        finish();
+//        Intent i = new Intent();
+//        Log.e("lxs", "onItemClick:一级菜单结果 "+result );
+//        result = result.split(",")[0];
+//        i.putExtra("result",result);
+//        i.putExtra("_ids", clientId + "," + clientEntryList.get(position).getID()+","+clientEntryList.get(position).getClientCode());
+//        setResult(mRequestCode, i);
+//        finish();
 //        }
 //        else {
 //            Utils.start_ActivityResult(ParentSelectorActivity.this, ChildSelectorActivity.class, mRequestCode,

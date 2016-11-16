@@ -413,26 +413,32 @@ public class ActivityAddAseetXunJian extends SuperActivity {
                         break;
                     case ConstValues.MSG_SUCESS:
                         if (i == 1) {
-                            dialogTip = new MaterialDialog(ActivityAddAseetXunJian.this)
-                                    .setTitle("提示")
-                                    .setMessage("该设备已巡检,是否继续巡检")
-                                    .setPositiveButton("是", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {//继续扫描
-                                            finish();
-                                            Utils.start_Activity(ActivityAddAseetXunJian.this, BindDevicesActivity.class, new YBasicNameValuePair[]{
-                                                    new YBasicNameValuePair("fromSource", "3")});
-                                        }
-                                    }).setNegativeButton("否", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            ActivityManager.getInstance().finshActivities(ActivityXunJianLook.class);
-                                            Utils.start_Activity(ActivityAddAseetXunJian.this, ActivityXunJianLook.class, new YBasicNameValuePair[]{
-                                                    new YBasicNameValuePair("position", ConstValues.planId)});
-                                            finish();
-                                        }
-                                    });
-                            dialogTip.show();
+                            String json = (String)msg.obj;
+                            if(json.equals("-1")){
+                                Toast.makeText(getBaseContext(), "该设备已增加", Toast.LENGTH_SHORT).show();
+                            }else {
+                                dialogTip = new MaterialDialog(ActivityAddAseetXunJian.this)
+                                        .setTitle("提示")
+                                        .setMessage("该设备已巡检,是否继续巡检")
+                                        .setPositiveButton("是", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {//继续扫描
+                                                finish();
+                                                Utils.start_Activity(ActivityAddAseetXunJian.this, BindDevicesActivity.class, new YBasicNameValuePair[]{
+                                                        new YBasicNameValuePair("fromSource", "3")});
+                                            }
+                                        }).setNegativeButton("否", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                ActivityManager.getInstance().finshActivities(ActivityXunJianLook.class);
+                                                Utils.start_Activity(ActivityAddAseetXunJian.this, ActivityXunJianLook.class, new YBasicNameValuePair[]{
+                                                        new YBasicNameValuePair("position", ConstValues.planId)});
+                                                finish();
+                                            }
+                                        });
+                                dialogTip.show();
+                            }
+
                         }
                         break;
                 }

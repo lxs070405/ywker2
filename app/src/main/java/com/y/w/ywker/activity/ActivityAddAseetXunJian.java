@@ -295,11 +295,11 @@ public class ActivityAddAseetXunJian extends SuperActivity {
     /**
      * 设备状态 1正常2故障
      */
-    private int AssetStatus;
+    private int AssetStatus = 0;
     /**
      * 外观描述 1，正常；2，破旧
      */
-    private int OutSideStatus;
+    private int OutSideStatus = 0;
     /**
      * 巡检描述
      */
@@ -316,10 +316,6 @@ public class ActivityAddAseetXunJian extends SuperActivity {
             case R.id.tv_XunJianDsc:
                 break;
             case R.id.btn_add:
-                proDialog = new ProgressDialog(this);
-                proDialog.setTitle("提示");
-                proDialog.setMessage("正在提交");
-                proDialog.show();
                 postData();
                 break;
             case R.id.rb_RunGood:
@@ -334,7 +330,6 @@ public class ActivityAddAseetXunJian extends SuperActivity {
             case R.id.rb_FaceBad:
                 OutSideStatus = 2;
                 break;
-
         }
     }
 
@@ -344,6 +339,14 @@ public class ActivityAddAseetXunJian extends SuperActivity {
      */
     private void postData() {
         AssetDetail = tvXunJianDsc.getText().toString();
+        if(AssetStatus == 0 ){
+            Toast.makeText(this,"请填写设备状态",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(OutSideStatus == 0 ){
+            Toast.makeText(this,"请填写外观描述",Toast.LENGTH_SHORT).show();
+            return;
+        }
         map.put("AssetStatus", AssetStatus + "");
         map.put("OutSideStatus", OutSideStatus + "");
         map.put("AssetDetail", AssetDetail);
@@ -353,6 +356,10 @@ public class ActivityAddAseetXunJian extends SuperActivity {
             Toast.makeText(this,"请填写巡检编号",Toast.LENGTH_SHORT).show();
             return;
         }
+        proDialog = new ProgressDialog(this);
+        proDialog.setTitle("提示");
+        proDialog.setMessage("正在提交");
+        proDialog.show();
         map.put("PagerOrderCode",code);
         Iterator iter = datapicmap.entrySet().iterator();
         while (iter.hasNext()) {
@@ -438,7 +445,6 @@ public class ActivityAddAseetXunJian extends SuperActivity {
                                         });
                                 dialogTip.show();
                             }
-
                         }
                         break;
                 }

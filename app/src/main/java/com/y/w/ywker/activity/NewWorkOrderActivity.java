@@ -158,7 +158,6 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
     private String ids ="";
     @OnClick({R.id.new_order_public})
     public void onPublic(View view) {
-//        newOrderPublic.setClickable(false);
         map.put(keySheetDetails, etDesc.getText().toString().trim());
 
 
@@ -186,7 +185,6 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
         /**
          * 如果是工单状态未受理,有没有选择受理人
          */
-
         if (!newOrderArrrow4Text2.getText().toString().equals("未受理")) {
             if (map.get(keyTeamerId).equals("")) {
                 Toast.makeText(getBaseContext(), "请选择受理人", Toast.LENGTH_SHORT).show();
@@ -316,14 +314,9 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
         map.put(keyManId, String.valueOf(""));
         map.put(keyClientConactId, String.valueOf(""));
         map.put(keySheetTitle, String.valueOf(""));
-//        map.put(keyClientId, String.valueOf(""));
         map.put(keySheetDetails, String.valueOf(""));
         map.put(keySheetLevel, "03");
-//        if(newOrderArrrow4Text2.getText().toString().equals("无")){
         map.put(keySheetState, "1");
-//        }else{
-//            map.put(keySheetState, "2");
-//        }
         map.put(keySheetType, typeid);
         map.put(keyTeamerId, String.valueOf(""));
         map.put(keyTeamId, String.valueOf(""));
@@ -378,15 +371,10 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
                 newOrderArrrow4Text2.setText("已受理");
             } else if (_outMap.get("from").equals("devices")) {//来自设备入口发布工单
                 map.put(keyClientId, (String) _outMap.get("ClientID"));
-//                AssetID =  (String)_outMap.get("AssetID");
                 AssetID = getIntent().getStringExtra("AssetID");
                 Log.e("lxs", "onCreate: "+ AssetID );
                 map.put(keyClientConactId, (String) _outMap.get("ContactID"));
                 newOrderArrrow3Text2.setText((String) _outMap.get("ClientName"));
-//                newOrderLClientAdress.setVisibility(View.VISIBLE);
-//                newOrderLClientConnect.setVisibility(View.VISIBLE);
-//                newOrderClientAdressText2.setText((String) _outMap.get("ClientAdress"));
-//                newOrderClientConnectText2.setText((String) _outMap.get("ContactName"));
             }
         }
     }

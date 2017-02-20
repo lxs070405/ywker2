@@ -43,6 +43,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 新增维修工单
+ */
 public class NewWeiXiuOrderActivity extends SuperActivity {
 
 
@@ -101,15 +104,8 @@ public class NewWeiXiuOrderActivity extends SuperActivity {
         ButterKnife.bind(this);
         mainId = OfflineDataManager.getInstance(this).getMainID();
         initMap();
-//        getRenYuanId();
     }
 
-    private void getRenYuanId() {
-
-        userId =  OfflineDataManager.getInstance(this).getUserID();
-        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.CONNTECTINON_URL, mainId), new MyHandler(this,2), this.getClass().getName());
-        httpManagerUtils.startRequest();
-    }
     private void initMap() {
         //初始化map
         map.put(keyRepaireSummary,"");
@@ -182,9 +178,7 @@ public class NewWeiXiuOrderActivity extends SuperActivity {
                 break;
         }
     }
-    private String ids ="";
     private void PostData() {
-
         map.put(keySheetDetails, etDesc.getText().toString().trim());//获取描述信息
         if (map.get(keyTypeID).equals("")) {
             Toast.makeText(this, "请填写设备类型信息", Toast.LENGTH_SHORT).show();
@@ -220,16 +214,6 @@ public class NewWeiXiuOrderActivity extends SuperActivity {
         }
         map.put(keyLianXiRen,lianxiren);
         map.put(keyPhone,phone);
-//        if(userEntryList != null &&userEntryList.size()>0){
-//            for (int i = 0; i < userEntryList.size(); i++) {
-//                if(userId.equals(userEntryList.get(i).getID())){
-//                    continue;
-//                }
-//                ids += userEntryList.get(i).getID() ;
-//                ids += ",";
-//            }
-//            map.put(keyFollowId, ids);
-//        }
         proDialog = new ProgressDialog(this);
         proDialog.setTitle("提示");
         proDialog.setMessage("正在发布");

@@ -28,7 +28,7 @@ public class HttpNetUtils {
     }
 
     /**
-     * 该不会开启异步线程。
+     * 开启同步线程
      * @param request
      * @return
      * @throws IOException
@@ -84,7 +84,6 @@ public class HttpNetUtils {
      * @param value
      * @return
      */
-
     public static String attachHttpGetParam(String url, String name, String value){
         return url + "?" + name + "=" + value;
     }
@@ -96,6 +95,7 @@ public class HttpNetUtils {
      * @throws Exception
      */
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     public static void postData(String url,Map<String,String> map,Callback responseCallback) throws Exception {
         Gson gson = new Gson();
         String json = gson.toJson(map);

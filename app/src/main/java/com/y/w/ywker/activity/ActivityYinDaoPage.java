@@ -22,6 +22,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 引导页
+ */
 public class ActivityYinDaoPage extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     @Bind(R.id.viewPager)
     ViewPager viewPager;

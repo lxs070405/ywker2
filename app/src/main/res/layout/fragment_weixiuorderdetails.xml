@@ -74,6 +74,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_ShouLiRen"
                     style="@style/comm_new_order_comm_layout_style"
                     android:layout_marginTop="16dp">
 
@@ -85,7 +86,6 @@
                     <TextView
                         android:id="@+id/tv_ShouLiRen"
                         style="@style/comm_right_textview_style"
-                        android:text="技术组,李晓帅"
                         />
 
                     <ImageView

@@ -66,7 +66,6 @@
         android:textColor="@color/commo_text_color"
         />
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/ll_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,7 +76,7 @@
         >
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
                 android:visibility="gone"
@@ -88,7 +87,7 @@
                 />
             <ImageView
                 android:visibility="gone"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="3dp"
                 android:id="@+id/image1"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
@@ -96,7 +95,7 @@
                 />
             <ImageView
                 android:visibility="gone"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="3dp"
                 android:id="@+id/image2"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
@@ -104,14 +103,32 @@
                 />
         </LinearLayout>
 
-        <ImageView
-            android:visibility="gone"
-            android:id="@+id/image4"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:src="@drawable/icon_addpic_unfocused"
-            />
     </LinearLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/ll_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/picshowrecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/picrecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/image4"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon_addpic_unfocused"
+                />
+        </RelativeLayout>
+
 
       <!--  <com.y.w.ywker.views.MyGridView
             android:layout_marginTop="28dp"
@@ -165,7 +182,6 @@
             android:orientation="vertical"
             android:overScrollMode="never"
             />
-
     </LinearLayout>
 
     <RelativeLayout

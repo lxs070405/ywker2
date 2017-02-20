@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,8 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     TextView btnAddAseet;
     @Bind(R.id.btn_caozuo)
     Button btnCaozuo;
+    @Bind(R.id.ll_ShouLiRen)
+    LinearLayout llShouLiRen;
     private String orderid = "";
 
     public int getMyRole() {
@@ -102,12 +105,14 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
         ButterKnife.bind(this, v);
         offlineDataManager = OfflineDataManager.getInstance(getContext());
         Gson gson = new Gson();
-        userName =gson.fromJson(offlineDataManager.getUser(), UserEntry.class).getUserName();
+        userName = gson.fromJson(offlineDataManager.getUser(), UserEntry.class).getUserName();
         initView();
         onStart();
         return v;
     }
+
     String userName;
+
     private void initView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager((WeiXiuOrderDetailActivity) getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -129,7 +134,8 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
             httpManagerUtils.startRequest();
         }
     }
-    public void reLodeData(){
+
+    public void reLodeData() {
         if (orderid != null && !orderid.equals("")) {
             httpManagerUtils = new YHttpManagerUtils(getContext(), String.format(ConstValues.WEIXIU_ORDERDETAIL_URL, orderid), new MyHandler(this, 1), this.getClass().getName());
             httpManagerUtils.startRequest();
@@ -169,6 +175,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
 
     OfflineDataManager offlineDataManager;
     String userId = "";
+
     /**
      * btn事件处理 修改工单状态
      */
@@ -187,7 +194,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
             LOG.e(getContext(), key + " : " + mapModify.get(key));
         }
         httpManagerUtils.startPostRequest(mapModify);
-        if(msg.equals("5")){
+        if (msg.equals("5")) {
             btnCaozuo.setVisibility(View.GONE);
         }
     }
@@ -199,18 +206,19 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     }
 
     private MaterialDialog dialogTip;
+
     private void TiShiAddAseet(String msg, final String lftbtn) {
         String str = "";
-        if(lftbtn.equals("增加设备")){
+        if (lftbtn.equals("增加设备")) {
             str = "取消";
         }
-         dialogTip = new MaterialDialog(getContext())
+        dialogTip = new MaterialDialog(getContext())
                 .setTitle("提示")
                 .setMessage(msg)
                 .setPositiveButton(lftbtn, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(lftbtn.equals("增加设备")){
+                        if (lftbtn.equals("增加设备")) {
                             AddAseet();
                         }
 
@@ -224,6 +232,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
                 });
         dialogTip.show();
     }
+
     boolean isfinish = false;
     private HashMap<String, String> map = new HashMap<String, String>();
 
@@ -231,32 +240,32 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_addAseet:
-               AddAseet();
+                AddAseet();
                 break;
             case R.id.btn_caozuo:
-                if(assetList == null ||assetList.size() == 0){
+                if (assetList == null || assetList.size() == 0) {
                     String msg = "请添加维修的设备然后开始处理";
-                    TiShiAddAseet(msg,"增加设备");
+                    TiShiAddAseet(msg, "增加设备");
                     return;
                 }
                 if (states.equals("已受理")) {
                     msgstatus = "3";
                 }
                 if (states.equals("处理中")) {
-                    if(!isfinish){
-                        TiShiAddAseet("请确认维修进度是否已完成，维修信息是否完整","确定");
+                    if (!isfinish) {
+                        TiShiAddAseet("请确认维修进度是否已完成，维修信息是否完整", "确定");
                         return;
                     }
                     msgstatus = "5";
                 }
-                updataOderstate(msgstatus,offlineDataManager.getUserID());//处理
+                updataOderstate(msgstatus, offlineDataManager.getUserID());//处理
                 btnCaozuo.setClickable(false);
                 break;
         }
     }
 
     private void AddAseet() {
-        if (role  != 1) {
+        if (role != 1) {
             Toast.makeText(getContext(), "您没有操作权限", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -271,15 +280,15 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
         String id = devicedata.get(position).split(",")[2];
         WeiXiuOrderDetailEntry.AssetListEntity listEntity = shebeiDatamap.get(id);
         Intent intent = new Intent(getActivity(), ActivityWeXiuZongJie.class);
-        intent.putExtra("TaskID",orderid);
-        intent.putExtra("myRole",role);
-        intent.putExtra("aseetId",id);
-        intent.putExtra("aseetName",aseetName);
-        intent.putExtra("sourceId",listEntity.getID());
-        intent.putExtra("zongjie",listEntity.getRepairSummary());
-        intent.putExtra("RepairSchedule",listEntity.getRepairSchedule());
-        intent.putExtra("SpdName",listEntity.getSpdName());
-        Log.e("lxs", "onItemClick: sourceId--->"+listEntity.getID() );
+        intent.putExtra("TaskID", orderid);
+        intent.putExtra("myRole", role);
+        intent.putExtra("aseetId", id);
+        intent.putExtra("aseetName", aseetName);
+        intent.putExtra("sourceId", listEntity.getID());
+        intent.putExtra("zongjie", listEntity.getRepairSummary());
+        intent.putExtra("RepairSchedule", listEntity.getRepairSchedule());
+        intent.putExtra("SpdName", listEntity.getSpdName());
+        Log.e("lxs", "onItemClick: sourceId--->" + listEntity.getID());
         startActivity(intent);
     }
 
@@ -297,13 +306,13 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
         }
         String id = devicedata.get(position).split(",")[2];
         WeiXiuOrderDetailEntry.AssetListEntity listEntity = shebeiDatamap.get(id);
-        String taskAssetId = listEntity.getID()+"";
+        String taskAssetId = listEntity.getID() + "";
         RemoveSheBeiData(taskAssetId);
         mAdapter.removeData(position);
     }
 
     private void RemoveSheBeiData(String taskAssetId) {
-        httpManagerUtils = new YHttpManagerUtils(getContext(), String.format(ConstValues.WEIXIU_ORDERDDeleteSheBei_URL, taskAssetId), new MyHandler(this,4), this.getClass().getName());
+        httpManagerUtils = new YHttpManagerUtils(getContext(), String.format(ConstValues.WEIXIU_ORDERDDeleteSheBei_URL, taskAssetId), new MyHandler(this, 4), this.getClass().getName());
         httpManagerUtils.startRequest();
     }
 
@@ -325,19 +334,19 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
             if (fragment != null) {
                 switch (msg.what) {
                     case ConstValues.MSG_FAILED:
-                        if(btnCaozuo != null){
+                        if (btnCaozuo != null) {
                             btnCaozuo.setClickable(true);
                         }
 
                     case ConstValues.MSG_ERROR:
-                        if(btnCaozuo != null){
+                        if (btnCaozuo != null) {
                             btnCaozuo.setClickable(true);
                         }
                         if (i == 1)
                             Toast.makeText(getContext(), "获取工单信息失败", Toast.LENGTH_SHORT).show();
                         break;
                     case ConstValues.MSG_NET_INAVIABLE:
-                        if(btnCaozuo != null){
+                        if (btnCaozuo != null) {
                             btnCaozuo.setClickable(true);
                         }
                         if (i == 1)
@@ -345,22 +354,22 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
 
                         break;
                     case ConstValues.MSG_JSON_FORMAT_WRONG:
-                        if(btnCaozuo != null){
-                             btnCaozuo.setClickable(true);
+                        if (btnCaozuo != null) {
+                            btnCaozuo.setClickable(true);
                         }
                         if (i == 1)
                             Toast.makeText(getContext(), "获取工单信息失败", Toast.LENGTH_SHORT).show();
                         break;
                     case ConstValues.MSG_SUCESS:
-                        if(i == 5){
+                        if (i == 5) {
                             Toast.makeText(getContext(), "更改受理人成功", Toast.LENGTH_SHORT).show();
                             reLodeData();
                         }
-                        if(i == 4){
+                        if (i == 4) {
                             Toast.makeText(getContext(), "删除设备成功", Toast.LENGTH_SHORT).show();
                             reLodeData();
                         }
-                        if(i == 3){
+                        if (i == 3) {
                             reLodeData();
                             Toast.makeText(getContext(), "增加设备成功", Toast.LENGTH_SHORT).show();
                         }
@@ -373,7 +382,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
                                 Toast.makeText(getContext(), "操作成功", Toast.LENGTH_SHORT).show();
                                 btnCaozuo.setClickable(true);
                                 reLodeData();
-                                if(entry != null && entry.getTaskStatus().equals("已完成")){
+                                if (entry != null && entry.getTaskStatus().equals("已完成")) {
                                     btnCaozuo.setVisibility(View.GONE);
                                 }
                                 break;
@@ -429,8 +438,9 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     WeiXiuOrderDetailEntry entry = null;
     private HashMap<String, WeiXiuOrderDetailEntry.AssetListEntity> shebeiDatamap = new HashMap<>();
     List<WeiXiuOrderDetailEntry.AssetListEntity> assetList;
+
     private void handleData(String json) {
-        if(devicedata.size() > 0){
+        if (devicedata.size() > 0) {
             devicedata.clear();
         }
         Gson gson = new Gson();
@@ -441,15 +451,21 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
         if (list != null && list.size() > 0) {
             entry = list.get(0);
             ((WeiXiuOrderDetailActivity) getActivity()).
-                    SetViewData(entry.getID()+"", entry.getTypeName(), entry.getTaskStatus(),
+                    SetViewData(entry.getID() + "", entry.getTypeName(), entry.getTaskStatus(),
                             entry.getUseTime());
             tvKeHuName.setText(entry.getClientName());
-            tvShouLiRen.setText(entry.getAcceptName());
+
             tvLianxiren.setText(entry.getLinkName());
+            String str = entry.getAcceptName();
+            if(str == null){
+                llShouLiRen.setVisibility(View.GONE);
+            }else{
+                tvShouLiRen.setText(entry.getAcceptName());
+           }
             tvDianhua.setText(entry.getLinkTel());
             tvOrderDesc.setText(entry.getTaskDetail());
-             assetList = entry.getAssetList();
-            if(assetList != null){
+            assetList = entry.getAssetList();
+            if (assetList != null) {
                 Log.e(TAG, "handleData: 后台数据assetList.size()---->" + assetList.size());
                 for (int i = 0; i < assetList.size(); i++) {
                     WeiXiuOrderDetailEntry.AssetListEntity entity = assetList.get(i);
@@ -457,9 +473,9 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
                     String AseetName = entity.getAssetName();
                     devicedata.add(AseetName + "," + entity.getSpdName() + "," + AssetID);
                     shebeiDatamap.put(AssetID, entity);
-                    if(!entity.getSpdName().contains("完成")|| entity.getRepairSummary().equals("")){
+                    if (!entity.getSpdName().contains("完成") || entity.getRepairSummary().equals("")) {
                         isfinish = false;
-                    }else {
+                    } else {
                         isfinish = true;
                     }
                 }
@@ -468,14 +484,15 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
                 mAdapter.notifyDataSetChanged();
             }
         }
-            /**
-             * 获取工单状态
-             */
-            orderStatus = entry.getTaskStatus();
+        /**
+         * 获取工单状态
+         */
+        orderStatus = entry.getTaskStatus();
         if (!userName.equals(entry.getAcceptName())) {
             btnAddAseet.setVisibility(View.GONE);
         }
     }
+
     private String orderStatus;
     private String ShouLiRenId;
 
@@ -503,17 +520,17 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
                 String AseetId = intent.getStringExtra("AseetId");
                 Log.e(TAG, "维修详情页onActivityResult: AseetId" + AseetId);
                 for (String s : devicedata) {
-                    if(s.contains(AseetId)){
-                        Toast.makeText(getContext(),"该设备已增加",Toast.LENGTH_SHORT).show();
+                    if (s.contains(AseetId)) {
+                        Toast.makeText(getContext(), "该设备已增加", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
                 postAddSheBeiData(AseetId);
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT:
-                Log.e("lxs","受理人返回结果 ids--->"+ids+",resul--->"+result);
+                Log.e("lxs", "受理人返回结果 ids--->" + ids + ",resul--->" + result);
                 if (ids != null && !ids.equals("")) {
-                    ShouLiRenId = ids.replace(",","$");
+                    ShouLiRenId = ids.replace(",", "$");
                     updateShouLiRen(ShouLiRenId);
                 }
                 if (result != null) {
@@ -526,6 +543,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
 
     /**
      * 更改受理人
+     *
      * @param shouLiRenId
      */
     public void updateShouLiRen(String shouLiRenId) {
@@ -534,7 +552,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
         mapModify.put("TaskId", orderid);
         mapModify.put("UpdateType", "Accept");
         mapModify.put("Values", shouLiRenId);
-        if(!shouLiRenId.equals(userId)){
+        if (!shouLiRenId.equals(userId)) {
             btnCaozuo.setVisibility(View.GONE);
         }
         mapModify.put("ChgeUserId", userId);
@@ -545,16 +563,18 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
 
     }
 
-    HashMap<String,String> hashmap = new HashMap<>();
+    HashMap<String, String> hashmap = new HashMap<>();
+
     /**
      * 向后台增加设备
+     *
      * @param assetId
      */
     private void postAddSheBeiData(String assetId) {
         httpManagerUtils = new YHttpManagerUtils(getContext(), ConstValues.WEIXIU_ADDSHEBEI_URL, new MyHandler(this, 3), getClass().getSimpleName());
         hashmap.put("writeId", userId);
-        hashmap.put("assetId",assetId);
-        hashmap.put("taskId",orderid);
+        hashmap.put("assetId", assetId);
+        hashmap.put("taskId", orderid);
         httpManagerUtils.startPostRequest(hashmap);
     }
 
@@ -562,13 +582,15 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     public void dismissBtn() {
         btnCaozuo.setVisibility(View.GONE);
     }
-    int role ;
+
+    int role;
     String states;
+
     /**
      * 控制显示处理工单btn
      */
     private void controlMenuBtn() {
-         role = ((WeiXiuOrderDetailActivity) getActivity()).getMyRole();
+        role = ((WeiXiuOrderDetailActivity) getActivity()).getMyRole();
         states = ((WeiXiuOrderDetailActivity) getActivity()).getorderstates();
 
         if (states.equals("未受理")) {
@@ -581,8 +603,8 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
             return;
         }
         map.put("SendTime", TimeUtils.getTime(System.currentTimeMillis()));
-        Log.e("lxs", "controlMenuBtn: myRole btn处理显示" + role+"当前工单状态"+states
-               +"userName--"+ userName+":--*"+entry.getAcceptName()
+        Log.e("lxs", "controlMenuBtn: myRole btn处理显示" + role + "当前工单状态" + states
+                + "userName--" + userName + ":--*" + entry.getAcceptName()
         );
 
         if (userName.equals(entry.getAcceptName())) {

@@ -8,8 +8,8 @@ android {
         applicationId "com.y.w.ywker"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 49
-        versionName "易维客3.5.5"
+        versionCode 52
+        versionName "易维客3.5.8"
     }
     buildTypes {
         release {
@@ -48,6 +48,7 @@ dependencies {
     compile 'com.kyleduo.switchbutton:library:1.4.0'
     compile 'com.android.support:design:23.4.0'
     compile project(':imageselectorlibrary')
+    compile project(':PhotoPicker')
 }
 
 

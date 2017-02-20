@@ -79,7 +79,6 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="打印机"
                         android:textSize="16sp"
                         android:textColor="#c7c7c7"
                         />
@@ -113,7 +112,6 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="惠普"
                         android:textSize="16sp"
                         android:textColor="#c7c7c7"
                         />
@@ -147,7 +145,6 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="Lv2220"
                         android:textSize="16sp"
                         android:textColor="#c7c7c7"
                         />
@@ -183,7 +180,6 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="Lv2220"
                         android:textSize="16sp"
                         android:textColor="#c7c7c7"
                         />

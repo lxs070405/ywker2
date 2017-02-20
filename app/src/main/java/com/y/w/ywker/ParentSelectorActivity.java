@@ -215,10 +215,8 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                         Toast.makeText(ParentSelectorActivity.this, "服务器返回错误", Toast.LENGTH_SHORT).show();
                         break;
                     case ConstValues.MSG_NET_INAVIABLE:
-
                         break;
                     case ConstValues.MSG_JSON_FORMAT_WRONG:
-
                         break;
                     case ConstValues.MSG_SUCESS:
 
@@ -242,8 +240,6 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                                 }
                             }
                         }
-                        break;
-                    default:
                         break;
                 }
             }

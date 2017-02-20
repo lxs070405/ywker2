@@ -15,7 +15,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,10 +43,13 @@ import com.y.w.ywker.ConstValues;
 import com.y.w.ywker.R;
 import com.y.w.ywker.adapters.AdapterDelete;
 import com.y.w.ywker.adapters.AdapterGrideviewImage;
+import com.y.w.ywker.adapters.PhotoAdapter;
+import com.y.w.ywker.adapters.PhotoShowAdapter;
 import com.y.w.ywker.basepackege.ImageSelectorBaseUtile;
 import com.y.w.ywker.entry.PicEntry;
 import com.y.w.ywker.entry.YBasicNameValuePair;
 import com.y.w.ywker.entry.ZongJieEntry;
+import com.y.w.ywker.interf.RecyclerItemClickListener;
 import com.y.w.ywker.utils.Base64Utils;
 import com.y.w.ywker.utils.ImgeUtils;
 import com.y.w.ywker.utils.OfflineDataManager;
@@ -65,6 +70,8 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.iwf.photopicker.PhotoPicker;
+import me.iwf.photopicker.PhotoPreview;
 
 public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonSlidingViewClickListener {
 
@@ -96,7 +103,11 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
     RelativeLayout rlBigImg;
     @Bind(R.id.gridview)
 //    MyGridView gridview;
-    GridView gridview;
+            GridView gridview;
+    @Bind(R.id.picrecyclerview)
+    RecyclerView picrecyclerview;
+    @Bind(R.id.picshowrecyclerview)
+    RecyclerView picshowrecyclerview;
     private String orderId;
     private AdapterDelete mAdapter;
     private int myRole;//角色
@@ -113,13 +124,14 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
         showLoading();
         ctx = this;
         initView();
+
+
     }
 
     private void initView() {
         isFinish = getIntent().getStringExtra("isFinish");
         orderId = getIntent().getStringExtra("orderId");
         myRole = Integer.parseInt(getIntent().getStringExtra("myRole"));
-        Log.e("lxs", "onCreate:myRole---> " + myRole);
         if (myRole < 1) {
             tvPost.setVisibility(View.GONE);
             btnAddAseet.setVisibility(View.GONE);
@@ -135,16 +147,60 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
         mAdapter.setDeleteBtnClickListener(this);
         recyclerview.setAdapter(mAdapter);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
-        grideviewAdapter = new AdapterGrideviewImage(this);
-        gridview.setAdapter(grideviewAdapter);
+//        grideviewAdapter = new AdapterGrideviewImage(this);
+//        gridview.setAdapter(grideviewAdapter);
+//        setGridviews();
 
-        setGridviews();
+        initSelectPic();
+        initShowPic();
 //
     }
-    AdapterGrideviewImage  grideviewAdapter;
-//    private int getDataSize(){
-//        return  pathList == null ? 0 :  pathList.size();
-//    }
+
+    private void initShowPic(){
+        picshowrecyclerview.setVisibility(View.GONE);
+        photoShowAdapter = new PhotoShowAdapter(this,showPhotos);
+        picshowrecyclerview.setLayoutManager(new StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL));
+        picshowrecyclerview.setAdapter(photoShowAdapter);
+        picshowrecyclerview.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                PhotoPreview.builder()
+//                        .setPhotos(showPhotos)
+//                        .setCurrentItem(position)
+//                        .start(ActivityZongJie.this);
+                showImage(showPhotos.get(position));
+            }
+        }));
+    }
+    private void initSelectPic() {
+        picrecyclerview.setVisibility(View.GONE);
+        photoAdapter = new PhotoAdapter(this, selectedPhotos);
+        picrecyclerview.setLayoutManager(new StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL));
+        picrecyclerview.setAdapter(photoAdapter);
+        picrecyclerview.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                PhotoPreview.builder()
+                        .setPhotos(selectedPhotos)
+                        .setCurrentItem(position)
+                        .start(ActivityZongJie.this);
+            }
+        }));
+    }
+
+    private void isShowAddPic() {
+        if(selectedPhotos != null){
+            if(selectedPhotos.size() == 0){
+                addImage.setVisibility(View.VISIBLE);
+                picrecyclerview.setVisibility(View.GONE);
+            }else {
+                addImage.setVisibility(View.GONE);
+                picrecyclerview.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    AdapterGrideviewImage grideviewAdapter;
 
     class MyHandler extends Handler {
 
@@ -213,67 +269,73 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
         }.getType();
         lists = gson.fromJson(json, listType);
         if (lists != null && lists.size() > 0) {
+            addImage.setVisibility(View.GONE);
             for (int i = 0; i < lists.size(); i++) {
-                picName.add(lists.get(i).getFileName());
+                showPhotos.add(lists.get(i).getPicHref());
             }
-            if (lists.size() == 1) {
-                typeNum = 0;
-                Glide.with(this)
-                        .load(lists.get(0).getPicHref())
-                        .centerCrop()
-                        .placeholder(R.drawable.photo_default)
-                        .error(R.drawable.photo_default)
-                        .crossFade()
-                        .into(iv);
-                arrlist.add(iv);
-                iv.setVisibility(View.VISIBLE);
-            }
-            if (lists.size() == 2) {
-                typeNum = 1;
-                iv.setVisibility(View.VISIBLE);
-                iv1.setVisibility(View.VISIBLE);
-                Glide.with(this)
-                        .load(lists.get(0).getPicHref())
-                        .placeholder(R.drawable.photo_default)
-                        .error(R.drawable.photo_default)
-                        .crossFade()
-                        .into(iv);
-                arrlist.add(iv);
-                Glide.with(this)
-                        .load(lists.get(1).getPicHref())
-                        .placeholder(R.drawable.photo_default)
-                        .error(R.drawable.photo_default)
-                        .crossFade()
-                        .into(iv1);
-                arrlist.add(iv1);
-            }
-            if (lists.size() == 3) {
-                typeNum = 2;
-                iv.setVisibility(View.VISIBLE);
-                iv1.setVisibility(View.VISIBLE);
-                iv2.setVisibility(View.VISIBLE);
-                Glide.with(this)
-                        .load(lists.get(0).getPicHref())
-                        .placeholder(R.drawable.photo_default)
-                        .error(R.drawable.photo_default)
-                        .crossFade()
-                        .into(iv);
-                arrlist.add(iv);
-                Glide.with(this)
-                        .load(lists.get(1).getPicHref())
-                        .placeholder(R.drawable.photo_default)
-                        .error(R.drawable.photo_default)
-                        .crossFade()
-                        .into(iv1);
-                arrlist.add(iv1);
-                Glide.with(this)
-                        .load(lists.get(2).getPicHref())
-                        .placeholder(R.drawable.photo_default)
-                        .error(R.drawable.photo_default)
-                        .crossFade()
-                        .into(iv2);
-                arrlist.add(iv2);
-            }
+            picshowrecyclerview.setVisibility(View.VISIBLE);
+            photoShowAdapter.notifyDataSetChanged();
+//            for (int i = 0; i < lists.size(); i++) {
+//                picName.add(lists.get(i).getFileName());
+//            }
+//            if (lists.size() == 1) {
+//                typeNum = 0;
+//                Glide.with(this)
+//                        .load(lists.get(0).getPicHref())
+//                        .centerCrop()
+//                        .placeholder(R.drawable.photo_default)
+//                        .error(R.drawable.photo_default)
+//                        .crossFade()
+//                        .into(iv);
+//                arrlist.add(iv);
+//                iv.setVisibility(View.VISIBLE);
+//            }
+//            if (lists.size() == 2) {
+//                typeNum = 1;
+//                iv.setVisibility(View.VISIBLE);
+//                iv1.setVisibility(View.VISIBLE);
+//                Glide.with(this)
+//                        .load(lists.get(0).getPicHref())
+//                        .placeholder(R.drawable.photo_default)
+//                        .error(R.drawable.photo_default)
+//                        .crossFade()
+//                        .into(iv);
+//                arrlist.add(iv);
+//                Glide.with(this)
+//                        .load(lists.get(1).getPicHref())
+//                        .placeholder(R.drawable.photo_default)
+//                        .error(R.drawable.photo_default)
+//                        .crossFade()
+//                        .into(iv1);
+//                arrlist.add(iv1);
+//            }
+//            if (lists.size() == 3) {
+//                typeNum = 2;
+//                iv.setVisibility(View.VISIBLE);
+//                iv1.setVisibility(View.VISIBLE);
+//                iv2.setVisibility(View.VISIBLE);
+//                Glide.with(this)
+//                        .load(lists.get(0).getPicHref())
+//                        .placeholder(R.drawable.photo_default)
+//                        .error(R.drawable.photo_default)
+//                        .crossFade()
+//                        .into(iv);
+//                arrlist.add(iv);
+//                Glide.with(this)
+//                        .load(lists.get(1).getPicHref())
+//                        .placeholder(R.drawable.photo_default)
+//                        .error(R.drawable.photo_default)
+//                        .crossFade()
+//                        .into(iv1);
+//                arrlist.add(iv1);
+//                Glide.with(this)
+//                        .load(lists.get(2).getPicHref())
+//                        .placeholder(R.drawable.photo_default)
+//                        .error(R.drawable.photo_default)
+//                        .crossFade()
+//                        .into(iv2);
+//                arrlist.add(iv2);
+//            }
         }
     }
 
@@ -288,7 +350,7 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
         }.getType();
         ZongJieEntry zongJieEntry = gson.fromJson(json, type);
         if (zongJieEntry != null) {
-            isLoadPICdata(zongJieEntry);
+//            isLoadPICdata(zongJieEntry);
             etZongjie.setText(zongJieEntry.getSheetSummay());
             entry = zongJieEntry.getAssetList();
             if (entry != null && entry.size() > 0) {
@@ -530,12 +592,13 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
     }
 
     private ArrayList<ImageView> arrlist = new ArrayList<>();
-    private void setGridviews(){
+
+    private void setGridviews() {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (grideviewAdapter.getItem(position) == null
-                        ||grideviewAdapter.isShowAddItem(position)){
+                        || grideviewAdapter.isShowAddItem(position)) {
                     ImgSelActivity.startActivity(ActivityZongJie.this,
                             ImageSelectorBaseUtile.initImageSelectorUtil(),
                             ConstValues.Image_REQUEST_CODE);
@@ -553,6 +616,7 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
             }
         });
     }
+
     /**
      * 上传头像
      */
@@ -609,7 +673,29 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (resultCode == RESULT_OK &&
+                (requestCode == PhotoPicker.REQUEST_CODE || requestCode == PhotoPreview.REQUEST_CODE)) {
+
+            List<String> photos = null;
+            if (intent != null) {
+                photos = intent.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+            }
+            selectedPhotos.clear();
+
+            if (photos != null) {
+                addImage.setVisibility(View.GONE);
+                picrecyclerview.setVisibility(View.VISIBLE);
+                selectedPhotos.addAll(photos);
+            }else {
+                addImage.setVisibility(View.VISIBLE);
+                picrecyclerview.setVisibility(View.GONE);
+            }
+            isShowAddPic();
+            photoAdapter.notifyDataSetChanged();
+        }
+
         switch (requestCode) {
+
             case ConstValues.ZONGJIE://扫描二维码页面返回
                 if (intent != null) {
                     String AseetId = intent.getStringExtra("AseetId");
@@ -623,9 +709,9 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
                 break;
             case ConstValues.Image_REQUEST_CODE:
                 if (intent != null && resultCode == RESULT_OK) {
-                   pathList= intent.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
-                   grideviewAdapter.addData(pathList);
-                   grideviewAdapter.notifyDataSetChanged();
+                    pathList = intent.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
+                    grideviewAdapter.addData(pathList);
+                    grideviewAdapter.notifyDataSetChanged();
                 }
                 break;
             case REQUEST_CAPTURE: //调用系统相机返回
@@ -723,7 +809,7 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
 
     private ProgressDialog proDialog;
 
-    @OnClick({R.id.tv_post, R.id.btn_addAseet, R.id.btn_back_devices_info})
+    @OnClick({R.id.tv_post, R.id.btn_addAseet, R.id.btn_back_devices_info,R.id.image4})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back_devices_info://返回
@@ -741,10 +827,25 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
                         new YBasicNameValuePair("fromSource", "4")
                 });
                 break;
+            case R.id.image4:
+                selectPIC();
+                break;
         }
     }
 
-    private int btnIsClick = 1;
+    private void selectPIC() {
+        PhotoPicker.builder()
+                .setPhotoCount(3)
+                .setShowCamera(true)
+                .setSelected(selectedPhotos)
+                .start(this);
+    }
+
+    private PhotoAdapter photoAdapter;
+    private PhotoShowAdapter photoShowAdapter;
+    private ArrayList<String> selectedPhotos = new ArrayList<>();
+    private ArrayList<String> showPhotos = new ArrayList<>();
+
     private HashMap<String, String> map = new HashMap<String, String>();
 
     /**
@@ -778,7 +879,13 @@ public class ActivityZongJie extends SuperActivity implements AdapterDelete.IonS
                 sbbuffer.append(s + "$");
             }
         }
-        List<String> adapterdatas = grideviewAdapter.getAdapterData();
+//        List<String> adapterdatas = grideviewAdapter.getAdapterData();
+
+        List<String> adapterdatas = new ArrayList<>();
+        if(selectedPhotos.size() > 0)
+        adapterdatas.addAll(selectedPhotos);
+//        if(showPhotos.size() > 0)
+//        adapterdatas.addAll(showPhotos);
         for (int i = 0; i < adapterdatas.size(); i++) {
             String path = adapterdatas.get(i);
             String picname = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".")) + System.currentTimeMillis() + ".jpg";

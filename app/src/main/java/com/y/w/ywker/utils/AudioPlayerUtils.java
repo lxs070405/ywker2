@@ -30,6 +30,7 @@ public class AudioPlayerUtils {
         if (audioPlayerUtils == null){
             audioPlayerUtils = new AudioPlayerUtils(ctx);
             audioPlayerUtils.setVoicePeker();
+
         }
         return audioPlayerUtils;
     }

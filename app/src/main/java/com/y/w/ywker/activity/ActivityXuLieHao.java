@@ -50,7 +50,8 @@ public class ActivityXuLieHao extends SuperActivity {
         layoutCommToolbarTitle.setText("设备序列号");
     }
 
-    @OnClick({R.id.layout_comm_toolbar_title, R.id.btn_bind_devices_back, R.id.btn_bind_devices_scan_qr, R.id.btn_bind_devices_sure})
+    @OnClick({R.id.layout_comm_toolbar_title, R.id.btn_bind_devices_back,
+            R.id.btn_bind_devices_scan_qr, R.id.btn_bind_devices_sure})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_comm_toolbar_title:
@@ -62,7 +63,8 @@ public class ActivityXuLieHao extends SuperActivity {
                 if (Build.VERSION.SDK_INT >= 23) {
                     requestCodeQrcodePermissions();
                 } else {
-                    Utils.start_ActivityResult(this, CaptureActivity.class, ConstValues.QR_CODE_REQUEST_XULIEHAO);
+                    Utils.start_ActivityResult(this, CaptureActivity.class,
+                            ConstValues.QR_CODE_REQUEST_XULIEHAO);
                 }
                 break;
             case R.id.btn_bind_devices_sure:

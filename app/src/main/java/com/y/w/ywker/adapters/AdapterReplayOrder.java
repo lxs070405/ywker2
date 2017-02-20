@@ -366,9 +366,9 @@ public class AdapterReplayOrder extends RecyclerView.Adapter<RecyclerView.ViewHo
                                 voice.setImageResource(R.drawable.chatfrom_voice_playing);
                             }
                         });
-                        if (audioPlayerUtils.isPlaying() && audioPlayerUtils.getCurrentUrl().equals(entry.getFileDown())){
+                        if ( audioPlayerUtils.isPlaying() && audioPlayerUtils.getCurrentUrl().equals(entry.getFileDown())){
                             voice.setImageResource(R.drawable.chatfrom_voice_playing);
-                            audioPlayerUtils.stopPlayVoice();
+                            audioPlayerUtils.stopPlayVoice();//
                         }else{
                             audioPlayerUtils.playVoice(entry.getFileDown());
                             voice.setImageResource(R.drawable.voice_frame);

@@ -13,6 +13,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,7 +23,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -37,11 +39,12 @@ import com.google.gson.reflect.TypeToken;
 import com.y.w.ywker.ConstValues;
 import com.y.w.ywker.R;
 import com.y.w.ywker.adapters.AdapterGrideviewImage;
-import com.y.w.ywker.basepackege.ImageSelectorBaseUtile;
+import com.y.w.ywker.adapters.PhotoAdapter;
 import com.y.w.ywker.entry.ChangYongWeiXiuEntry;
 import com.y.w.ywker.entry.ChangYongZongJieEntry;
 import com.y.w.ywker.entry.LingJianEntry;
 import com.y.w.ywker.entry.PicEntry;
+import com.y.w.ywker.interf.RecyclerItemClickListener;
 import com.y.w.ywker.utils.Base64Utils;
 import com.y.w.ywker.utils.ImgeUtils;
 import com.y.w.ywker.utils.OfflineDataManager;
@@ -63,6 +66,9 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.iwf.photopicker.PhotoPicker;
+import me.iwf.photopicker.PhotoPreview;
+
 
 public class ActivityWeXiuZongJie extends SuperActivity {
 
@@ -101,6 +107,8 @@ public class ActivityWeXiuZongJie extends SuperActivity {
     @Bind(R.id.gridview)
 //    MyGridView gridview;
     GridView gridview;
+    @Bind(R.id.picrecyclerview)
+    RecyclerView picrecyclerview;
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +159,7 @@ public class ActivityWeXiuZongJie extends SuperActivity {
                     case ConstValues.MSG_ERROR:
                         if(i == 2 ){//&& myRole == 1
                             setlistener();
-                            gridview.setVisibility(View.VISIBLE);
+//                            gridview.setVisibility(View.VISIBLE);
                         }
                         break;
                     case ConstValues.MSG_NET_INAVIABLE:
@@ -165,7 +173,7 @@ public class ActivityWeXiuZongJie extends SuperActivity {
                         }
                         if(i == 2){
                             handlePicData(json);
-                            gridview.setVisibility(View.GONE);
+//                            gridview.setVisibility(View.GONE);
                         }
                         if(i == 3){
                             parsData(json,"lingjian");
@@ -247,36 +255,37 @@ public class ActivityWeXiuZongJie extends SuperActivity {
         map.put("MainId",MainId);
         map.put("AddUserId",userId);
         map.put("TaskID",TaskID);
-        grideviewAdapter = new AdapterGrideviewImage(this);
-        gridview.setAdapter(grideviewAdapter);
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (grideviewAdapter.getItem(position) == null
-                        ||grideviewAdapter.isShowAddItem(position)){
-                    ImgSelActivity.startActivity(ActivityWeXiuZongJie.this,
-                            ImageSelectorBaseUtile.initImageSelectorUtil(),
-                            ConstValues.Image_REQUEST_CODE);
-                }
-
-            }
-        });
-        gridview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                grideviewAdapter.removeImage(position);
-                grideviewAdapter.notifyDataSetChanged();
-                return true;
-            }
-        });
+//        grideviewAdapter = new AdapterGrideviewImage(this);
+//        gridview.setAdapter(grideviewAdapter);
+//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (grideviewAdapter.getItem(position) == null
+//                        ||grideviewAdapter.isShowAddItem(position)){
+//                    ImgSelActivity.startActivity(ActivityWeXiuZongJie.this,
+//                            ImageSelectorBaseUtile.initImageSelectorUtil(),
+//                            ConstValues.Image_REQUEST_CODE);
+//                }
+//
+//            }
+//        });
+//        gridview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                grideviewAdapter.removeImage(position);
+//                grideviewAdapter.notifyDataSetChanged();
+//                return true;
+//            }
+//        });
+        initSelectPic();
     }
-    AdapterGrideviewImage  grideviewAdapter;
+//    AdapterGrideviewImage  grideviewAdapter;
     String MainId;
     String userId;
     private ProgressDialog proDialog;
     @OnClick({R.id.btn_back_devices_info,
             R.id.tv_post,R.id.rl_bigImg,
-            R.id.tv_WeiXiuJinDu, R.id.tv_AddLingJian, R.id.tv_zongjie})
+            R.id.tv_WeiXiuJinDu, R.id.tv_AddLingJian, R.id.tv_zongjie,R.id.image4})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back_devices_info:
@@ -308,9 +317,39 @@ public class ActivityWeXiuZongJie extends SuperActivity {
             case R.id.rl_bigImg:
                 rlBigImg.setVisibility(View.GONE);
                 break;
+            case R.id.image4:
+                selectPIC();
+                break;
         }
     }
 
+    private void selectPIC() {
+        PhotoPicker.builder()
+                .setPhotoCount(3)
+                .setShowCamera(true)
+                .setSelected(selectedPhotos)
+                .start(this);
+    }
+
+    private PhotoAdapter photoAdapter;
+
+    private void initSelectPic() {
+        picrecyclerview.setVisibility(View.GONE);
+        photoAdapter = new PhotoAdapter(this, selectedPhotos);
+        picrecyclerview.setLayoutManager(new StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL));
+        picrecyclerview.setAdapter(photoAdapter);
+        picrecyclerview.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                PhotoPreview.builder()
+                        .setPhotos(selectedPhotos)
+                        .setCurrentItem(position)
+                        .start(ActivityWeXiuZongJie.this);
+            }
+        }));
+    }
+    AdapterGrideviewImage grideviewAdapter;
+    private ArrayList<String> selectedPhotos = new ArrayList<>();
     List<LingJianView> viewlist = new ArrayList<>();
     String LingJianData = "";
     /**
@@ -421,7 +460,8 @@ public class ActivityWeXiuZongJie extends SuperActivity {
                 sbbuffer.append(s + "$");
             }
         }
-        List<String> adapterdatas = grideviewAdapter.getAdapterData();
+//        List<String> adapterdatas = grideviewAdapter.getAdapterData();
+        List<String> adapterdatas = selectedPhotos;
         for (int i = 0; i < adapterdatas.size(); i++) {
             String path = adapterdatas.get(i);
             String picname = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".")) + System.currentTimeMillis() + ".jpg";
@@ -628,6 +668,7 @@ public class ActivityWeXiuZongJie extends SuperActivity {
         }.getType();
         lists = gson.fromJson(json, listType);
         if (lists != null && lists.size() > 0) {
+            addImage.setVisibility(View.GONE);
             for (int i = 0; i < lists.size(); i++) {
                 picName.add(lists.get(i).getFileName());
             }
@@ -704,6 +745,17 @@ public class ActivityWeXiuZongJie extends SuperActivity {
         Glide.with(this).load(img_url).placeholder(R.drawable.photo_default).error(R.drawable.photo_default).into(ivBigImg);
     }
 
+    private void isShowAddPic() {
+        if(selectedPhotos != null){
+            if(selectedPhotos.size() == 0){
+                addImage.setVisibility(View.VISIBLE);
+                picrecyclerview.setVisibility(View.GONE);
+            }else {
+                addImage.setVisibility(View.GONE);
+                picrecyclerview.setVisibility(View.VISIBLE);
+            }
+        }
+    }
     /**
      * 上传头像
      */
@@ -758,6 +810,25 @@ public class ActivityWeXiuZongJie extends SuperActivity {
     private List<String> pathList;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (resultCode == RESULT_OK &&
+                (requestCode == PhotoPicker.REQUEST_CODE || requestCode == PhotoPreview.REQUEST_CODE)) {
+
+            List<String> photos = null;
+            if (intent != null) {
+                photos = intent.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+            }
+            selectedPhotos.clear();
+
+            if (photos != null) {
+                addImage.setVisibility(View.GONE);
+                picrecyclerview.setVisibility(View.VISIBLE);
+                selectedPhotos.addAll(photos);
+            }else {
+                addImage.setVisibility(View.VISIBLE);
+            }
+            isShowAddPic();
+            photoAdapter.notifyDataSetChanged();
+        }
         switch (requestCode) {
             case ConstValues.Image_REQUEST_CODE:
                 if (intent != null && resultCode == RESULT_OK) {

@@ -1,1 +1,1 @@
-include ':app', ':stickyrecyclerviewlibrary', ':imageselectorlibrary', ':bannerlayout'
+include ':app', ':stickyrecyclerviewlibrary', ':imageselectorlibrary', ':bannerlayout', ':PhotoPicker'

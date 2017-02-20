@@ -132,10 +132,8 @@ public class ActivityXingHaoList extends SuperActivity {
                                 parseModeData(json);
                             }
                             if(type == 4){
-                                if(intent != null&&  mode.equals("2")){
-                                  Intent  intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
-                                    intent.putExtra("_ids", modleId);
-                                    intent.putExtra("result", modleName);
+                                if(intent != null){
+
                                     intent.putExtra("AssetID",(String)msg.obj);
                                     Log.e("lxs", "handleMessage: 型号页面传递"+(String)msg.obj);
                                     setResult(ConstValues.RESULT_FOR_DEVICES_XINGHAO, intent);
@@ -162,9 +160,9 @@ public class ActivityXingHaoList extends SuperActivity {
                     String modleId = modeEntryList.get(position).getID();
                     String modleName = modeEntryList.get(position).getBrandName();
 
-//                    Log.e("lxs", "设备品牌页: parseModeData" + "设备品牌名称返回" + modleId
-//                            +"BrandID---->"+modleId);
-                    if(mode.equals("1")){
+                    Log.e("lxs", "设备品牌页: parseModeData" + "设备品牌名称返回" + modleId
+                            +"BrandID---->"+modleId);
+//                    if(mode.equals("1")){
                         Intent intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
                         intent.putExtra("_ids", modleId);
                         intent.putExtra("result", modleName);
@@ -173,7 +171,7 @@ public class ActivityXingHaoList extends SuperActivity {
                         modleName= "";
                         finish();
 
-                    }
+//                    }
 
                 }
             });
@@ -203,9 +201,12 @@ public class ActivityXingHaoList extends SuperActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     modleId = xinghaoEntryList.get(position).getID();
                      modleName = xinghaoEntryList.get(position).getModelName();
+                    Log.e("lxs", "onItemClick:---- "+position );
                     httpManagerUtils = new YHttpManagerUtils(ActivityXingHaoList.this, String.format(ConstValues.GET_ASEETID_URL, MainID, TypeID, BrandID, modleId,ClientID), new MyHandler(ActivityXingHaoList.this, 4), this.getClass().getName());
                     httpManagerUtils.startRequest();
-
+                    intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
+                    intent.putExtra("_ids", modleId);
+                    intent.putExtra("result", modleName);
                 }
             });
         }

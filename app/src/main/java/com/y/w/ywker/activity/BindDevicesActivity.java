@@ -259,8 +259,6 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
                         }
 
                         break;
-                    default:
-                        break;
                 }
             }
         }

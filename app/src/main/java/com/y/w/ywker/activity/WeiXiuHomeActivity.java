@@ -67,6 +67,8 @@ public class WeiXiuHomeActivity extends SuperActivity implements SwipeRefreshLay
         httpManagerUtils.startRequest();
     }
     private Handler mHandler = new MyHandler(this);
+
+
     class MyHandler extends Handler {
 
         WeakReference<Activity> mFragmentReference;

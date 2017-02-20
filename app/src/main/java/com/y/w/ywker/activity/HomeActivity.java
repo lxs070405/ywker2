@@ -121,7 +121,6 @@ public class HomeActivity extends SuperActivity implements View.OnClickListener 
         //推送注册
         JPushInterface.init(getApplicationContext());
         registerMessageReceiver();
-
     }
     OfflineDataManager offlineDataManager;
     private void isUpdateApp() {

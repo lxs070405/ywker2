@@ -16,4 +16,5 @@ public class LOG {
     public static void v(Context ctx,String msg){
         Log.v(ctx.getClass().getSimpleName(),msg);
     }
+
 }

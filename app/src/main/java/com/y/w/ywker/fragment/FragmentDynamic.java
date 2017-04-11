@@ -300,12 +300,14 @@ public class FragmentDynamic extends Fragment implements OnCommAdapterItemClickL
                 //更新adapter
                 adapter.addAll(_list);
                 adapter.setStartLoad(false);
+                adapter.notifyDataSetChanged();
             }
             if (isRefresh){//刷新数据
                 isRefresh = false;
                 dynamicEntryList.addAll(0,_list);
                 //更新adapter
                 adapter.addRefreshData(_list);
+                adapter.notifyDataSetChanged();
             }
         }else{
             isLoading = false;

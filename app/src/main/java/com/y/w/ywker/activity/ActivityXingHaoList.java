@@ -21,7 +21,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.y.w.ywker.ConstValues;
 import com.y.w.ywker.R;
+import com.y.w.ywker.adapters.AdapterAssetArea;
 import com.y.w.ywker.adapters.AdapterBrandName;
+import com.y.w.ywker.entry.AssetAreaEntry;
 import com.y.w.ywker.entry.ModeEntry;
 import com.y.w.ywker.entry.XingHaoEntry;
 import com.y.w.ywker.utils.YHttpManagerUtils;
@@ -53,13 +55,17 @@ public class ActivityXingHaoList extends SuperActivity {
     private String BrandID;
     private String ClientID;
     private String mode;
+    private final int GETAssetArea_URL = 5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xing_hao_list);
         ButterKnife.bind(this);
-       mode = getIntent().getStringExtra("mode");
+        mode = getIntent().getStringExtra("mode");
         MainID = getIntent().getStringExtra("MainID");
+
+
         if (mode.equals("1")) {
             tvTitle.setText("选择品牌");
             btnAdd.setVisibility(View.GONE);
@@ -69,9 +75,15 @@ public class ActivityXingHaoList extends SuperActivity {
             ClientID = getIntent().getStringExtra("ClientID");
             TypeID = getIntent().getStringExtra("keyTypeID");
             BrandID = getIntent().getStringExtra("BrandID");
-            httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_XINGHAO_URL, MainID, TypeID, BrandID), new MyHandler(this, 1), this.getClass().getName());
+            httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_XINGHAO_URL, MainID, TypeID, BrandID,ClientID), new MyHandler(this, 1), this.getClass().getName());
+            httpManagerUtils.startRequest();
+        } else if (mode.equals("3")) {
+            tvTitle.setText("选择设备区域");
+            btnAdd.setVisibility(View.GONE);
+            httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_AssetArea_URL), new MyHandler(this, GETAssetArea_URL), this.getClass().getName());
             httpManagerUtils.startRequest();
         }
+
         showLoading();
 
     }
@@ -116,11 +128,11 @@ public class ActivityXingHaoList extends SuperActivity {
                             if (type == 2) {
                                 proDialog.dismiss();
                                 entry.setID((String) msg.obj);
-                                if( xinghaoEntryList == null){//第一次增加时
+                                if (xinghaoEntryList == null) {//第一次增加时
                                     xinghaoEntryList = new ArrayList<>();
                                     xinghaoEntryList.add(entry);
                                     setLisener();
-                                }else {
+                                } else {
                                     xinghaoEntryList.add(0, entry);
                                     adapter.notifyDataSetChanged();
                                 }
@@ -131,19 +143,49 @@ public class ActivityXingHaoList extends SuperActivity {
                                 String json = (String) msg.obj;
                                 parseModeData(json);
                             }
-                            if(type == 4){
-                                if(intent != null){
-
-                                    intent.putExtra("AssetID",(String)msg.obj);
-                                    Log.e("lxs", "handleMessage: 型号页面传递"+(String)msg.obj);
+                            if (type == 4) {
+                                if (intent != null) {
+                                    intent.putExtra("AssetID", (String) msg.obj);
+                                    Log.e("lxs", "handleMessage: 型号页面传递" + (String) msg.obj);
                                     setResult(ConstValues.RESULT_FOR_DEVICES_XINGHAO, intent);
                                     finish();
                                 }
+                            }
+                            if (type == GETAssetArea_URL) {
+                                String json = (String) msg.obj;
+                                parseAssetAreaData(json);
                             }
                         }
                         break;
                 }
             }
+        }
+    }
+
+    private void parseAssetAreaData(String json) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<AssetAreaEntry>>() {
+        }.getType();
+        final  ArrayList<AssetAreaEntry> data = gson.fromJson(json, type);
+        if(data != null && data.size() > 0){
+            listview.setAdapter(new AdapterAssetArea(data, ActivityXingHaoList.this));
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String modleId = data.get(position).getID()+"";
+                    String modleName = data.get(position).getAreaName();
+
+                    Log.e("lxs", "区域: parseData" + "区域名称返回" + modleName
+                            + "区域ID---->" + modleId);
+                    Intent intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
+                    intent.putExtra("_ids", modleId);
+                    intent.putExtra("result", modleName);
+                    setResult(ConstValues.RESULT_FOR_DEVICES_PINPAI, intent);
+                    modleId = "";
+                    modleName = "";
+                    finish();
+                }
+            });
         }
     }
 
@@ -153,7 +195,7 @@ public class ActivityXingHaoList extends SuperActivity {
         }.getType();
         modeEntryList = gson.fromJson(json, type);
         if (modeEntryList != null && modeEntryList.size() > 0) {
-            listview.setAdapter(new AdapterBrandName(modeEntryList,ActivityXingHaoList.this));
+            listview.setAdapter(new AdapterBrandName(modeEntryList, ActivityXingHaoList.this));
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -161,15 +203,15 @@ public class ActivityXingHaoList extends SuperActivity {
                     String modleName = modeEntryList.get(position).getBrandName();
 
                     Log.e("lxs", "设备品牌页: parseModeData" + "设备品牌名称返回" + modleId
-                            +"BrandID---->"+modleId);
+                            + "BrandID---->" + modleId);
 //                    if(mode.equals("1")){
-                        Intent intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
-                        intent.putExtra("_ids", modleId);
-                        intent.putExtra("result", modleName);
-                        setResult(ConstValues.RESULT_FOR_DEVICES_PINPAI, intent);
-                        modleId= "";
-                        modleName= "";
-                        finish();
+                    Intent intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
+                    intent.putExtra("_ids", modleId);
+                    intent.putExtra("result", modleName);
+                    setResult(ConstValues.RESULT_FOR_DEVICES_PINPAI, intent);
+                    modleId = "";
+                    modleName = "";
+                    finish();
 
 //                    }
 
@@ -180,7 +222,7 @@ public class ActivityXingHaoList extends SuperActivity {
 
     private List<ModeEntry> modeEntryList;
     private List<XingHaoEntry> xinghaoEntryList;
-    private MyAdapter adapter  = new MyAdapter();
+    private MyAdapter adapter = new MyAdapter();
 
     private void parseData(String json) {
         Gson gson = new Gson();
@@ -190,19 +232,21 @@ public class ActivityXingHaoList extends SuperActivity {
         xinghaoEntryList = gson.fromJson(json, type);
         setLisener();
     }
+
     String modleId;
     String modleName;
+
     private void setLisener() {
         if (xinghaoEntryList != null && xinghaoEntryList.size() > 0) {
-            Log.e("lxs", "parseData: "+xinghaoEntryList.size());
+            Log.e("lxs", "parseData: " + xinghaoEntryList.size());
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     modleId = xinghaoEntryList.get(position).getID();
-                     modleName = xinghaoEntryList.get(position).getModelName();
-                    Log.e("lxs", "onItemClick:---- "+position );
-                    httpManagerUtils = new YHttpManagerUtils(ActivityXingHaoList.this, String.format(ConstValues.GET_ASEETID_URL, MainID, TypeID, BrandID, modleId,ClientID), new MyHandler(ActivityXingHaoList.this, 4), this.getClass().getName());
+                    modleName = xinghaoEntryList.get(position).getModelName();
+                    Log.e("lxs", "onItemClick:---- " + position);
+                    httpManagerUtils = new YHttpManagerUtils(ActivityXingHaoList.this, String.format(ConstValues.GET_ASEETID_URL, MainID, TypeID, BrandID, modleId, ClientID), new MyHandler(ActivityXingHaoList.this, 4), this.getClass().getName());
                     httpManagerUtils.startRequest();
                     intent = new Intent(ActivityXingHaoList.this, DevicesInfoActivity.class);
                     intent.putExtra("_ids", modleId);
@@ -213,7 +257,7 @@ public class ActivityXingHaoList extends SuperActivity {
     }
 
 
-    private  Intent intent;
+    private Intent intent;
     private ProgressDialog proDialog;
 
     @OnClick({R.id.btn_back, R.id.btn_add})
@@ -287,7 +331,7 @@ public class ActivityXingHaoList extends SuperActivity {
             }
             hodler.XingHao.setText(xinghaoEntryList.get(position).getModelName());
             String num = xinghaoEntryList.get(position).getNotBindCount();
-            if (num.equals("0")||num.equals("")) {
+            if (num.equals("0") || num.equals("")) {
                 hodler.Number.setText("");//无设备
             } else {
                 hodler.Number.setText("未绑定 " + num);

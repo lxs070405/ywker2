@@ -207,6 +207,13 @@
             />
 
         <LinearLayout
+            android:id="@+id/ll_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
@@ -269,7 +276,7 @@
                 android:textColor="@color/commo_text_color"
                 />
         </LinearLayout>
-
+        </LinearLayout>
     <Button
         android:id="@+id/btn_over"
         android:layout_marginLeft="20dp"

@@ -143,9 +143,6 @@ public class ActivityContacts extends SuperActivity implements SwipeRefreshLayou
                     ParentItemAdapter adapter = new ParentItemAdapter(adapterList);
                     adapter.setListener(ActivityContacts.this);
                     layoutCommSwipeRefreshRecyclerview.setAdapter(adapter);
-
-                    break;
-                default:
                     break;
             }
         }

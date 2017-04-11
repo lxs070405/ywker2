@@ -307,8 +307,6 @@ public class NewWeiXiuOrderActivity extends SuperActivity {
             return;
         }
 
-        String msg = data.getStringExtra("edtmsg");
-        String info = data.getStringExtra("info");
         String result = data.getStringExtra("result");
         String ids = data.getStringExtra("_ids");
 

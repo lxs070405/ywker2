@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:hint="输入反馈意见"
+            android:hint="输入反馈意见(限50字以内)"
             android:id="@+id/edt_feed_back"
             style="@style/comm_edt_style"
             android:maxLength="10"

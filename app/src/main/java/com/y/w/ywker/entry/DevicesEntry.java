@@ -4,170 +4,188 @@ package com.y.w.ywker.entry;
  * Created by lxs on 16/5/4.
  */
 public class DevicesEntry {
+
     /**
-     * ID : 3996
-     * ClientID : 321  客户主键
-     * DepartID : 317
-     * TypeID : 13
-     * BrandID : 26
-     * ModelID : 94
-     * TypeName: 设备类型
-     * Remark  描述
-     * AssetName : 四通5860针式打印机
-     * AssetXuLie : null
-     * ModelName : 5860  型号
-     * BrandName : 四通  品牌
-     * ClientName : 中国邮政储蓄银行郑州分行须水镇支行
-     * ContactName : 刘会娟
-     * DepartName : 须水镇支行
-     * ContactID : 315 联系人主键
-     * IsHavePic 是否有图片信息 大于0 标识有图片 等于0 没有
+     * AreaName : 非现金区
+     * AssetName : 电脑 三星 898
+     * AssetXuLie :
+     * BrandID : 30123
+     * BrandName : 三星
+     * ClientID : 30371
+     * ClientName : 农业银行测试客户
+     * ContactID : 0
+     * ContactName :
+     * DepartID : 0
+     * DepartName :
+     * ID : 36261
+     * IsHavePic : 0
+     * ModelID : 30344
+     * ModelName : 898
+     * Remark : 测试绑定
+     * TypeID : 50095
+     * TypeName : 电脑
      */
 
-    private int ID;
-    private int ClientID;
-    private int DepartID;
-    private int TypeID;
-    private int BrandID;
-    private int ModelID;
-    private int IsHavePic;
+    private String AreaName;
     private String AssetName;
-    private String TypeName;
     private String AssetXuLie;
-    private String ModelName;
+    private String BrandID;
     private String BrandName;
+    private String ClientID;
     private String ClientName;
+    private String ContactID;
     private String ContactName;
-    private String Remark;
+    private String DepartID;
     private String DepartName;
-    private int ContactID;
-    public void setIsHavePic(int isHavePic){
-        this.IsHavePic = isHavePic;
-    }
-    public int getIsHavePic(){
-        return IsHavePic;
-    }
-    public void setRemark(String remark){
-        this.Remark = remark;
-    }
-    public String getRemark(){
-        return Remark;
-    }
-    public void setTypeName(String typeName){
-        this.TypeName = TypeName;
-    }
-    public String getTypeName(){
-        return TypeName;
-    }
-    public int getID() {
-        return ID;
-    }
+    private String ID;
+    private String IsHavePic;
+    private String ModelID;
+    private String ModelName;
+    private String Remark;
+    private String TypeID;
+    private String TypeName;
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public int getClientID() {
-        return ClientID;
-    }
-
-    public void setClientID(int ClientID) {
-        this.ClientID = ClientID;
-    }
-
-    public int getDepartID() {
-        return DepartID;
-    }
-
-    public void setDepartID(int DepartID) {
-        this.DepartID = DepartID;
-    }
-
-    public int getTypeID() {
-        return TypeID;
-    }
-
-    public void setTypeID(int TypeID) {
-        this.TypeID = TypeID;
-    }
-
-    public int getBrandID() {
-        return BrandID;
-    }
-
-    public void setBrandID(int BrandID) {
-        this.BrandID = BrandID;
-    }
-
-    public int getModelID() {
-        return ModelID;
-    }
-
-    public void setModelID(int ModelID) {
-        this.ModelID = ModelID;
-    }
-
-    public String getAssetName() {
-        return AssetName;
+    public void setAreaName(String AreaName) {
+        this.AreaName = AreaName;
     }
 
     public void setAssetName(String AssetName) {
         this.AssetName = AssetName;
     }
 
-    public String getAssetXuLie() {
-        return AssetXuLie;
-    }
-
     public void setAssetXuLie(String AssetXuLie) {
         this.AssetXuLie = AssetXuLie;
     }
 
-    public String getModelName() {
-        return ModelName;
-    }
-
-    public void setModelName(String ModelName) {
-        this.ModelName = ModelName;
-    }
-
-    public String getBrandName() {
-        return BrandName;
+    public void setBrandID(String BrandID) {
+        this.BrandID = BrandID;
     }
 
     public void setBrandName(String BrandName) {
         this.BrandName = BrandName;
     }
 
-    public String getClientName() {
-        return ClientName;
+    public void setClientID(String ClientID) {
+        this.ClientID = ClientID;
     }
 
     public void setClientName(String ClientName) {
         this.ClientName = ClientName;
     }
 
-    public String getContactName() {
-        return ContactName;
+    public void setContactID(String ContactID) {
+        this.ContactID = ContactID;
     }
 
     public void setContactName(String ContactName) {
         this.ContactName = ContactName;
     }
 
-    public String getDepartName() {
-        return DepartName;
+    public void setDepartID(String DepartID) {
+        this.DepartID = DepartID;
     }
 
     public void setDepartName(String DepartName) {
         this.DepartName = DepartName;
     }
 
-    public int getContactID() {
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setIsHavePic(String IsHavePic) {
+        this.IsHavePic = IsHavePic;
+    }
+
+    public void setModelID(String ModelID) {
+        this.ModelID = ModelID;
+    }
+
+    public void setModelName(String ModelName) {
+        this.ModelName = ModelName;
+    }
+
+    public void setRemark(String Remark) {
+        this.Remark = Remark;
+    }
+
+    public void setTypeID(String TypeID) {
+        this.TypeID = TypeID;
+    }
+
+    public void setTypeName(String TypeName) {
+        this.TypeName = TypeName;
+    }
+
+    public String getAreaName() {
+        return AreaName;
+    }
+
+    public String getAssetName() {
+        return AssetName;
+    }
+
+    public String getAssetXuLie() {
+        return AssetXuLie;
+    }
+
+    public String getBrandID() {
+        return BrandID;
+    }
+
+    public String getBrandName() {
+        return BrandName;
+    }
+
+    public String getClientID() {
+        return ClientID;
+    }
+
+    public String getClientName() {
+        return ClientName;
+    }
+
+    public String getContactID() {
         return ContactID;
     }
 
-    public void setContactID(int ContactID) {
-        this.ContactID = ContactID;
+    public String getContactName() {
+        return ContactName;
+    }
+
+    public String getDepartID() {
+        return DepartID;
+    }
+
+    public String getDepartName() {
+        return DepartName;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getIsHavePic() {
+        return IsHavePic;
+    }
+
+    public String getModelID() {
+        return ModelID;
+    }
+
+    public String getModelName() {
+        return ModelName;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public String getTypeID() {
+        return TypeID;
+    }
+
+    public String getTypeName() {
+        return TypeName;
     }
 }

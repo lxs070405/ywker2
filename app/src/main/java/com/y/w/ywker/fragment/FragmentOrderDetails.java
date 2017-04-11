@@ -255,7 +255,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
                 if(status.equals("已受理")){
                     btnCaozuo.setClickable(false);
                     msgstatus = "3";
-//                    llZongjie.setVisibility(View.VISIBLE);
                 }
                 if(status.equals("处理中") && myRole == 1){
 //                    Utils.start_ActivityResult(this, ActivityZongJie.class, ConstValues.GONGZUOJONGJIE,

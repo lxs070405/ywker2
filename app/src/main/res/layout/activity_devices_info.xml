@@ -81,6 +81,8 @@
                 style="@style/comm_arrow_right_img_style"
                 />
         </LinearLayout>
+
+
         <LinearLayout
             android:clickable="true"
             android:background="@drawable/comm_selector_bg"
@@ -145,6 +147,30 @@
 
             <TextView
                 android:id="@+id/devices_info_xinghao_tv"
+                style="@style/comm_right_textview_style"
+                android:text="必填项"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:clickable="true"
+            android:background="@drawable/comm_selector_bg"
+            android:id="@+id/devices_info_devices_area_layout"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="设备区域"
+                />
+
+            <TextView
+                android:id="@+id/devices_info_area_tv"
                 style="@style/comm_right_textview_style"
                 android:text="必填项"
                 />

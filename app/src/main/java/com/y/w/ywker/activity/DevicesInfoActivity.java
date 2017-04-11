@@ -140,6 +140,10 @@ public class DevicesInfoActivity extends SuperActivity {
     LinearLayout llXianshiBeizhu;
     @Bind(R.id.picrecyclerview)
     RecyclerView picrecyclerview;
+    @Bind(R.id.devices_info_area_tv)
+    TextView devicesInfoAreaTv;
+    @Bind(R.id.devices_info_devices_area_layout)
+    LinearLayout devicesInfoDevicesAreaLayout;
     private String devicesInfo = "";
     private String codeId = "";
     private String bind_xunjian = "";
@@ -207,6 +211,7 @@ public class DevicesInfoActivity extends SuperActivity {
 
     private PhotoAdapter photoAdapter;
     private ArrayList<String> selectedPhotos = new ArrayList<>();
+
     private void initSelectPic() {
         picrecyclerview.setVisibility(View.GONE);
         photoAdapter = new PhotoAdapter(this, selectedPhotos);
@@ -222,6 +227,7 @@ public class DevicesInfoActivity extends SuperActivity {
             }
         }));
     }
+
     private void selectPIC() {
         PhotoPicker.builder()
                 .setPhotoCount(3)
@@ -229,6 +235,7 @@ public class DevicesInfoActivity extends SuperActivity {
                 .setSelected(selectedPhotos)
                 .start(this);
     }
+
     /**
      * 设置图片监听
      */
@@ -357,13 +364,14 @@ public class DevicesInfoActivity extends SuperActivity {
                 devicesInfoBtnSure.setText("回复工单");
                 layoutCommToolbarTitle.setText("回复工单");
             }
-            int assetId = entry.getID();
+            int assetId = Integer.parseInt(entry.getID());
 
-            if (assetId > 0 && entry.getIsHavePic() > 0) {
+            if (assetId > 0 && Integer.parseInt(entry.getIsHavePic()) > 0) {
                 httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_DEVICESINFO_PIC, assetId, offlineDataManager.getMainID()), new MyHandler(this, 2), this.getClass().getName());
                 httpManagerUtils.startRequest();
-            } else if (assetId > 0 && entry.getIsHavePic() == 0) {
+            } else if (assetId > 0 && Integer.parseInt(entry.getIsHavePic())  == 0) {
                 llTuPian.setVisibility(View.GONE);
+                addImage.setVisibility(View.GONE);
             }
             //初始化信息
             //设备类型
@@ -388,6 +396,12 @@ public class DevicesInfoActivity extends SuperActivity {
 
             //客户
             devicesInfoClientNameTv.setText(entry.getClientName());
+            if(!entry.getAreaName().equals("")){
+                devicesInfoAreaTv.setText(entry.getAreaName());
+            }else {
+                devicesInfoDevicesAreaLayout.setVisibility(View.GONE);
+            }
+
 //            //联系人
 //            devicesInfoClientConnectNameTv.setText(entry.getContactName() + "," + entry.getDepartName());
 
@@ -431,16 +445,19 @@ public class DevicesInfoActivity extends SuperActivity {
         bindMap.put("TypeName", "");
         bindMap.put("keyTypeID", "");
         bindMap.put("AssetID", "");
+        bindMap.put("AreaID", "");
     }
 
 
     @OnClick({R.id.devices_info_btn_sure, R.id.devices_info_devices_name_layout, R.id.btn_back_devices_info,
-            R.id.devices_info_client_layout, R.id.devices_info_client_connect_layout,
+            R.id.devices_info_client_layout, R.id.devices_info_client_connect_layout,R.id.devices_info_devices_area_layout,
             R.id.devices_info_pinpai_layout, R.id.devices_info_xinghao_layout, R.id.ll_Xuliehao})
     public void onClick(View v) {
         if (v.getId() == R.id.btn_back_devices_info) {
             finish();
         }
+
+
         String text = devicesInfoBtnSure.getText().toString();
         if (v.getId() == R.id.devices_info_btn_sure) {
 //            if(text.equals("增加设备")){
@@ -477,13 +494,7 @@ public class DevicesInfoActivity extends SuperActivity {
             return;
         }
         switch (v.getId()) {
-//            case R.id.devices_info_client_connect_layout:
-////                ConstValues.isnew = false;
-//                Utils.start_ActivityResult(this, ParentSelectorActivity.class, ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,//RESULT_FOR_PICKER_CLIENT_ROOT
-//                        new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择客户")});
-//                break;
             case R.id.devices_info_client_layout://客户
-//                ConstValues.isnew = false;
                 Utils.start_ActivityResult(this, ParentSelectorActivity.class, ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,//ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,
                         new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择客户")});
                 break;
@@ -493,18 +504,26 @@ public class DevicesInfoActivity extends SuperActivity {
                     Toast.makeText(this, "请先选择客户", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                startActivityF(ConstValues.RESULT_FOR_DEVICES_PINPAI, "选择品牌",
-//                        bindMap.get("ClientID"), bindMap.get("ContactID"), "Brand", "", "");
                 Intent intent = new Intent(DevicesInfoActivity.this, ActivityXingHaoList.class);
                 intent.putExtra("mode", "1");
                 intent.putExtra("MainID", bindMap.get("MainID"));
                 startActivityForResult(intent, ConstValues.RESULT_FOR_DEVICES_PINPAI);
+                break;
+            case R.id.devices_info_devices_area_layout:
+                if (bindMap.get("ClientID").equals("")) {
+                    Toast.makeText(this, "请先选择客户", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent inten = new Intent(DevicesInfoActivity.this, ActivityXingHaoList.class);
+                inten.putExtra("mode", "3");
+                startActivityForResult(inten, ConstValues.RESULT_FOR_DEVICES_AREA);
                 break;
             case R.id.devices_info_xinghao_layout:
                 if (bindMap.get("ClientID").equals("")) {
                     Toast.makeText(this, "请先选择客户", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 String s = bindMap.get("keyTypeID");
                 Log.e("lxs", "onClick: keyTypeID--->" + s);
                 if (s.equals("")) {
@@ -612,19 +631,20 @@ public class DevicesInfoActivity extends SuperActivity {
 //            Toast.makeText(this,"该设备未录入后台数据库中,请联系管理员",Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-        proDialog = new ProgressDialog(this);
-        proDialog.setTitle("提示");
-        proDialog.setMessage("正在提交");
-        proDialog.show();
+        if (bindMap.get("AreaID").equals("")) {
+            Toast.makeText(this, "请先选择设备区域", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         httpManagerUtils = new YHttpManagerUtils(this, ConstValues.BIND_DEVICES_URL, new MyHandler(this, 1), getClass().getSimpleName());
         HashMap<String, String> bindmapdata = new HashMap<String, String>();
         bindmapdata.put("ID", codeId);
         String astr = bindMap.get("AssetID");
         Log.e("lxs", "bindDevices:astr---- " + astr);
-        if (astr.contains("$")) {
-            bindmapdata.put("AssetID", astr.replace("$", ""));
-        } else
-            bindmapdata.put("AssetID", bindMap.get("AssetID"));
+//        if (astr.contains("$")) {
+//            bindmapdata.put("AssetID", astr.split("$")[0]);
+//        } else
+            bindmapdata.put("AssetID", astr);
         bindmapdata.put("AssetXuLie", bindMap.get("AssetXuLie"));
         bindmapdata.put("Remark", tvXunJianDsc.getText().toString());
         Iterator iter = datapicmap.entrySet().iterator();
@@ -655,12 +675,17 @@ public class DevicesInfoActivity extends SuperActivity {
         bindmapdata.put("TypeID", bindMap.get("keyTypeID"));
         bindmapdata.put("BrandID", bindMap.get("BrandID"));
         bindmapdata.put("ModelID", bindMap.get("ModelID"));
+        bindmapdata.put("AreaID", bindMap.get("AreaID"));
 //        Log.e("lxs", "上传图片的名称:" + sbbuffer.toString());
 //        Log.e("lxs", "上传图片的内容:" + sbbase.toString());
         if (bindmapdata.get("Pic").equals("") && bindmapdata.get("AssetXuLie").equals("") && bindmapdata.get("Remark").equals("")) {
             Toast.makeText(this, "请填写选填项", Toast.LENGTH_SHORT).show();
             return;
         }
+        proDialog = new ProgressDialog(this);
+        proDialog.setTitle("提示");
+        proDialog.setMessage("正在提交");
+        proDialog.show();
         bindmapdata.put("opId", offlineDataManager.getUserID());
         for (String key : bindmapdata.keySet()) {
             Log.e("lxs", "bindDevices: " + key + " : " + bindmapdata.get(key));
@@ -870,16 +895,17 @@ public class DevicesInfoActivity extends SuperActivity {
     String beizhu = null;
 
     private void isShowAddPic() {
-        if(selectedPhotos != null){
-            if(selectedPhotos.size() == 0){
+        if (selectedPhotos != null) {
+            if (selectedPhotos.size() == 0) {
                 addImage.setVisibility(View.VISIBLE);
                 picrecyclerview.setVisibility(View.GONE);
-            }else {
+            } else {
                 addImage.setVisibility(View.GONE);
                 picrecyclerview.setVisibility(View.VISIBLE);
             }
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -896,7 +922,7 @@ public class DevicesInfoActivity extends SuperActivity {
                 addImage.setVisibility(View.GONE);
                 picrecyclerview.setVisibility(View.VISIBLE);
                 selectedPhotos.addAll(photos);
-            }else {
+            } else {
                 addImage.setVisibility(View.VISIBLE);
                 picrecyclerview.setVisibility(View.GONE);
             }
@@ -997,8 +1023,6 @@ public class DevicesInfoActivity extends SuperActivity {
                 }
                 break;
             case ConstValues.RESULT_FOR_DEVICES_TYPE:
-//                Log.e("lxs", "设备详情页onActivityResult: " + "设备类型名称返回" + result
-//                +"keyTypeID---->"+ids);
                 if (ids != null) {
                     bindMap.put("keyTypeID", ids);
                     devicesInfoNameTv.setText(result);
@@ -1007,59 +1031,46 @@ public class DevicesInfoActivity extends SuperActivity {
                 result = null;
                 ids = null;
                 break;
-//            case ConstValues.RESULT_FOR_DEVICES_NAME:
-//
-//                if (ids != null && !ids.equals("")) {
-////                    String[] str = null;
-////                    if(ids.contains("$")){
-////                        str= ids.split("$");
-////                        bindMap.put("AssetID", str[0]);
-////                    }else
-//                    bindMap.put("AssetID", ids);
-//                }
-////
-////                if (result != null && !result.equals("")) {
-////                    bindMap.put("AssetName", result);
-////                    devicesInfoNameTv.setText(result);
-////                    edit.putString("AseetName", result);
-////                    edit.commit();
-////                }
-//                break;
             case ConstValues.RESULT_FOR_DEVICES_PINPAI:
-                Log.e("lxs", "onActivityResult: 品牌" + ids + ",result----" + result + ",AssetID---" + AssetID);
                 if (ids != null && !ids.equals("")) {
                     bindMap.put("BrandID", ids);
                     if (result != null && !result.equals("")) {
                         devicesInfoPinpaiTv.setText(result);
                     }
                 }
-//                result = null;
-//                ids = null;
                 break;
+            case ConstValues.RESULT_FOR_DEVICES_AREA:
+                if (ids != null && !ids.equals("")) {
+
+                    bindMap.put("AreaID", ids);
+                    if (result != null && !result.equals("")) {
+                        devicesInfoAreaTv.setText(result);
+                    }
+                }
+                break;
+
+
             case ConstValues.RESULT_FOR_DEVICES_XINGHAO://型号
-                Log.e("lxs", "onActivityResult: " + ids + ",result----" + result + ",AssetID---" + AssetID);
+                Log.e("lxs", "onActivityResult: " + ids + ",型号result----" + result + ",AssetID---" + AssetID);
                 if (ids != null && !ids.equals("")) {
                     bindMap.put("ModelID", ids);
+
                     if (AssetID != null) {
-                        final String[] str = AssetID.split("$");
-                        if (str.length == 2) {
-                            bindMap.put("AssetID", str[0]);
-                            beizhu = str[1];
-                        } else {
-                            bindMap.put("AssetID", str[0]);
+                        if(AssetID.contains("$")){
+                            bindMap.put("AssetID", AssetID.substring(0,AssetID.indexOf("$")));
+                            tvXunJianDsc.setText(AssetID.substring(AssetID.indexOf("$")+1,AssetID.length()));
+                        }else {
+                            Toast.makeText(DevicesInfoActivity.this,"参数错误,请联系后台",Toast.LENGTH_SHORT).show();
                         }
 
+                        if (result != null && !result.equals("")) {
+                            devicesInfoXinghaoTv.setText(result);
+                        }
+
+                    }else{
+                        devicesInfoXinghaoTv.setText("必填项");
                     }
-
-//                    bindMap.put("AssetID",AssetID);
-                    Log.e("lxs", "onActivityResult:AssetID " + AssetID);
                 }
-                if (result != null && !result.equals("")) {
-                    devicesInfoXinghaoTv.setText(result);
-//                            edit.putString("XingHao", result);
-//                            edit.commit();
-                }
-
                 break;
             case ConstValues.RESULT_FOR_DEVICES_XULIEHAO:
                 if (result != null && !result.equals("")) {

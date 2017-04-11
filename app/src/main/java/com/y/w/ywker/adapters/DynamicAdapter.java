@@ -116,6 +116,8 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             v = LayoutInflater.from(ctx).inflate(R.layout.adapter_item_footer,parent,false);
             return new FooterViewHoler(v);
         }
+
+
         return null;
     }
 
@@ -123,6 +125,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof DynamicVH){
             ((DynamicVH)holder).bindData(position);
+
         }
     }
 

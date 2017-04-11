@@ -48,6 +48,7 @@ public class ConstValues {
     public static final int RESULT_FOR_PICKER_IMG = 12;
     public static final int RESULT_FOR_DEVICES_REPLAY_ORDER = 13;
     public static final int RESULT_FOR_DEVICES_PINPAI = 14;
+    public static final int RESULT_FOR_DEVICES_AREA = 23;
     public static final int RESULT_FOR_DEVICES_XINGHAO = 15;
     public static final int RESULT_FOR_DEVICES_NAME = 16;
     public static final int RESULT_FOR_DEVICES_XULIEHAO = 22;
@@ -98,10 +99,11 @@ public class ConstValues {
     /**
      * 基础URL
      */
-    public static String BASE_URL = "http://123.56.153.172:8801/";
-//    public static String BASE_URL = "http://192.168.1.149:8801/";
+    //  public static String BASE_URL = "http://123.56.153.172:8801/";
+    public static String BASE_URL = "http://192.168.1.149:8801/";
 //    public static String BASE_URL = "http://192.168.1.15:8801/";
 //    public static String BASE_URL = "http://192.168.1.17:8801/";
+//    public static String BASE_URL = "http://192.168.1.43:8801/";//李勇兴电脑ip配置
 
 
 
@@ -199,7 +201,7 @@ public class ConstValues {
     public static String GET_XUNJIAN_PIC = BASE_URL + "InspectPlan/GetPicList?recordAssetId=%s&mainId=%s";
     public static String GET_DEVICESINFO_PIC = BASE_URL+"Asset/GetPicList?assetId=%s&mainId=%s";
     public static String GET_DEVICETYPE_URL = BASE_URL + "Asset/GetAssetType?mainId=%s";
-    public static String GET_XINGHAO_URL = BASE_URL + "Asset/GetModelList?mainId=%s&typeId=%s&brandId=%s";
+    public static String GET_XINGHAO_URL = BASE_URL + "Asset/GetModelList?mainId=%s&typeId=%s&brandId=%s&ClientID=%s";
     public static String GET_ASEETID_URL = BASE_URL + "Asset/GetAssetIdForBindAsset?mainId=%s&typeId=%s&brandId=%s&modelId=%s&clientId=%s";
     /**
      * 获取工单类型
@@ -271,6 +273,7 @@ public class ConstValues {
 
     public static String GET_DEVICES_INFO_URL = BASE_URL + "Asset/GetAssetBrandModel?lMainID=%s&lClientID=%s&lContactID=%s&strType=%s";
     public static String GET_MODE_URL = BASE_URL + "Asset/GetBrandList?mainId=%s";
+    public static String GET_AssetArea_URL = BASE_URL + "Asset/GetAPPAssetArea";
     /**
      * 获取设备名称
      */

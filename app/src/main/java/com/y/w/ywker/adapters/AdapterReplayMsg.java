@@ -90,6 +90,12 @@ public class AdapterReplayMsg extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    /**
+     * IM自定义布局
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = null;

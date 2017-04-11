@@ -69,16 +69,19 @@ public class ActivityXunJianOver extends SuperActivity {
     TextView tvZhiXingRen;
     String PatrolID;
     String recordId;
+    @Bind(R.id.ll_next)
+    LinearLayout llNext;
     private HashMap<String, String> map = new HashMap<String, String>();
     /**
      * 客户确认人
      */
-   private String user;
+    private String user;
     /**
      * 联系方式
      */
     private String lianxi;
     private String xunjianNum = "0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +89,12 @@ public class ActivityXunJianOver extends SuperActivity {
         ButterKnife.bind(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-       xunjianNum = getIntent().getStringExtra("Number");
+        xunjianNum = getIntent().getStringExtra("Number");
         tvXunJianNum.setText(xunjianNum);
         PatrolID = getIntent().getStringExtra("PatrolID");//巡检计划ID
         showLoading();
-        httpManagerUtils = new YHttpManagerUtils(this,String.format(ConstValues.GET_JIHUA_URL, PatrolID),
-                new MyHandler(this,2), this.getClass().getName());
+        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_JIHUA_URL, PatrolID),
+                new MyHandler(this, 2), this.getClass().getName());
         httpManagerUtils.startRequest();
         recordId = getIntent().getStringExtra("recordId");
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -101,7 +104,7 @@ public class ActivityXunJianOver extends SuperActivity {
         map.put("NextInspectPerson", offlineDataManager.getUserID());
         map.put("PatrolID", PatrolID);
         map.put("recordId", recordId);
-        map.put("InspectSummary",etZongjie.getText().toString());
+        map.put("InspectSummary", etZongjie.getText().toString());
     }
 
     public void showDialog() {
@@ -139,12 +142,12 @@ public class ActivityXunJianOver extends SuperActivity {
             case R.id.btn_over://确认完成
                 user = etSuerName.getText().toString().trim();
                 lianxi = etSureConacts.getText().toString().trim();
-                if(TextUtils.isEmpty(user)){
-                    Toast.makeText(this,"请填写客户确认人",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(user)) {
+                    Toast.makeText(this, "请填写客户确认人", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(lianxi)){
-                    Toast.makeText(this,"请填写联系方式",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(lianxi)) {
+                    Toast.makeText(this, "请填写联系方式", Toast.LENGTH_SHORT).show();
                     return;
                 }
 //                if(!CheckUtils.isPhoneNumberValid(lianxi)){
@@ -159,7 +162,9 @@ public class ActivityXunJianOver extends SuperActivity {
                 break;
         }
     }
+
     private YHttpManagerUtils httpManagerUtils;
+
     /**
      * 获取人员列表信息
      */
@@ -181,26 +186,31 @@ public class ActivityXunJianOver extends SuperActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     /**
      * 提交数据
      */
     private void postData() {
-        map.put("ClientConfirmedUser",user);
-        map.put("ClientTel",lianxi);
-        map.put("NextInspectTime",tvZhiXingTime.getText().toString());
+        map.put("ClientConfirmedUser", user);
+        map.put("ClientTel", lianxi);
+        map.put("NextInspectTime", tvZhiXingTime.getText().toString());
         YHttpManagerUtils managerUtils = new YHttpManagerUtils(this, ConstValues.POST_OVER_XUNJIAN, mHandler, getClass().getName());
         managerUtils.startPostRequest(map);
     }
-    private Handler mHandler = new MyHandler(this,1);
+
+    private Handler mHandler = new MyHandler(this, 1);
     private InputMethodManager manager;
     private ProgressDialog proDialog;
+
     class MyHandler extends Handler {
         WeakReference<AppCompatActivity> mFragmentReference;
         private int type;
-        public MyHandler(AppCompatActivity fragment,int type) {
+
+        public MyHandler(AppCompatActivity fragment, int type) {
             mFragmentReference = new WeakReference<AppCompatActivity>(fragment);
             this.type = type;
         }
+
         @Override
         public void handleMessage(Message msg) {
             dismissLoading();
@@ -213,7 +223,7 @@ public class ActivityXunJianOver extends SuperActivity {
                     case ConstValues.MSG_FAILED:
                         break;
                     case ConstValues.MSG_ERROR:
-                        if(type == 2){
+                        if (type == 2) {
                             return;
                         }
                         Toast.makeText(getBaseContext(), "提交失败", Toast.LENGTH_SHORT).show();
@@ -223,32 +233,38 @@ public class ActivityXunJianOver extends SuperActivity {
                     case ConstValues.MSG_JSON_FORMAT_WRONG:
                         break;
                     case ConstValues.MSG_SUCESS:
-                        if(type == 2){
-                           String str = (String)msg.obj;
+                        if (type == 2) {
+                            String str = (String) msg.obj;
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<JiHuaEntry>>() {
                             }.getType();
-                            List<JiHuaEntry> list = gson.fromJson(str,listType);
-                            if(list != null && list.size()> 0){
+                            List<JiHuaEntry> list = gson.fromJson(str, listType);
+                            if (list != null && list.size() > 0) {
                                 String time = list.get(0).getNextInspectTime();
-                                time =  time.substring(0,time.indexOf(" "));
-                                time = time.replace("/","-");
-                                tvZhiXingTime.setText(time);
-                                tvZhiXingRen.setText(list.get(0).getNextInspectPersonName());
-                                map.put("NextInspectPerson",list.get(0).getNextInspectPersonId());
+                                if (time.isEmpty()) {
+                                    llNext.setVisibility(View.GONE);
+                                } else {
+                                    time = time.substring(0, time.indexOf(" "));
+                                    time = time.replace("/", "-");
+                                    tvZhiXingTime.setText(time);
+                                    tvZhiXingRen.setText(list.get(0).getNextInspectPersonName());
+                                    map.put("NextInspectPerson", list.get(0).getNextInspectPersonId());
+                                }
+
                             }
                             return;
                         }
                         Toast.makeText(getBaseContext(), "提交成功", Toast.LENGTH_SHORT).show();
                         finish();
-                        ActivityManager.getInstance().finshActivities(ActivityXunJianLook.class,ActivityXunJian.class,
+                        ActivityManager.getInstance().finshActivities(ActivityXunJianLook.class, ActivityXunJian.class,
                                 ActivityLookedXunJianAseet.class);
-                        Utils.start_Activity(ActivityXunJianOver.this,ActivityXunJian.class);
+                        Utils.start_Activity(ActivityXunJianOver.this, ActivityXunJian.class);
                         break;
                 }
             }
         }
     }
+
     /**
      * 隐藏软键盘
      */

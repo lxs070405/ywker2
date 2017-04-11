@@ -209,7 +209,6 @@ public class ParentSelectorActivity extends BaseSwipeRefreshActivity implements 
                 layoutCommSwipeRefresh.setRefreshing(false);
                 switch (msg.what){
                     case ConstValues.MSG_FAILED:
-
                         break;
                     case ConstValues.MSG_ERROR:
                         Toast.makeText(ParentSelectorActivity.this, "服务器返回错误", Toast.LENGTH_SHORT).show();

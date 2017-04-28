@@ -41,21 +41,21 @@ public class ActivityXuLieHao extends SuperActivity {
     TextView btnBindDevicesScanQr;
     @Bind(R.id.btn_bind_devices_sure)
     Button btnBindDevicesSure;
-
+    String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind);
         ButterKnife.bind(this);
-        layoutCommToolbarTitle.setText("设备序列号");
+        type = getIntent().getStringExtra("type");
+        String title = getIntent().getStringExtra("title");
+        layoutCommToolbarTitle.setText(title);
     }
 
     @OnClick({R.id.layout_comm_toolbar_title, R.id.btn_bind_devices_back,
             R.id.btn_bind_devices_scan_qr, R.id.btn_bind_devices_sure})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.layout_comm_toolbar_title:
-                break;
             case R.id.btn_bind_devices_back:
                 finish();
                 break;
@@ -77,10 +77,18 @@ public class ActivityXuLieHao extends SuperActivity {
 //                        new YBasicNameValuePair("bind_type","create"),
 //                        new YBasicNameValuePair("xuliehao",result)
 //                });
-                Intent i = new Intent(this,DevicesInfoActivity.class);
-                i.putExtra("result",result);
-                setResult(ConstValues.RESULT_FOR_DEVICES_XULIEHAO,i);
-                finish();
+                if(type.equals("1")){
+                    Intent i = new Intent(this,DevicesInfoActivity.class);
+                    i.putExtra("result",result);
+                    setResult(ConstValues.RESULT_FOR_DEVICES_XULIEHAO,i);
+                    finish();
+                }else {
+                    Intent i = new Intent(this,DevicesInfoActivity.class);
+                    i.putExtra("result",result);
+                    setResult(ConstValues.RESULT_FOR_DEVICES_QBCODE,i);
+                    finish();
+                }
+
                 break;
         }
     }

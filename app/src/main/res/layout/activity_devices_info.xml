@@ -184,9 +184,57 @@
             android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="下列三项任选其中至少一项"
+            android:text="下列五项任选其中至少一项"
             android:textColor="@android:color/holo_red_dark"
             />
+    <LinearLayout
+        android:clickable="true"
+        android:background="@drawable/comm_selector_bg"
+        android:id="@+id/ll_QBCode"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            style="@style/comm_left_textview_style"
+            android:text="资产编号"
+            />
+
+        <TextView
+            android:id="@+id/devices_QBCode_tv"
+            style="@style/comm_right_textview_style"
+            android:text="选填"
+            />
+
+        <ImageView
+            style="@style/comm_arrow_right_img_style"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:id="@+id/ll_time"
+            android:background="@drawable/comm_selector_bg"
+            >
+            <TextView
+                style="@style/comm_left_textview_style"
+                android:text="启用时间"
+
+                />
+            <TextView
+                android:id="@+id/tv_qiyongTime"
+                style="@style/comm_right_textview_style"
+                android:text="选填"
+                />
+
+            <ImageView
+                style="@style/comm_arrow_right_img_style"
+                />
+        </LinearLayout>
+
+
         <LinearLayout
             android:clickable="true"
             android:background="@drawable/comm_selector_bg"
@@ -334,7 +382,13 @@
             </RelativeLayout>
       <!--  </LinearLayout>-->
 
-
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_rebind"
+            android:layout_marginTop="20dp"
+            style="@style/comm_btn_yellow_style"
+            android:text="修改确定"
+            />
         <Button
             android:id="@+id/devices_info_btn_sure"
             android:layout_marginTop="20dp"
@@ -342,6 +396,7 @@
             android:text="绑定设备"
             android:layout_marginBottom="20dp"
             />
+
     </LinearLayout>
 </ScrollView>
 

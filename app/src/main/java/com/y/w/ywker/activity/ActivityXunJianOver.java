@@ -1,6 +1,5 @@
 package com.y.w.ywker.activity;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,15 +25,16 @@ import com.y.w.ywker.ConstValues;
 import com.y.w.ywker.R;
 import com.y.w.ywker.entry.JiHuaEntry;
 import com.y.w.ywker.entry.YBasicNameValuePair;
+import com.y.w.ywker.timecheck.TimePickerView;
 import com.y.w.ywker.utils.ActivityManager;
 import com.y.w.ywker.utils.OfflineDataManager;
 import com.y.w.ywker.utils.Utils;
 import com.y.w.ywker.utils.YHttpManagerUtils;
-import com.y.w.ywker.views.DateTimePickerDialog;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,6 +81,7 @@ public class ActivityXunJianOver extends SuperActivity {
      */
     private String lianxi;
     private String xunjianNum = "0";
+    private TimePickerView pvTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,20 +109,37 @@ public class ActivityXunJianOver extends SuperActivity {
     }
 
     public void showDialog() {
-        DateTimePickerDialog dialog = new DateTimePickerDialog(this, System.currentTimeMillis());
-        dialog.setOnDateTimeSetListener(new DateTimePickerDialog.OnDateTimeSetListener() {
+//        DateTimePickerDialog dialog = new DateTimePickerDialog(this, System.currentTimeMillis());
+//        dialog.setOnDateTimeSetListener(new DateTimePickerDialog.OnDateTimeSetListener() {
+//            @Override
+//            public void OnDateTimeSet(AlertDialog dialog, long date) {
+//                tvZhiXingTime.setText(getStringDate(date));
+//            }
+//        });
+//        dialog.show();
+        //时间选择器
+        pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
+        //控制时间范围
+//        Calendar calendar = Calendar.getInstance();
+//        pvTime.setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR));//要在setTime 之前才有效果哦
+        pvTime.setTime(new Date());
+        pvTime.setCyclic(false);
+        pvTime.setCancelable(true);
+        //时间选择后回调
+        pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+
             @Override
-            public void OnDateTimeSet(AlertDialog dialog, long date) {
+            public void onTimeSelect(Date date) {
                 tvZhiXingTime.setText(getStringDate(date));
             }
         });
-        dialog.show();
+        pvTime.show();
     }
 
     /**
      * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
      */
-    public static String getStringDate(Long date) {
+    public static String getStringDate(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");//HH:mm:ss
         String dateString = formatter.format(date);
         return dateString;
@@ -250,7 +268,6 @@ public class ActivityXunJianOver extends SuperActivity {
                                     tvZhiXingRen.setText(list.get(0).getNextInspectPersonName());
                                     map.put("NextInspectPerson", list.get(0).getNextInspectPersonId());
                                 }
-
                             }
                             return;
                         }

@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.y.w.ywker.ConstValues;
 import com.y.w.ywker.R;
 import com.y.w.ywker.entry.AseetCodeSearchEntry;
 import com.y.w.ywker.entry.DevicesEntry;
+import com.y.w.ywker.entry.ModelNameEntry;
 import com.y.w.ywker.entry.YBasicNameValuePair;
 import com.y.w.ywker.utils.LOG;
 import com.y.w.ywker.utils.OfflineDataManager;
@@ -55,19 +57,24 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
     @Bind(R.id.layout_comm_toolbar)
     Toolbar layoutCommToolbar;
     @Bind(R.id.layout_comm_toolbar_title)
-    TextView layoutCommToolbarTitle;
+    TextView Title;
     @Bind(R.id.edt_bind_devices)
     EditText edtBindDevices;
     @Bind(R.id.btn_bind_devices_sure)
     Button btnBindDevicesSure;
     @Bind(R.id.listview)
     ListView listview;
+    @Bind(R.id.listview_CodeMuBan)
+    ListView listviewCodeMuBan;
+    @Bind(R.id.ll_moban)
+    LinearLayout llMoban;
+    @Bind(R.id.btn_xuni)
+    Button btnXuni;
     private YHttpManagerUtils httpManagerUtils;
 
 
     /**
      * 回复工单,其他
-     *
      */
     private String devicesInfo = "";
     /**
@@ -80,6 +87,7 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
      */
     private String codeId = "";
     private String MainID = "";
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -90,22 +98,24 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
         MainID = offlineDataManager.getMainID();
         edtBindDevices.addTextChangedListener(new EditChangedListener());
         fromSouce = getIntent().getStringExtra("fromSource");
-        if (fromSouce.equals("1")){
-            layoutCommToolbarTitle.setText("扫描设备");
-        }else if (fromSouce.equals("2")){
-            layoutCommToolbarTitle.setText("回复工单");
-        }else if(fromSouce.equals("3")){
-            layoutCommToolbarTitle.setText("增加巡检设备");
-        }else if(fromSouce.equals("4")||fromSouce.equals("6")){
-            layoutCommToolbarTitle.setText("工单增加设备");
-        }else if(fromSouce.equals("5")){
-            layoutCommToolbarTitle.setText("扫描维修设备");
+        if (fromSouce.equals("1")) {
+            Title.setText("扫描设备");
+        } else if (fromSouce.equals("2")) {
+            Title.setText("回复工单");
+        } else if (fromSouce.equals("3")) {
+            Title.setText("增加巡检设备");
+        } else if (fromSouce.equals("4") || fromSouce.equals("6")) {
+            Title.setText("工单增加设备");
+        } else if (fromSouce.equals("5")) {
+            Title.setText("扫描维修设备");
         }
 
     }
 
     boolean isSearch;
-    boolean stopWath ;
+    boolean stopWath;
+
+
     class EditChangedListener implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -115,65 +125,71 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             //将输入的内容实时显示
-            if(s.length() == 0){
+            if (s.length() == 0) {
                 stopWath = false;
                 btnBindDevicesSure.setEnabled(false);
                 btnBindDevicesSure.setText("确定");
                 listview.setVisibility(View.GONE);
             }
         }
+
         @Override
         public void afterTextChanged(Editable s) {//文本改变之后的监听事件回调
 
-            if(!isSearch&&!stopWath&&s.length() > 3){
+            if (!isSearch && !stopWath && s.length() > 3) {
                 isSearch = true;
             }
-            if(isSearch&& s.length() > 3){
-                    Search(s.toString());
+            if (isSearch && s.length() > 3) {
+                Search(s.toString());
             }
         }
 
     }
+
     private boolean stopSearch;
+
     private void isDevicesBinded(String deviceCode) {
         btnBindDevicesSure.setEnabled(false);
-        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.BIND_DEVICES_COMPARE_URL, deviceCode,MainID), new MyHandler(this), this.getClass().getName());
+        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.BIND_DEVICES_COMPARE_URL, deviceCode, MainID), new MyHandler(this), this.getClass().getName());
         httpManagerUtils.startRequest();
     }
+
     private void Search(String deviceCode) {
 //        isSearch = false;
-        if(isSearch&&!stopWath){
+        if (isSearch && !stopWath) {
             btnBindDevicesSure.setEnabled(false);
-            httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.SEARCH_DEVICES_COMPARE_URL, deviceCode,MainID), new  SearchHandler(this), this.getClass().getName());
+            httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.SEARCH_DEVICES_COMPARE_URL, deviceCode, MainID), new SearchHandler(this), this.getClass().getName());
             httpManagerUtils.startRequest();
             isSearch = false;
         }
 
     }
-    class  SearchHandler extends Handler{
+
+    class SearchHandler extends Handler {
         WeakReference<AppCompatActivity> mFragmentReference;
-        public SearchHandler(AppCompatActivity fragment){
+
+        public SearchHandler(AppCompatActivity fragment) {
             mFragmentReference = new WeakReference<AppCompatActivity>(fragment);
         }
 
         @Override
         public void handleMessage(Message msg) {
             AppCompatActivity fragment = mFragmentReference.get();
-            if (fragment != null){
-                switch (msg.what){
-                    case  ConstValues.MSG_FAILED:
+            if (fragment != null) {
+                switch (msg.what) {
+                    case ConstValues.MSG_FAILED:
                         break;
                     case ConstValues.MSG_ERROR:
-                        Utils.showToast(BindDevicesActivity.this,"未查询到该标签请重新输入!");
+                        Utils.showToast(BindDevicesActivity.this, "未查询到该标签请重新输入!");
                         break;
                     case ConstValues.MSG_SUCESS:
-                       String result = (String) msg.obj;
-                        if(result.equals("error")){
-                            Utils.showToast(BindDevicesActivity.this,"未查询到该标签请重新输入!");
+                        String result = (String) msg.obj;
+                        if (result.equals("error")) {
+                            Utils.showToast(BindDevicesActivity.this, "未查询到该标签请重新输入!");
                             return;
                         }
                         final ArrayList<String> arr = PaseData(result);
-                        if(!stopSearch){
+                        if (!stopSearch) {
                             listview.setVisibility(View.VISIBLE);
                             stopSearch = false;
                         }
@@ -194,6 +210,123 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
         }
     }
 
+    private final int GetCodeMuBan = 1;
+    private final int GetCodeDsc = 2;
+
+    class GetCodeMuBanHandler extends Handler {
+        WeakReference<AppCompatActivity> mFragmentReference;
+
+        int type;
+
+        public GetCodeMuBanHandler(AppCompatActivity fragment, int type) {
+            mFragmentReference = new WeakReference<AppCompatActivity>(fragment);
+            this.type = type;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            AppCompatActivity fragment = mFragmentReference.get();
+            if (fragment != null) {
+                switch (msg.what) {
+                    case ConstValues.MSG_FAILED:
+                        btnXuni.setEnabled(true);
+                        break;
+                    case ConstValues.MSG_ERROR:
+                        btnXuni.setEnabled(true);
+                        Utils.showToast(BindDevicesActivity.this, "创建虚拟标签失败!");
+                        break;
+                    case ConstValues.MSG_SUCESS:
+
+                        String result = (String) msg.obj;
+                        if (result.equals("error")) {
+                            Utils.showToast(BindDevicesActivity.this, "输入信息有误请重新输入!");
+                            return;
+                        }
+                        if (type == GetCodeMuBan) {
+                            llMoban.setVisibility(View.VISIBLE);
+                            Title.setText("请选择标签模板");
+                            final ArrayList<String> arr = PaseCodeMuBanData(result);
+                            listviewCodeMuBan.setAdapter(new ArrayAdapter<String>(BindDevicesActivity.this,
+                                    android.R.layout.simple_list_item_1, arr));
+                            listviewCodeMuBan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                    //请求虚拟标签获取设备信息 根据资产号和虚拟标签模板id去获取设备信息
+                                    if (ModelNameIDlist != null) {
+                                        String code = edtBindDevices.getText().toString().trim();
+                                        if (code.equals("") || TextUtils.isEmpty(code)) {
+                                            GetDeviceDsc(ModelNameIDlist.get(position), "0");
+                                        } else {
+                                            GetDeviceDsc(ModelNameIDlist.get(position), code);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        if (type == GetCodeDsc) {
+                            try {
+                                if (Integer.parseInt(result) > 0) {
+                                    codeId = result;
+                                    Utils.start_Activity(BindDevicesActivity.this, DevicesInfoActivity.class, new YBasicNameValuePair[]{
+                                            new YBasicNameValuePair("bind_type", "create"),
+                                            new YBasicNameValuePair("codeID", codeId)});
+                                    finish();
+                                    return;
+                                }
+                            } catch (Exception e) {
+
+                            }
+
+                            handData(result);
+                            llMoban.setVisibility(View.GONE);
+                            btnBindDevicesSure.setText("查看设备信息(已绑定)");
+                            btnBindDevicesSure.setEnabled(true);
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    private List<String> ModelNameIDlist;
+
+    private ArrayList<String> PaseCodeMuBanData(String json) {
+
+        Gson gson = new Gson();
+        ArrayList<String> arr = new ArrayList<>();
+        ModelNameIDlist = new ArrayList<>();
+        Type type = new TypeToken<List<ModelNameEntry>>() {
+        }.getType();
+        List<ModelNameEntry> ModelNamelist = gson.fromJson(json, type);
+        if (ModelNamelist != null && !ModelNamelist.isEmpty()) {
+            for (ModelNameEntry entry : ModelNamelist) {
+                arr.add(entry.getModelname());
+                ModelNameIDlist.add(entry.getID());
+            }
+        }
+
+        return arr;
+    }
+
+    /**
+     * 创建虚拟标签号请求 获取标签模板
+     */
+    private void createXuNiCode() {
+        btnBindDevicesSure.setEnabled(false);
+        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.BIND_DEVICES_GETMUBAN_URL, MainID), new GetCodeMuBanHandler(this, GetCodeMuBan), this.getClass().getName());
+        httpManagerUtils.startRequest();
+    }
+
+    /**
+     * 获取设备信息
+     */
+    private void GetDeviceDsc(String CodeMuBanID, String QBCode) {
+        btnBindDevicesSure.setEnabled(false);
+        httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.BIND_DEVICES_GETINFO_URL, QBCode, CodeMuBanID, MainID), new GetCodeMuBanHandler(this, GetCodeDsc), this.getClass().getName());
+        httpManagerUtils.startRequest();
+    }
+
     class MyHandler extends Handler {
 
         WeakReference<AppCompatActivity> mFragmentReference;
@@ -211,50 +344,61 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
                 switch (msg.what) {
                     case ConstValues.MSG_FAILED:
                         btnBindDevicesSure.setEnabled(true);
+                        btnBindDevicesSure.setText("确定");
                         break;
                     case ConstValues.MSG_ERROR:
                         //使用默认值
 //                        Toast.makeText(BindDevicesActivity.this, "设备未绑定", Toast.LENGTH_SHORT).show();
                         btnBindDevicesSure.setEnabled(true);
-                        btnBindDevicesSure.setText("绑定设备");
+                        btnBindDevicesSure.setText("确定");
                         break;
                     case ConstValues.MSG_NET_INAVIABLE:
                         btnBindDevicesSure.setEnabled(true);
+                        btnBindDevicesSure.setText("确定");
                         break;
                     case ConstValues.MSG_JSON_FORMAT_WRONG:
                         btnBindDevicesSure.setEnabled(true);
+                        btnBindDevicesSure.setText("确定");
+                        ;
                         break;
                     case ConstValues.MSG_SUCESS:
                         btnBindDevicesSure.setEnabled(true);
                         String result = (String) msg.obj;
 
-                        Log.e(getClass().getSimpleName(),"扫描完毕判断返回值 : " + result);
+                        Log.e(getClass().getSimpleName(), "扫描完毕判断返回值 : " + result);
 
-                        if (result.equals("0")){
+                        if (result.equals("0")) {
                             Toast.makeText(BindDevicesActivity.this, "该标签不存在此服务商中", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         try {
-                            if (Integer.parseInt(result) > 0){
+                            if (Integer.parseInt(result) == -1) {
+                                createXuNiCode();
+                                Toast.makeText(BindDevicesActivity.this, "设备未绑定", Toast.LENGTH_SHORT).show();
+                                btnBindDevicesSure.setEnabled(true);
+                                btnBindDevicesSure.setText("创建虚拟标签");
+                                return;
+                            }
+
+                            if (Integer.parseInt(result) > 0) {
                                 codeId = result;
                                 Toast.makeText(BindDevicesActivity.this, "设备未绑定", Toast.LENGTH_SHORT).show();
                                 btnBindDevicesSure.setEnabled(true);
                                 btnBindDevicesSure.setText("绑定设备");
                                 return;
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
 
                         handData(result);
                         btnBindDevicesSure.setEnabled(true);
-                        if(fromSouce.equals("4")||fromSouce.equals("3")){
+                        if (fromSouce.equals("4") || fromSouce.equals("3")) {
                             btnBindDevicesSure.setText("增加设备信息(已绑定)");
-                        }else if(fromSouce.equals("2")){
+                        } else if (fromSouce.equals("2")) {
                             btnBindDevicesSure.setText("回复设备信息(已绑定)");
-                        }
-                        else {
+                        } else {
                             btnBindDevicesSure.setText("查看设备信息(已绑定)");
                         }
 
@@ -265,29 +409,32 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
     }
 
 
-    private  ArrayList PaseData(String json){
+    private ArrayList PaseData(String json) {
         Gson gson = new Gson();
-        ArrayList<String> arr =new ArrayList<>();
-        Type type = new TypeToken<List<AseetCodeSearchEntry>>(){}.getType();
-        List<AseetCodeSearchEntry> list = gson.fromJson(json,type);
-        if (list != null && !list.isEmpty()){
-            for(AseetCodeSearchEntry entry : list ){
-               arr.add(entry.getQBCode()) ;
+        ArrayList<String> arr = new ArrayList<>();
+        Type type = new TypeToken<List<AseetCodeSearchEntry>>() {
+        }.getType();
+        List<AseetCodeSearchEntry> list = gson.fromJson(json, type);
+        if (list != null && !list.isEmpty()) {
+            for (AseetCodeSearchEntry entry : list) {
+                arr.add(entry.getQBCode());
             }
         }
         return arr;
     }
+
     private String AseetId = "0";
     private String AseetName = "";
 
-    private void handData(String json){
-        Log.e("lxs", "handData: "+json);
+    private void handData(String json) {
+        Log.e("lxs", "handData: " + json);
         Gson gson = new Gson();
-        Type type = new TypeToken<List<DevicesEntry>>(){}.getType();
-        List<DevicesEntry> _list = gson.fromJson(json,type);
-        if (_list != null && !_list.isEmpty()){
+        Type type = new TypeToken<List<DevicesEntry>>() {
+        }.getType();
+        List<DevicesEntry> _list = gson.fromJson(json, type);
+        if (_list != null && !_list.isEmpty()) {
             devicesInfo = gson.toJson(_list.get(0));
-            AseetId = _list.get(0).getID()+"";
+            AseetId = _list.get(0).getID() + "";
             AseetName = _list.get(0).getAssetName();
         }
     }
@@ -303,7 +450,7 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
         super.onDestroy();
     }
 
-    @OnClick({R.id.btn_bind_devices_back, R.id.btn_bind_devices_scan_qr, R.id.btn_bind_devices_sure})
+    @OnClick({R.id.btn_bind_devices_back, R.id.btn_bind_devices_scan_qr, R.id.btn_bind_devices_sure, R.id.btn_xuni})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -311,83 +458,86 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
                 /**
                  * 如果绑定,获取绑定信息的
                  */
-                if (btnBindDevicesSure.getText().equals("绑定设备")){
-                    if(fromSouce.equals("4")||fromSouce.equals("5")||fromSouce.equals("6")){
-                        Utils.start_Activity(BindDevicesActivity.this,DevicesInfoActivity.class,new YBasicNameValuePair[]{
-                                new YBasicNameValuePair("bind_type","zongjietype"),
-                                new YBasicNameValuePair("bind_xunjian","zongjie"),
-                                new YBasicNameValuePair("QBCode",edtBindDevices.getText().toString()),
-                                new YBasicNameValuePair("codeID",codeId) });
+                if (btnBindDevicesSure.getText().equals("绑定设备")) {
+                    if (fromSouce.equals("4") || fromSouce.equals("5") || fromSouce.equals("6")) {
+                        Utils.start_Activity(BindDevicesActivity.this, DevicesInfoActivity.class, new YBasicNameValuePair[]{
+                                new YBasicNameValuePair("bind_type", "zongjietype"),
+                                new YBasicNameValuePair("bind_xunjian", "zongjie"),
+                                new YBasicNameValuePair("QBCode", edtBindDevices.getText().toString()),
+                                new YBasicNameValuePair("codeID", codeId)});
                         finish();
-                    }else
-                    if (fromSouce.equals("1")){//创建
-                        Utils.start_Activity(BindDevicesActivity.this,DevicesInfoActivity.class,new YBasicNameValuePair[]{
-                                new YBasicNameValuePair("bind_type","create"),
-                                new YBasicNameValuePair("codeID",codeId)});
+                    } else if (fromSouce.equals("1")) {//创建
+                        Utils.start_Activity(BindDevicesActivity.this, DevicesInfoActivity.class, new YBasicNameValuePair[]{
+                                new YBasicNameValuePair("bind_type", "create"),
+                                new YBasicNameValuePair("codeID", codeId)});
                         finish();
-                    }else if(fromSouce.equals("2")){//回复
+                    } else if (fromSouce.equals("2")) {//回复
                         Utils.start_ActivityResult(BindDevicesActivity.this, DevicesInfoActivity.class, ConstValues.RESULT_FOR_DEVICES_REPLAY_ORDER, new YBasicNameValuePair[]{
                                 new YBasicNameValuePair("bind_type", "replay"),//replay
-                                new YBasicNameValuePair("codeID",codeId)
+                                new YBasicNameValuePair("codeID", codeId)
                         });
 //                        finish();
-                    }else if(fromSouce.equals("3")){
-                        Utils.start_Activity(BindDevicesActivity.this,DevicesInfoActivity.class,new YBasicNameValuePair[]{
-                                new YBasicNameValuePair("bind_type","xunjiantype"),
-                                new YBasicNameValuePair("bind_xunjian","xunjian"),
-                                new YBasicNameValuePair("codeID",codeId) });
+                    } else if (fromSouce.equals("3")) {
+                        Utils.start_Activity(BindDevicesActivity.this, DevicesInfoActivity.class, new YBasicNameValuePair[]{
+                                new YBasicNameValuePair("bind_type", "xunjiantype"),
+                                new YBasicNameValuePair("bind_xunjian", "xunjian"),
+                                new YBasicNameValuePair("codeID", codeId)});
                         finish();
                     }
-                }else if(btnBindDevicesSure.getText().toString().contains("已绑定")){
-                    if(fromSouce.equals("6")){//维修工单增加设备
-                        Intent intent = new Intent(BindDevicesActivity.this,WeiXiuOrderDetailActivity.class);
-                        intent.putExtra("AseetId",AseetId);
-                        intent.putExtra("AseetName",AseetName);
-                        intent.putExtra("QBCode",edtBindDevices.getText().toString());
-                        Log.e("lxs", "onClick:传递---- "+AseetId );
-                        setResult(ConstValues.ADD_SHEBEI,intent);
+                } else if (btnBindDevicesSure.getText().toString().contains("已绑定")) {
+                    if (fromSouce.equals("6")) {//维修工单增加设备
+                        Intent intent = new Intent(BindDevicesActivity.this, WeiXiuOrderDetailActivity.class);
+                        intent.putExtra("AseetId", AseetId);
+                        intent.putExtra("AseetName", AseetName);
+                        intent.putExtra("QBCode", edtBindDevices.getText().toString());
+                        intent.putExtra("codeID", codeId);
+
+                        Log.e("lxs", "onClick:传递----codeId -----" + AseetId + codeId);
+                        setResult(ConstValues.ADD_SHEBEI, intent);
                         finish();
-                    }else
-                    if (fromSouce.equals("5")){//创建维修工单
-                        Utils.start_Activity(BindDevicesActivity.this,DevicesInfoActivity.class,new YBasicNameValuePair[]{
-                                new YBasicNameValuePair("bind_type","createweixiu"),
-                                new YBasicNameValuePair("devices_info",devicesInfo)
+                    } else if (fromSouce.equals("5")) {//创建维修工单
+                        Utils.start_Activity(BindDevicesActivity.this, DevicesInfoActivity.class, new YBasicNameValuePair[]{
+                                new YBasicNameValuePair("bind_type", "createweixiu"),
+                                new YBasicNameValuePair("devices_info", devicesInfo)
                         });
                         finish();
-                    }else
-                    if(fromSouce.equals("4")){//工作总结
-                        Intent intent = new Intent(BindDevicesActivity.this,ActivityZongJie.class);
-                        intent.putExtra("AseetId",AseetId);
-                        intent.putExtra("AseetName",AseetName);
-                        intent.putExtra("QBCode",edtBindDevices.getText().toString());
-                        setResult(ConstValues.ZONGJIE,intent);
+                    } else if (fromSouce.equals("4")) {//工作总结
+                        Intent intent = new Intent(BindDevicesActivity.this, ActivityZongJie.class);
+                        intent.putExtra("AseetId", AseetId);
+                        intent.putExtra("AseetName", AseetName);
+                        intent.putExtra("QBCode", edtBindDevices.getText().toString());
+                        intent.putExtra("codeID", codeId);
+                        setResult(ConstValues.ZONGJIE, intent);
                         finish();
-                    }else
-                    if(fromSouce.equals("3") ){//巡检
-                        Utils.start_Activity(BindDevicesActivity.this,ActivityAddAseetXunJian.class,new YBasicNameValuePair[]{
-                                new YBasicNameValuePair("devices_info",devicesInfo),
-                                new YBasicNameValuePair("Code",edtBindDevices.getText().toString())
+                    } else if (fromSouce.equals("3")) {//巡检
+                        Utils.start_Activity(BindDevicesActivity.this, ActivityAddAseetXunJian.class, new YBasicNameValuePair[]{
+                                new YBasicNameValuePair("devices_info", devicesInfo),
+                                new YBasicNameValuePair("Code", edtBindDevices.getText().toString()),
+                                new YBasicNameValuePair("codeID", codeId)
                         });
                         finish();
-                    }else if (fromSouce.equals("1")){//创建工单
-                        Utils.start_Activity(BindDevicesActivity.this,DevicesInfoActivity.class,new YBasicNameValuePair[]{
-                                new YBasicNameValuePair("bind_type","create"),
-                                new YBasicNameValuePair("devices_info",devicesInfo)
+                    } else if (fromSouce.equals("1")) {//创建工单
+                        Utils.start_Activity(BindDevicesActivity.this, DevicesInfoActivity.class, new YBasicNameValuePair[]{
+                                new YBasicNameValuePair("bind_type", "create"),
+                                new YBasicNameValuePair("devices_info", devicesInfo),
+                                new YBasicNameValuePair("codeID", codeId)
+
                         });
                         finish();
-                    }else if(fromSouce.equals("2")){//回复
-                        Log.e("lxs", "onClick: devicesInfo--------->"+devicesInfo );
-                        Utils.start_ActivityResult(BindDevicesActivity.this,DevicesInfoActivity.class,ConstValues.RESULT_FOR_DEVICES_REPLAY_ORDER,new YBasicNameValuePair[]{
-                                new YBasicNameValuePair("bind_type","replay"),
-                                new YBasicNameValuePair("devices_info",devicesInfo)
+                    } else if (fromSouce.equals("2")) {//回复
+                        Log.e("lxs", "onClick: devicesInfo--------->" + devicesInfo);
+                        Utils.start_ActivityResult(BindDevicesActivity.this, DevicesInfoActivity.class, ConstValues.RESULT_FOR_DEVICES_REPLAY_ORDER, new YBasicNameValuePair[]{
+                                new YBasicNameValuePair("bind_type", "replay"),
+                                new YBasicNameValuePair("devices_info", devicesInfo)
+
                         });
 //                        finish();
                     }
-                }else if(btnBindDevicesSure.getText().toString().contains("确定")){
-                    if (edtBindDevices.getText() != null){
+                } else if (btnBindDevicesSure.getText().toString().contains("确定")) {
+                    if (edtBindDevices.getText() != null) {
                         isDevicesBinded(edtBindDevices.getText().toString());
-                    }else{
-                        Toast.makeText(this,"请填写设备信息",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "请填写设备信息", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
@@ -401,9 +551,15 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
             case R.id.btn_bind_devices_back:
                 finish();
                 break;
+            case R.id.btn_xuni:
+                btnXuni.setEnabled(false);
+                createXuNiCode();
+                break;
         }
     }
+
     String Codedata = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -417,24 +573,23 @@ public class BindDevicesActivity extends SuperActivity implements View.OnClickLi
                 /**
                  * 判断是否是易维客官方二维码
                  */
-                if (scan_result.contains("Cid=")||scan_result.contains("cid=")){
-                    String sCode = scan_result.substring(scan_result.lastIndexOf("=") + 1,scan_result.length());
+                if (scan_result.contains("Cid=") || scan_result.contains("cid=")) {
+                    String sCode = scan_result.substring(scan_result.lastIndexOf("=") + 1, scan_result.length());
                     edtBindDevices.setText(sCode);
-                     listview.setVisibility(View.GONE);
+                    listview.setVisibility(View.GONE);
                     /**
                      * 开始判断是否绑定
                      */
-                    LOG.e(this,"设备码 = " + sCode);
+                    LOG.e(this, "设备码 = " + sCode);
                     stopSearch = true;
                     isDevicesBinded(sCode);
 
-                }
-                else{
+                } else {
                     edtBindDevices.setText(scan_result);
                 }
             }
-        }else if(requestCode == ConstValues.RESULT_FOR_DEVICES_REPLAY_ORDER){
-            setResult(ConstValues.RESULT_FOR_DEVICES_REPLAY_ORDER,data);
+        } else if (requestCode == ConstValues.RESULT_FOR_DEVICES_REPLAY_ORDER) {
+            setResult(ConstValues.RESULT_FOR_DEVICES_REPLAY_ORDER, data);
             finish();
         }
     }

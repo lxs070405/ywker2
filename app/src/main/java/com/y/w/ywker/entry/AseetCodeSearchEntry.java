@@ -6,6 +6,14 @@ package com.y.w.ywker.entry;
  */
 public class AseetCodeSearchEntry {
 
+    public String getQBCode() {
+        return QBCode;
+    }
+
+    public void setQBCode(String QBCode) {
+        this.QBCode = QBCode;
+    }
+
     /**
      * ID : 10003  二维码主键
      * MainID : 1  供应商主键
@@ -17,76 +25,14 @@ public class AseetCodeSearchEntry {
      * Valid : 1  有效性
      */
 
-    private int ID;
-    private int MainID;
+//    private int ID;
+//    private int MainID;
     private String QBCode;
-    private Object QBDetail;
-    private Object QBPath;
-    private int AssetID;
-    private int PrintNum;
-    private int Valid;
+//    private Object QBDetail;
+//    private Object QBPath;
+//    private int AssetID;
+//    private int PrintNum;
+//    private int Valid;
 
-    public int getID() {
-        return ID;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public int getMainID() {
-        return MainID;
-    }
-
-    public void setMainID(int MainID) {
-        this.MainID = MainID;
-    }
-
-    public String getQBCode() {
-        return QBCode;
-    }
-
-    public void setQBCode(String QBCode) {
-        this.QBCode = QBCode;
-    }
-
-    public Object getQBDetail() {
-        return QBDetail;
-    }
-
-    public void setQBDetail(Object QBDetail) {
-        this.QBDetail = QBDetail;
-    }
-
-    public Object getQBPath() {
-        return QBPath;
-    }
-
-    public void setQBPath(Object QBPath) {
-        this.QBPath = QBPath;
-    }
-
-    public int getAssetID() {
-        return AssetID;
-    }
-
-    public void setAssetID(int AssetID) {
-        this.AssetID = AssetID;
-    }
-
-    public int getPrintNum() {
-        return PrintNum;
-    }
-
-    public void setPrintNum(int PrintNum) {
-        this.PrintNum = PrintNum;
-    }
-
-    public int getValid() {
-        return Valid;
-    }
-
-    public void setValid(int Valid) {
-        this.Valid = Valid;
-    }
 }

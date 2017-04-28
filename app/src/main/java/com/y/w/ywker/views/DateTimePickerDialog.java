@@ -32,9 +32,9 @@ public class DateTimePickerDialog extends AlertDialog implements OnClickListener
 				mDate.set(Calendar.YEAR, year);
                 mDate.set(Calendar.MONTH, month);
                 mDate.set(Calendar.DAY_OF_MONTH, day);
-                mDate.set(Calendar.HOUR_OF_DAY, hour);
-                mDate.set(Calendar.MINUTE, minute);
-                mDate.set(Calendar.SECOND, 0);
+//                mDate.set(Calendar.HOUR_OF_DAY, hour);
+//                mDate.set(Calendar.MINUTE, minute);
+//                mDate.set(Calendar.SECOND, 0);
                 updateTitle(mDate.getTimeInMillis());
 			}
 		});

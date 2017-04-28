@@ -190,8 +190,8 @@ public class FragmentDynamic extends Fragment implements OnCommAdapterItemClickL
         if (dynamicEntryList != null && !dynamicEntryList.isEmpty()){
 //            loadNewsData(dynamicEntryList.get(0).getID() + "");
             loadNewsData( "0");
-            if (adapter != null)
-                adapter.notifyDataSetChanged();
+//            if (adapter != null)
+//                adapter.notifyDataSetChanged();
         }else{
             Toast.makeText(getContext(),"没有新数据",Toast.LENGTH_SHORT).show();
             layoutCommSwipeRefresh.setRefreshing(false);

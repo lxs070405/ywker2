@@ -21,16 +21,12 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +42,7 @@ import com.y.w.ywker.entry.PicEntry;
 import com.y.w.ywker.entry.SerializableMap;
 import com.y.w.ywker.entry.YBasicNameValuePair;
 import com.y.w.ywker.interf.RecyclerItemClickListener;
+import com.y.w.ywker.timecheck.TimePickerView;
 import com.y.w.ywker.utils.Base64Utils;
 import com.y.w.ywker.utils.ImgeUtils;
 import com.y.w.ywker.utils.OfflineDataManager;
@@ -59,7 +56,9 @@ import com.y.w.ywker.views.MaterialDialog;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -144,6 +143,16 @@ public class DevicesInfoActivity extends SuperActivity {
     TextView devicesInfoAreaTv;
     @Bind(R.id.devices_info_devices_area_layout)
     LinearLayout devicesInfoDevicesAreaLayout;
+    @Bind(R.id.devices_QBCode_tv)
+    TextView devicesQBCodeTv;
+    @Bind(R.id.tv_qiyongTime)
+    TextView tvQiyongTime;
+    @Bind(R.id.ll_QBCode)
+    LinearLayout llQBCode;
+    @Bind(R.id.ll_time)
+    LinearLayout llTime;
+    @Bind(R.id.btn_rebind)
+    Button btnRebind;
     private String devicesInfo = "";
     private String codeId = "";
     private String bind_xunjian = "";
@@ -158,6 +167,7 @@ public class DevicesInfoActivity extends SuperActivity {
      */
     private SharedPreferences.Editor edit;
     private String QBCode = "";
+    private TimePickerView pvTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -288,77 +298,29 @@ public class DevicesInfoActivity extends SuperActivity {
     private int typeNum = 0;
     private ArrayList<ImageView> arrlist = new ArrayList<>();
 
-    /**
-     * 上传头像
-     */
-    private void uploadHeadImage() {
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_popupwindow, null);
-        TextView btnCarema = (TextView) view.findViewById(R.id.btn_camera);
-        TextView btnPhoto = (TextView) view.findViewById(R.id.btn_photo);
-        TextView btnCancel = (TextView) view.findViewById(R.id.btn_cancel);
-        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
-        popupWindow.setOutsideTouchable(true);
-        View parent = LayoutInflater.from(this).inflate(R.layout.activity_addaseetxunjian, null);
-        popupWindow.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
-        //popupWindow在弹窗的时候背景半透明
-        final WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.alpha = 0.5f;
-        getWindow().setAttributes(params);
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                params.alpha = 1.0f;
-                getWindow().setAttributes(params);
-            }
-        });
-
-        btnCarema.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳转到调用系统相机
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-                startActivityForResult(intent, REQUEST_CAPTURE);
-                popupWindow.dismiss();
-            }
-        });
-        btnPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳转到调用系统图库
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(Intent.createChooser(intent, "请选择图片"), REQUEST_PICK);
-                popupWindow.dismiss();
-            }
-        });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
-    }
-
     private String Type = "";
 
     private void initData() {
         if (entry != null) {
-            tvFenGe.setText("");
+            tvFenGe.setText(" ");
             if (Type.equals("createweixiu")) {
                 devicesInfoBtnSure.setVisibility(View.VISIBLE);
                 devicesInfoBtnSure.setText("创建维修工单");
                 layoutCommToolbarTitle.setText("设备信息");
+                btnRebind.setVisibility(View.VISIBLE);
             } else if (Type.equals("zongjietype")) {
                 devicesInfoBtnSure.setVisibility(View.VISIBLE);
                 devicesInfoBtnSure.setText("增加设备");
                 layoutCommToolbarTitle.setText("设备信息");
+                btnRebind.setVisibility(View.VISIBLE);
             } else if (Type.equals("xunjiantype")) {
                 devicesInfoBtnSure.setVisibility(View.GONE);
+
             } else if (Type.equals("create")) {
                 devicesInfoBtnSure.setVisibility(View.VISIBLE);
                 devicesInfoBtnSure.setText("创建工单");
                 layoutCommToolbarTitle.setText("设备信息");
+                btnRebind.setVisibility(View.VISIBLE);
             } else if (Type.equals("replay")) {
                 devicesInfoBtnSure.setVisibility(View.VISIBLE);
                 devicesInfoBtnSure.setText("回复工单");
@@ -369,7 +331,7 @@ public class DevicesInfoActivity extends SuperActivity {
             if (assetId > 0 && Integer.parseInt(entry.getIsHavePic()) > 0) {
                 httpManagerUtils = new YHttpManagerUtils(this, String.format(ConstValues.GET_DEVICESINFO_PIC, assetId, offlineDataManager.getMainID()), new MyHandler(this, 2), this.getClass().getName());
                 httpManagerUtils.startRequest();
-            } else if (assetId > 0 && Integer.parseInt(entry.getIsHavePic())  == 0) {
+            } else if (assetId > 0 && Integer.parseInt(entry.getIsHavePic()) == 0) {
                 llTuPian.setVisibility(View.GONE);
                 addImage.setVisibility(View.GONE);
             }
@@ -381,11 +343,11 @@ public class DevicesInfoActivity extends SuperActivity {
             //型号
             devicesInfoXinghaoTv.setText(entry.getModelName());
             //序列号 有序列号显示序列号栏没有序列号不显示此栏
-            if (entry.getAssetXuLie().equals("")) {
-                llXuliehao.setVisibility(View.GONE);
-            } else {
+//            if (entry.getAssetXuLie().equals("")) {
+//                llXuliehao.setVisibility(View.GONE);
+//            } else {
                 devicesInfoXuliehaoTv.setText(entry.getAssetXuLie());
-            }
+//            }
             if (entry.getRemark().equals("")) {
                 llBeiZhu.setVisibility(View.GONE);
             } else {
@@ -396,11 +358,37 @@ public class DevicesInfoActivity extends SuperActivity {
 
             //客户
             devicesInfoClientNameTv.setText(entry.getClientName());
-            if(!entry.getAreaName().equals("")){
+            if (!entry.getAreaName().equals("")) {
                 devicesInfoAreaTv.setText(entry.getAreaName());
-            }else {
-                devicesInfoDevicesAreaLayout.setVisibility(View.GONE);
+                bindMap.put("AreaID", entry.getAreaID());
             }
+//            else {
+//                devicesInfoDevicesAreaLayout.setVisibility(View.GONE);
+//            }
+
+            if (!entry.getBeginTime().equals("")) {
+                tvQiyongTime.setText(entry.getBeginTime().trim());
+                bindMap.put("BeginTime", entry.getBeginTime());
+            }
+//            else {
+//                llTime.setVisibility(View.GONE);
+//            }
+
+            if (!entry.getDeviceCode().equals("")) {
+                bindMap.put("DeviceCode", entry.getDeviceCode());
+                devicesQBCodeTv.setText(entry.getDeviceCode());
+            }
+//            else {
+//                llQBCode.setVisibility(View.GONE);
+//            }
+            bindMap.put("ClientID", entry.getClientID());
+            bindMap.put("BrandID", entry.getBrandID());
+            bindMap.put("ModelID", entry.getModelID());
+            bindMap.put("AssetName", entry.getAssetName());
+            bindMap.put("TypeName", entry.getTypeName());
+            bindMap.put("keyTypeID", entry.getTypeID());
+            bindMap.put("AssetID", entry.getID());
+            bindMap.put("AssetXuLie",entry.getAssetXuLie());
 
 //            //联系人
 //            devicesInfoClientConnectNameTv.setText(entry.getContactName() + "," + entry.getDepartName());
@@ -427,6 +415,7 @@ public class DevicesInfoActivity extends SuperActivity {
         if (!TextUtils.isEmpty(codeId)) {
             Log.e("lxs", "codeID : " + codeId);
         }
+        bindmapdata.put("ID", codeId);
         if (devicesInfo != null && !devicesInfo.equals("")) {
             Gson gson = new Gson();
             entry = gson.fromJson(devicesInfo, DevicesEntry.class);
@@ -435,8 +424,6 @@ public class DevicesInfoActivity extends SuperActivity {
         bindMap.put("MainID", mainID);
         bindMap.put("ClientID", "");
         bindMap.put("ClientCode", "");
-        bindMap.put("ContactID", "");
-        bindMap.put("InTime", "");
         bindMap.put("BrandID", "");
         bindMap.put("ModelID", "");
         bindMap.put("UserID", offlineDataManager.getUserID());
@@ -446,11 +433,14 @@ public class DevicesInfoActivity extends SuperActivity {
         bindMap.put("keyTypeID", "");
         bindMap.put("AssetID", "");
         bindMap.put("AreaID", "");
+        bindMap.put("DeviceCode", "");
+        bindMap.put("BeginTime", "");
     }
 
 
     @OnClick({R.id.devices_info_btn_sure, R.id.devices_info_devices_name_layout, R.id.btn_back_devices_info,
-            R.id.devices_info_client_layout, R.id.devices_info_client_connect_layout,R.id.devices_info_devices_area_layout,
+            R.id.devices_info_client_layout, R.id.devices_info_client_connect_layout,
+            R.id.devices_info_devices_area_layout, R.id.ll_QBCode, R.id.ll_time,R.id.btn_rebind,
             R.id.devices_info_pinpai_layout, R.id.devices_info_xinghao_layout, R.id.ll_Xuliehao})
     public void onClick(View v) {
         if (v.getId() == R.id.btn_back_devices_info) {
@@ -460,18 +450,6 @@ public class DevicesInfoActivity extends SuperActivity {
 
         String text = devicesInfoBtnSure.getText().toString();
         if (v.getId() == R.id.devices_info_btn_sure) {
-//            if(text.equals("增加设备")){
-//                Intent intent = new Intent(DevicesInfoActivity.this,ActivityZongJie.class);
-//                intent.putExtra("AseetId", bindMap.get("AssetID"));
-//                String AseetName = devicesInfoNameTv.getText().toString()+" "+
-//                        devicesInfoPinpaiTv.getText().toString()+" "+
-//                        devicesInfoXinghaoTv.getText().toString();
-//                intent.putExtra("AseetName",AseetName);
-//                intent.putExtra("QBCode",QBCode);
-//                Log.e("lxs", "onClick: "+AseetName);
-//                setResult(ConstValues.ZONGJIE,intent);
-//                finish();
-//            }else
             if (text.equals("回复工单")) {
                 Intent i = new Intent();
                 i.putExtra("devices_replay_result", devicesData);
@@ -487,19 +465,25 @@ public class DevicesInfoActivity extends SuperActivity {
                 CreatOrder("weixiu");//创建工单
             }
         }
-        /**
-         * 不进行任何操作了
-         */
-        if (!text.equals("绑定设备")) {
-            return;
-        }
+//        /**
+//         * 不进行任何操作了
+//         */
+//        if (!text.equals("绑定设备")) {
+//            return;
+//        }
         switch (v.getId()) {
             case R.id.devices_info_client_layout://客户
+                if (!text.equals("绑定设备")) {
+                    return;
+                }
                 Utils.start_ActivityResult(this, ParentSelectorActivity.class, ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,//ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,
                         new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择客户")});
                 break;
 
             case R.id.devices_info_pinpai_layout:
+                if (!text.equals("绑定设备")) {
+                    return;
+                }
                 if (bindMap.get("ClientID").equals("")) {
                     Toast.makeText(this, "请先选择客户", Toast.LENGTH_SHORT).show();
                     return;
@@ -519,6 +503,9 @@ public class DevicesInfoActivity extends SuperActivity {
                 startActivityForResult(inten, ConstValues.RESULT_FOR_DEVICES_AREA);
                 break;
             case R.id.devices_info_xinghao_layout:
+                if (!text.equals("绑定设备")) {
+                    return;
+                }
                 if (bindMap.get("ClientID").equals("")) {
                     Toast.makeText(this, "请先选择客户", Toast.LENGTH_SHORT).show();
                     return;
@@ -549,6 +536,9 @@ public class DevicesInfoActivity extends SuperActivity {
                 break;
             case R.id.devices_info_devices_name_layout://设备类型
 
+                if (!text.equals("绑定设备")) {
+                    return;
+                }
                 if (bindMap.get("ClientID").equals("")) {
                     Toast.makeText(this, "请先选择客户", Toast.LENGTH_SHORT).show();
                     return;
@@ -564,7 +554,21 @@ public class DevicesInfoActivity extends SuperActivity {
                     return;
                 }
                 Utils.start_ActivityResult(this, ActivityXuLieHao.class, ConstValues.RESULT_FOR_DEVICES_XULIEHAO,
-                        new YBasicNameValuePair[]{new YBasicNameValuePair("title", "产品序列号")});
+                        new YBasicNameValuePair[]{new YBasicNameValuePair("type", "1"), new YBasicNameValuePair("title", "设备序列号")});
+                break;
+            case R.id.ll_QBCode:
+//                if(entry != null && !entry.getDeviceCode().equals("")){
+//                    return;
+//                }
+                Utils.start_ActivityResult(this, ActivityXuLieHao.class, ConstValues.RESULT_FOR_DEVICES_QBCODE,
+                        new YBasicNameValuePair[]{new YBasicNameValuePair("type", "2"), new YBasicNameValuePair("title", "资产编号")});
+                break;
+            case R.id.ll_time:
+                showDialog();
+                break;
+            case R.id.btn_rebind:
+                bindmapdata.put("ID", entry.getQBCodeID());
+                bindDevices();
                 break;
         }
 
@@ -621,8 +625,50 @@ public class DevicesInfoActivity extends SuperActivity {
 
     }
 
-    private ProgressDialog proDialog;
+    public void showDialog() {
+//        DateTimePickerDialog dialog = new DateTimePickerDialog(this, System.currentTimeMillis());
+//        dialog.setOnDateTimeSetListener(new DateTimePickerDialog.OnDateTimeSetListener() {
+//            @Override
+//            public void OnDateTimeSet(AlertDialog dialog, long date) {
+//                tvQiyongTime.setText(getStringDate(date));
+//                bindMap.put("BeginTime", getStringDate(date));
+//            }
+//        });
+//        dialog.show();
+        //时间选择器
+        pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
+        //控制时间范围
+//        Calendar calendar = Calendar.getInstance();
+//        pvTime.setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR));//要在setTime 之前才有效果哦
+        pvTime.setTime(new Date());
+        pvTime.setCyclic(false);
+        pvTime.setCancelable(true);
+        //时间选择后回调
+        pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
 
+            @Override
+            public void onTimeSelect(Date date) {
+                tvQiyongTime.setText(getStringDate(date));
+                bindMap.put("BeginTime", getStringDate(date));
+            }
+        });
+        pvTime.show();
+
+    }
+
+
+
+    /**
+     * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
+     */
+    public static String getStringDate(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");//HH:mm:ss
+        String dateString = formatter.format(date);
+        return dateString;
+    }
+
+    private ProgressDialog proDialog;
+    HashMap<String, String> bindmapdata = new HashMap<String, String>();
     /**
      * 绑定设备
      */
@@ -637,14 +683,14 @@ public class DevicesInfoActivity extends SuperActivity {
         }
 
         httpManagerUtils = new YHttpManagerUtils(this, ConstValues.BIND_DEVICES_URL, new MyHandler(this, 1), getClass().getSimpleName());
-        HashMap<String, String> bindmapdata = new HashMap<String, String>();
-        bindmapdata.put("ID", codeId);
+
+
         String astr = bindMap.get("AssetID");
         Log.e("lxs", "bindDevices:astr---- " + astr);
 //        if (astr.contains("$")) {
 //            bindmapdata.put("AssetID", astr.split("$")[0]);
 //        } else
-            bindmapdata.put("AssetID", astr);
+        bindmapdata.put("AssetID", astr);
         bindmapdata.put("AssetXuLie", bindMap.get("AssetXuLie"));
         bindmapdata.put("Remark", tvXunJianDsc.getText().toString());
         Iterator iter = datapicmap.entrySet().iterator();
@@ -676,6 +722,9 @@ public class DevicesInfoActivity extends SuperActivity {
         bindmapdata.put("BrandID", bindMap.get("BrandID"));
         bindmapdata.put("ModelID", bindMap.get("ModelID"));
         bindmapdata.put("AreaID", bindMap.get("AreaID"));
+        bindmapdata.put("DeviceCode", bindMap.get("DeviceCode"));
+        bindmapdata.put("BeginTime", bindMap.get("BeginTime"));
+
 //        Log.e("lxs", "上传图片的名称:" + sbbuffer.toString());
 //        Log.e("lxs", "上传图片的内容:" + sbbase.toString());
         if (bindmapdata.get("Pic").equals("") && bindmapdata.get("AssetXuLie").equals("") && bindmapdata.get("Remark").equals("")) {
@@ -694,6 +743,7 @@ public class DevicesInfoActivity extends SuperActivity {
         sbbuffer = new StringBuffer("");
         sbbase = new StringBuffer("");
     }
+
 
 
     class MyHandler extends Handler {
@@ -725,7 +775,7 @@ public class DevicesInfoActivity extends SuperActivity {
                             proDialog.dismiss();
                         }
                         if (i == 1)
-                            Toast.makeText(getBaseContext(), "绑定设备失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "资产编号重复,绑定失败", Toast.LENGTH_SHORT).show();
                         break;
                     case ConstValues.MSG_NET_INAVIABLE:
                         break;
@@ -801,7 +851,8 @@ public class DevicesInfoActivity extends SuperActivity {
      * 解析图片数据
      */
     private void handlePicData(String json) {
-        Log.e("lxs", "巡检设备详情:" + json);
+        addImage.setVisibility(View.GONE);
+        Log.e("lxs", " 解析图片数据:" + json);
         Gson gson = new Gson();
         Type listType = new TypeToken<List<PicEntry>>() {
         }.getType();
@@ -1038,6 +1089,8 @@ public class DevicesInfoActivity extends SuperActivity {
                         devicesInfoPinpaiTv.setText(result);
                     }
                 }
+                result = null;
+                ids = null;
                 break;
             case ConstValues.RESULT_FOR_DEVICES_AREA:
                 if (ids != null && !ids.equals("")) {
@@ -1047,6 +1100,8 @@ public class DevicesInfoActivity extends SuperActivity {
                         devicesInfoAreaTv.setText(result);
                     }
                 }
+                result = null;
+                ids = null;
                 break;
 
 
@@ -1056,26 +1111,37 @@ public class DevicesInfoActivity extends SuperActivity {
                     bindMap.put("ModelID", ids);
 
                     if (AssetID != null) {
-                        if(AssetID.contains("$")){
-                            bindMap.put("AssetID", AssetID.substring(0,AssetID.indexOf("$")));
-                            tvXunJianDsc.setText(AssetID.substring(AssetID.indexOf("$")+1,AssetID.length()));
-                        }else {
-                            Toast.makeText(DevicesInfoActivity.this,"参数错误,请联系后台",Toast.LENGTH_SHORT).show();
+                        if (AssetID.contains("$")) {
+                            bindMap.put("AssetID", AssetID.substring(0, AssetID.indexOf("$")));
+                            tvXunJianDsc.setText(AssetID.substring(AssetID.indexOf("$") + 1, AssetID.length()));
+                        } else {
+                            Toast.makeText(DevicesInfoActivity.this, "参数错误,请联系后台", Toast.LENGTH_SHORT).show();
                         }
 
                         if (result != null && !result.equals("")) {
                             devicesInfoXinghaoTv.setText(result);
                         }
-
-                    }else{
+                    } else {
                         devicesInfoXinghaoTv.setText("必填项");
                     }
                 }
+                result = null;
+                ids = null;
                 break;
             case ConstValues.RESULT_FOR_DEVICES_XULIEHAO:
                 if (result != null && !result.equals("")) {
                     devicesInfoXuliehaoTv.setText(result);
                     bindMap.put("AssetXuLie", result);
+                }
+                result = null;
+                ids = null;
+                break;
+            case ConstValues.RESULT_FOR_DEVICES_QBCODE:
+                if (result != null && !result.equals("")) {
+                    devicesQBCodeTv.setText(result);
+                    bindMap.put("DeviceCode", result);
+                }else{
+                    devicesQBCodeTv.setText("选填");
                 }
                 result = null;
                 ids = null;

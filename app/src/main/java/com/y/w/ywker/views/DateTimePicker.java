@@ -18,8 +18,9 @@ import java.util.Calendar;
 public class DateTimePicker extends FrameLayout
 {
 	private final NumberPicker mDateSpinner;
-	private final NumberPicker mHourSpinner;
-	private final NumberPicker mMinuteSpinner;
+//	private final NumberPicker myearSpinner;
+//	private final NumberPicker mHourSpinner;
+//	private final NumberPicker mMinuteSpinner;
 	private Calendar mDate;
     private int mHour,mMinute; 
     private String[] mDateDisplayValues = new String[7];
@@ -40,18 +41,18 @@ public class DateTimePicker extends FrameLayout
          mDateSpinner.setMaxValue(6);
          updateDateControl();
     	 mDateSpinner.setOnValueChangedListener(mOnDateChangedListener);
-    	 
-    	 mHourSpinner=(NumberPicker)this.findViewById(R.id.np_hour);
-    	 mHourSpinner.setMaxValue(23);
-    	 mHourSpinner.setMinValue(0);
-    	 mHourSpinner.setValue(mHour);
-    	 mHourSpinner.setOnValueChangedListener(mOnHourChangedListener);
-    	 
-    	 mMinuteSpinner=(NumberPicker)this.findViewById(R.id.np_minute);
-    	 mMinuteSpinner.setMaxValue(59);
-    	 mMinuteSpinner.setMinValue(0);
-    	 mMinuteSpinner.setValue(mMinute);
-    	 mMinuteSpinner.setOnValueChangedListener(mOnMinuteChangedListener);
+
+//    	 mHourSpinner=(NumberPicker)this.findViewById(R.id.np_hour);
+//    	 mHourSpinner.setMaxValue(23);
+//    	 mHourSpinner.setMinValue(0);
+//    	 mHourSpinner.setValue(mHour);
+//    	 mHourSpinner.setOnValueChangedListener(mOnHourChangedListener);
+//
+//    	 mMinuteSpinner=(NumberPicker)this.findViewById(R.id.np_minute);
+//    	 mMinuteSpinner.setMaxValue(59);
+//    	 mMinuteSpinner.setMinValue(0);
+//    	 mMinuteSpinner.setValue(mMinute);
+//    	 mMinuteSpinner.setOnValueChangedListener(mOnMinuteChangedListener);
 	}
     
     private NumberPicker.OnValueChangeListener mOnDateChangedListener=new OnValueChangeListener()
@@ -65,25 +66,25 @@ public class DateTimePicker extends FrameLayout
 		}
 	};
     
-    private NumberPicker.OnValueChangeListener mOnHourChangedListener=new OnValueChangeListener()
-	{
-		@Override
-		public void onValueChange(NumberPicker picker, int oldVal, int newVal)
-		{
-			mHour=mHourSpinner.getValue();
-			onDateTimeChanged();
-		}
-	};
-	
-	  private NumberPicker.OnValueChangeListener mOnMinuteChangedListener=new OnValueChangeListener()
-		{
-			@Override
-			public void onValueChange(NumberPicker picker, int oldVal, int newVal)
-			{
-				mMinute=mMinuteSpinner.getValue();
-				onDateTimeChanged();
-			}
-		};
+//    private NumberPicker.OnValueChangeListener mOnHourChangedListener=new OnValueChangeListener()
+//	{
+//		@Override
+//		public void onValueChange(NumberPicker picker, int oldVal, int newVal)
+//		{
+//			mHour=mHourSpinner.getValue();
+//			onDateTimeChanged();
+//		}
+//	};
+//
+//	  private NumberPicker.OnValueChangeListener mOnMinuteChangedListener=new OnValueChangeListener()
+//		{
+//			@Override
+//			public void onValueChange(NumberPicker picker, int oldVal, int newVal)
+//			{
+//				mMinute=mMinuteSpinner.getValue();
+//				onDateTimeChanged();
+//			}
+//		};
 	
 	private void updateDateControl() 
     {
@@ -94,7 +95,7 @@ public class DateTimePicker extends FrameLayout
         for (int i = 0; i < 7; ++i) 
         {
             cal.add(Calendar.DAY_OF_YEAR, 1);
-            mDateDisplayValues[i] = (String) DateFormat.format("MM.dd EEEE", cal);
+            mDateDisplayValues[i] = (String) DateFormat.format("MM.dd ", cal);
         }
         mDateSpinner.setDisplayedValues(mDateDisplayValues);
         mDateSpinner.setValue(7 / 2);

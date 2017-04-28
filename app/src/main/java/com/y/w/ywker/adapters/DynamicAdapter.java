@@ -44,7 +44,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public void setIsLoadDone(boolean isLoadDone) {
         this.isLoadDone = isLoadDone;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public boolean isStartLoad() {
@@ -81,7 +81,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                dynamicEntryList.remove(entry);
 //            }
             dynamicEntryList.addAll(_dynamicEntryList);
-            notifyDataSetChanged();
+//            notifyDataSetChanged();
         }
     }
 
@@ -116,8 +116,6 @@ public class DynamicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             v = LayoutInflater.from(ctx).inflate(R.layout.adapter_item_footer,parent,false);
             return new FooterViewHoler(v);
         }
-
-
         return null;
     }
 

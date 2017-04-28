@@ -13,17 +13,29 @@
         android:paddingLeft="3.0dip" >
 
         <NumberPicker
+            android:id="@+id/np_year"
+            android:layout_width="80.0dip"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=":"
+            android:textSize="20.0sp" />
+        <NumberPicker
             android:id="@+id/np_date"
             android:layout_width="120.0dip"
             android:layout_height="wrap_content" />
 
         <NumberPicker
+            android:visibility="gone"
             android:id="@+id/np_hour"
             android:layout_width="50.0dip"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5.0dip" />
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -31,6 +43,7 @@
             android:textSize="20.0sp" />
 
         <NumberPicker
+            android:visibility="gone"
             android:id="@+id/np_minute"
             android:layout_width="50.0dip"
             android:layout_height="wrap_content" />

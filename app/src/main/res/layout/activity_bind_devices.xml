@@ -21,6 +21,23 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
+
+    <LinearLayout
+        android:id="@+id/ll_moban"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:background="#b22"
+            android:id="@+id/listview_CodeMuBan"
+            android:listSelector="@color/icon_disabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
     <FrameLayout
         android:background="@drawable/login_in_centerlayout_drawable"
         android:layout_width="match_parent"
@@ -39,17 +56,17 @@
 
     </FrameLayout>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <LinearLayout
+
+        <LinearLayout
         android:layout_marginTop="18dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -72,7 +89,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <Button
+        <Button
         android:text="确定"
         android:textColor="#fff"
         android:textSize="18dp"
@@ -81,13 +98,27 @@
         android:id="@+id/btn_bind_devices_sure"
         android:layout_width="match_parent"
         android:layout_height="48dp" />
+            <Button
+                android:text="创建虚拟标签"
+                android:textColor="#fff"
+                android:textSize="18dp"
+                android:background="@drawable/login_in_btn_drawable"
+                android:layout_margin="16dp"
+                android:id="@+id/btn_xuni"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
     </LinearLayout>
         <ListView
-            android:background="#743"
+            android:background="#b22"
             android:visibility="gone"
             android:id="@+id/listview"
-            android:listSelector="@android:color/transparent"
+            android:listSelector="@color/icon_disabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </RelativeLayout>
+
+
+
+
 </LinearLayout>

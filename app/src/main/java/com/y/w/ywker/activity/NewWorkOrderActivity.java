@@ -507,10 +507,6 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
                 Utils.start_ActivityResult(this, ParentSelectorActivity.class, ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT,
                         new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择客户")});
                 break;
-//            case R.id.new_order_l_4://选择工单状态
-//                Utils.start_ActivityResult(this, ActivityWorkOrderStatusInfo.class, ConstValues.RESULT_FOR_PICKER_ORDER_STATUS,
-//                        new YBasicNameValuePair[]{new YBasicNameValuePair("title", "工单状态")});
-//                break;
             case R.id.new_order_l_5://选择工单类型
                 Utils.start_ActivityResult(this, ActivityWorkOrderStatusInfo.class, ConstValues.RESULT_FOR_PICKER_ORDER_TYPES,
                         new YBasicNameValuePair[]{new YBasicNameValuePair("title", "工单类型")});
@@ -526,25 +522,6 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
                         new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择服务组")
                         });
                 break;
-//            case R.id.new_order_l_8://选择受理组人员
-//                if (map.get(keyTeamId).equals("")) {
-//                    Toast.makeText(this, "请先选择受理组", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                Utils.start_ActivityResult(this, ActivityPickerTeamer.class, ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN,
-//                        new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择服务组人员"),
-//                                new YBasicNameValuePair("mainID", map.get(keyTeamId))
-//                        });
-//                break;
-//            case R.id.new_order_l_9://选择关注人员
-//                Utils.start_ActivityResult(this, ActivityPickerConacts.class, ConstValues.RESULT_FOR_PICKER_WATCH_FOR,
-//                        new YBasicNameValuePair[]{new YBasicNameValuePair("title", "选择关注人员")});
-//                break;
-//            case R.id.new_order_l_client_connect:
-//                /**
-//                 * 查看联系人地址
-//                 */
-//                break;
         }
     }
 
@@ -561,69 +538,15 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
         String ids = data.getStringExtra("_ids");
 
         switch (resultCode) {
-//            case ConstValues.RESULT_FOR_PICKER_TITLE_EDT://标题
-//                if (msg != null) {
-//                    newOrderArrrow1Text2.setText(msg);
-//                    map.put(keySheetTitle, msg);
-//                }
-//                break;
-//            case ConstValues.RESULT_FOR_PICKER_DES_EDT://描述
-//                if (msg != null) {
-//                    newOrderArrrow2Text2.setText(msg);
-//                    map.put(keySheetDetails, msg);
-//                }
-//                break;
-//            case ConstValues.RESULT_FOR_PICKER_ORDER_LEVEL://工单优先级
-//                if (info != null) {
-//                    newOrderArrrow6Text2.setText(info);
-//                }
-//                if (ids != null && !ids.equals("") && !ids.contains(",")) {
-//                    map.put(keySheetLevel, ids);
-//                }
-//                break;
-//            case ConstValues.RESULT_FOR_PICKER_ORDER_STATUS://工单状态
-//                if (info != null) {
-//                    newOrderArrrow4Text2.setText(info);
-//                }
-//                if (ids != null && !ids.equals("") && !ids.contains(",")) {
-//                    map.put(keySheetState, ids);
-//                }
-//                break;
-//            case ConstValues.RESULT_FOR_PICKER_ORDER_TYPES://工单类型
-//                if (info != null) {
-//                    newOrderArrrow5Text2.setText(info);
-//                }
-//                if (ids != null && !ids.equals("") && !ids.contains(",")) {
-//                    map.put(keySheetType, ids);
-//                }
-//                break;
             case ConstValues.RESULT_FOR_PICKER_CLIENT_ROOT://客户
                 Log.e("lxs", "onActivityResult:clientIds "+result+",ids--"+ids );
                 if (result != null) {
-//                    String results[] = result.split(",");
-//                    if (results != null && results.length == 3) {
-////                        newOrderArrrow3Text2.setText(results[0]);
-////                        newOrderLClientAdress.setVisibility(View.VISIBLE);
-////                        newOrderLClientConnect.setVisibility(View.VISIBLE);
-//
-////                        newOrderClientAdressText2.setText(results[1]);
-////                        newOrderClientConnectText2.setText(results[2]);
-//                    } else {
-////                        newOrderArrrow3Text2.setText(result);
-////                        newOrderLClientAdress.setVisibility(View.GONE);
-////                        newOrderLClientConnect.setVisibility(View.GONE);
-//                    }
                     newOrderArrrow3Text2.setText(result);
                 }
                 if (ids != null && ids.contains(",")) {
                     String clientIds[] = ids.split(",");
                     Log.e("lxs", "onActivityResult:clientIds "+clientIds[0] );
                     map.put(keyClientId, clientIds[0]);
-//                    if (clientIds != null && clientIds.length >= 2) {
-//                        map.put(keyClientId, clientIds[0]);
-//                        Log.e("lxs", "onActivityResult:keyClientId "+clientIds[0] );
-////                        map.put(keyClientConactId, clientIds[1]);
-//                    }
                 }
                 break;
             case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT://受理服务组
@@ -637,48 +560,11 @@ public class NewWorkOrderActivity extends SuperActivity implements View.OnClickL
                 }
                 if (result != null) {
                     newOrderArrrow7Text2.setText(result);
-//                    newOrderArrrow8Text2.setText("");
                     if (newOrderArrrow4Text2.getText().equals("未受理")) {
                         newOrderArrrow4Text2.setText("已受理");
                     }
                 }
                 break;
-//            case ConstValues.RESULT_FOR_PICKER_SERVICES_CHILDREN://受理人
-//                if (ids != null && !ids.equals("")) {
-//                    map.put(keyTeamerId, ids);
-//                }
-//                if (result != null) {
-//                    newOrderArrrow8Text2.setText(result);
-//                }
-//                break;
-//            case ConstValues.RESULT_FOR_PICKER_SERVICES_ROOT:
-//                if (result != null){
-//                    String str[] = result.split(",");
-//                    if (str != null && str.length == 2){
-//                        newOrderArrrow7Text2.setText(str[0]);
-//                        newOrderArrrow8Text2.setText(str[1]);
-//                    }
-//                }
-//                if (ids != null && ids.contains(",")){
-//                    String servicesIds[] = ids.split(",");
-//                    if (servicesIds != null && servicesIds.length == 2){
-//                        map.put(keyTeamId,servicesIds[0]);
-//                        map.put(keyTeamerId,servicesIds[1]);
-//                    }
-//                }
-//                break;
-//            case ConstValues.RESULT_FOR_PICKER_WATCH_FOR://关注人
-//                if (result != null) {
-//                    newOrderArrrow9Text2.setText(result);
-//                }
-//                if (ids != null) {
-//                    String watchIds[] = ids.split(",");
-//                    for (String id : watchIds) {
-//                        LOG.e(getBaseContext(), id);
-//                    }
-//                    map.put(keyFollowId, ids);
-//                }
-//                break;
         }
     }
 

@@ -1,6 +1,7 @@
 package com.y.w.ywker.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -206,7 +207,29 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     }
 
     private MaterialDialog dialogTip;
+    /**
+     * 提示是否放弃发布
+     */
+    private void TiShi(final String phone) {
+        dialogTip = new MaterialDialog(getContext())
+                .setTitle("提示")
+                .setMessage("是否拨打该电话号码?")
+                .setPositiveButton("是", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogTip.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phone));
+                        startActivity(intent);
 
+                    }
+                }).setNegativeButton("否", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogTip.dismiss();
+                    }
+                });
+        dialogTip.show();
+    }
     private void TiShiAddAseet(String msg, final String lftbtn) {
         String str = "";
         if (lftbtn.equals("增加设备")) {
@@ -236,7 +259,7 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
     boolean isfinish = false;
     private HashMap<String, String> map = new HashMap<String, String>();
 
-    @OnClick({R.id.btn_addAseet, R.id.btn_caozuo})
+    @OnClick({R.id.btn_addAseet, R.id.btn_caozuo,R.id.ll_dianhua})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_addAseet:
@@ -260,6 +283,10 @@ public class FragmentWeixiuOrderDetails extends Fragment implements View.OnClick
                 }
                 updataOderstate(msgstatus, offlineDataManager.getUserID());//处理
                 btnCaozuo.setClickable(false);
+                break;
+            case R.id.ll_dianhua:
+                String phone = tvDianhua.getText().toString().trim();
+                TiShi(phone);
                 break;
         }
     }

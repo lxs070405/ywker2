@@ -52,6 +52,7 @@ public class ConstValues {
     public static final int RESULT_FOR_DEVICES_XINGHAO = 15;
     public static final int RESULT_FOR_DEVICES_NAME = 16;
     public static final int RESULT_FOR_DEVICES_XULIEHAO = 22;
+    public static final int RESULT_FOR_DEVICES_QBCODE = 244;
     public static final int RESULT_FOR_MODIFY_NAME = 17;
     public static final int RESULT_FOR_MODIFY_PHONE = 18;
     /**
@@ -100,14 +101,20 @@ public class ConstValues {
      * 基础URL
      */
     //  public static String BASE_URL = "http://123.56.153.172:8801/";
-    public static String BASE_URL = "http://192.168.1.149:8801/";
+      public static String BASE_URL = "http://123.56.153.172:8802/";
+//    public static String BASE_URL = "http://192.168.1.149:8801/";
 //    public static String BASE_URL = "http://192.168.1.15:8801/";
 //    public static String BASE_URL = "http://192.168.1.17:8801/";
-//    public static String BASE_URL = "http://192.168.1.43:8801/";//李勇兴电脑ip配置
+//    public static String BASE_URL = "http://192.168.1.41:8801/";//李勇兴电脑ip配置
 
 
-
+    /**
+     * 获取app版本
+     */
     public static String GetNewVersionForApp =  BASE_URL+"AppUpgrade/GetNewVersionForApp";
+    /**
+     * 获取app更新url
+     */
     public static String GetNewVersionPath = BASE_URL+"AppUpgrade/GetNewVersionPath";
     /**
      * 登录URL
@@ -257,6 +264,14 @@ public class ConstValues {
      * 是否绑定设备
      */
     public static String BIND_DEVICES_COMPARE_URL = BASE_URL + "Asset/GetAsset?strQBCode=%s&MainID=%s";
+    /**
+     * 获取资产信息
+     */
+    public static String BIND_DEVICES_GETINFO_URL = BASE_URL + "Asset/GetAssetByDeviceCode?deviceCode=%s&modelID=%s&mainID=%s";
+    /**
+     *
+     */
+    public static String BIND_DEVICES_GETMUBAN_URL = BASE_URL + "Asset/GetQBModel?MainId=%s";
     /**
      * 模糊搜索设备码
      */

@@ -5,9 +5,18 @@ package com.y.w.ywker.entry;
  */
 public class UserEntry {
 
+    public String getMainName() {
+        return MainName;
+    }
+
+    public void setMainName(String mainName) {
+        MainName = mainName;
+    }
+
     /**
      * ID : 1
      * MainID : 1
+     * MainName:
      * DepartID : 0
      * CreatTime : 2016-04-14 9:12:43
      * UserName : 系统管理员
@@ -24,6 +33,7 @@ public class UserEntry {
      * Valid : 1
      */
 
+    private String MainName;
     private String ID;
     private String MainID;
     private String DepartID;

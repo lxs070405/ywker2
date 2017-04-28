@@ -48,6 +48,8 @@ public class ActivityUserInfo extends SuperActivity {
     TextView userInfoName;
     @Bind(R.id.user_info_phone)
     TextView userInfoPhone;
+    @Bind(R.id.user_info_main)
+    TextView userInfoMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +66,13 @@ public class ActivityUserInfo extends SuperActivity {
         userInfoAccount.setText(entery.getUserCode());
         userInfoName.setText(entery.getUserName());
         userInfoPhone.setText(entery.getUserTel());
+        userInfoMain.setText(entery.getMainName());
         Glide.with(this).load(ConstValues.BASE_URL + entery.getImgUrl()).placeholder(R.drawable.edit_hd).transform(new GlideCircleTransform(this)).into(userInfoHeader);
     }
 
     private MaterialDialog dialog;
 
-    @OnClick({R.id.user_info_logout, R.id.user_info_modify_pwd, R.id.user_info_back,R.id.user_info_name_layout,R.id.user_info_phone_layout})
+    @OnClick({R.id.user_info_logout, R.id.user_info_modify_pwd, R.id.user_info_back, R.id.user_info_name_layout, R.id.user_info_phone_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.user_info_back:
@@ -103,28 +106,28 @@ public class ActivityUserInfo extends SuperActivity {
                 dialog.show();
                 break;
             case R.id.user_info_name_layout:
-                startActivityF(ConstValues.RESULT_FOR_MODIFY_NAME,0);
+                startActivityF(ConstValues.RESULT_FOR_MODIFY_NAME, 0);
                 break;
             case R.id.user_info_phone_layout:
-                startActivityF(ConstValues.RESULT_FOR_MODIFY_PHONE,1);
+                startActivityF(ConstValues.RESULT_FOR_MODIFY_PHONE, 1);
                 break;
         }
     }
 
-    private void startActivityF(int requestCode,int modify_type){
-        Intent i = new Intent(this,ActivityModifyNameAndPhone.class);
-        i.putExtra("modify_type",modify_type);
-        i.putExtra("requestCode",requestCode);
-        startActivityForResult(i,requestCode);
+    private void startActivityF(int requestCode, int modify_type) {
+        Intent i = new Intent(this, ActivityModifyNameAndPhone.class);
+        i.putExtra("modify_type", modify_type);
+        i.putExtra("requestCode", requestCode);
+        startActivityForResult(i, requestCode);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null){
+        if (data == null) {
             return;
         }
         String result = data.getStringExtra("result");
-        switch (requestCode){
+        switch (requestCode) {
             case ConstValues.RESULT_FOR_MODIFY_PHONE:
                 userInfoPhone.setText(result);
                 break;

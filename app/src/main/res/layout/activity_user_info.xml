@@ -87,6 +87,24 @@
             style="@style/comm_arrow_right_img_style" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/user_info_main_layout"
+        style="@style/comm_new_order_comm_layout_style">
+        <TextView
+            android:text="所属服务商"
+            style="@style/comm_left_textview_style"
+            />
+        <TextView
+            android:id="@+id/user_info_main"
+            android:text=""
+            style="@style/comm_right_textview_style"
+            />
+        <ImageView
+            android:visibility="invisible"
+            style="@style/comm_arrow_right_img_style" />
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/user_info_modify_pwd"

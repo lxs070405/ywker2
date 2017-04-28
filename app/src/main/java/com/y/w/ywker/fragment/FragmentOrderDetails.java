@@ -146,12 +146,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
         super.onCreate(savedInstanceState);
     }
 
-    //    public String  getOrderData(){
-//       String str =  tvOrderId.getText().toString()+","+
-//        newOrderArrrow5Text2.getText().toString()+","+//工单类型
-//        newOrderArrrow4Text2 .getText().toString() ;//工单状态
-//        return str;
-//    }
     private YHttpManagerUtils httpManagerUtils;
 
     @Override
@@ -161,6 +155,7 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
         loadData();
         ButterKnife.bind(this, v);
         tvOrderId.setText(orderid);
+        onStart();
         Log.e("lxs","getOrderStatus()"+getOrderStatus());
         return v;
     }
@@ -196,7 +191,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
                         new YBasicNameValuePair("orderId", orderid),
                         new YBasicNameValuePair("oldermsg", orderDetailsEntry.getTeamName())
                 });
-
     }
     @Override
     public void onDestroyView() {
@@ -251,18 +245,12 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
             case R.id.btn_caozuo://操作
 
                 String status =  getOrderStatus();
-                onStart();
+
                 if(status.equals("已受理")){
                     btnCaozuo.setClickable(false);
                     msgstatus = "3";
                 }
                 if(status.equals("处理中") && myRole == 1){
-//                    Utils.start_ActivityResult(this, ActivityZongJie.class, ConstValues.GONGZUOJONGJIE,
-//                            new YBasicNameValuePair[]{
-//                                    new YBasicNameValuePair("orderId", orderid),
-//                                    new YBasicNameValuePair("myRole", myRole+""),
-//                                    new YBasicNameValuePair("isFinish", "0")
-//                            });
                     if(entries.get(0).getSheetSummary().isEmpty()||entries.get(0).getSheetSummary().equals("null")){
                         Toast.makeText(getContext(),"请填写工作总结才可以完成",Toast.LENGTH_SHORT).show();
                         return;
@@ -373,34 +361,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
                                 Toast.makeText(getContext(), "操作成功", Toast.LENGTH_SHORT).show();
                                 btnCaozuo.setClickable(true);
                                 loadData();
-//                                if(getOrderStatus().equals("未受理")){
-//                                    loadData();
-//                                    orderDetailsL7.setVisibility(View.VISIBLE);
-//                                    setOrderStatus("已受理");
-//                                    return;
-//                                }
-//                                if(getOrderStatus().equals("已受理")){
-//                                    setOrderStatus("处理中");
-//                                    btnCaozuo.setText("工单完成");
-////                                    isReplay = false;
-//                                }else
-//                                if(getOrderStatus().equals("处理中")){
-//                                    setOrderStatus("已完成");
-//                                    btnCaozuo.setVisibility(View.GONE);
-////                                    isReplay = true;
-//                                }
-                                // else
-//                                 if(getOrderStatus().equals("暂停")){
-//                                    setOrderStatus("处理中");
-//                                    btnCaozuo.setVisibility(View.VISIBLE);
-//                                   isReplay = true;
-//                                }
-
-//                                if( !locationArr.isEmpty()){//isReplay &&
-//                                    map.put("Detail",locationArr);
-//                                    httpManagerUtils.setUrl(ConstValues.REPLAY_ORDERS_URL);
-//                                    httpManagerUtils.startPostRequest(map);
-//                                }
                                 break;
                             }
                         }
@@ -498,8 +458,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
              * 获取工单状态
              */
             orderStatus = orderDetailsEntry.getSheetStateCN();
-//           发起人
-//            titleinfo.setText(String.format("%s  创建于  %s ", orderDetailsEntry.getWriterName(), orderDetailsEntry.getWriteTime()));
             String faqiren = String.format("%s  创建于  %s ", orderDetailsEntry.getWriterName(), orderDetailsEntry.getWriteTime());
             newOrderArrrow1Text2.setText(orderDetailsEntry.getSheetTitle());
             newOrderArrrow2Text2.setText(orderDetailsEntry.getSheetDetail());
@@ -535,7 +493,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
             String ordertype =  orderDetailsEntry.getTypeName();
             newOrderArrrow4Text2.setText(orderDetailsEntry.getSheetStateCN());//工单状态
             newOrderArrrow5Text2.setText(orderDetailsEntry.getTypeName());//类型
-//            newOrderArrrow6Text2.setText(orderDetailsEntry.getPriority());//优先级
             ((ActivityOrderReplayDetails) getActivity()).SetOrderPageData(orderstate,ordertype,faqiren);
             String team = orderDetailsEntry.getTeamName();
             String teamer = orderDetailsEntry.getUserName();
@@ -550,9 +507,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
             }else {
                 llZongjie.setVisibility(View.VISIBLE);
             }
-//            newOrderArrrow8Text2.setText(teamer.equals("") ? "无" : teamer);
-//            String follow = orderDetailsEntry.getFollow();
-//            newOrderArrrow9Text2.setText(follow.equals("") ? "无" : follow);
         }
     }
 
@@ -582,13 +536,6 @@ public class FragmentOrderDetails extends Fragment implements View.OnClickListen
         String ids = data.getStringExtra("_ids");
 
         switch (resultCode) {
-//            case ConstValues.GONGZUOJONGJIE:
-//                Log.e("lxs","sfadsfsdfasd----");
-//                llZongjie.setVisibility(View.VISIBLE);
-//                msgstatus = "6";
-//                updataOderstate(msgstatus);//处理
-//                onStart();
-//                break;
             case ConstValues.RESULT_FOR_PICKER_TITLE_EDT:
                 if (msg != null) {
                     newOrderArrrow1Text2.setText(msg);

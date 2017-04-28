@@ -5,10 +5,14 @@ package com.y.w.ywker.entry;
  */
 public class DevicesEntry {
 
-    /**
-     * AreaName : 非现金区
-     * AssetName : 电脑 三星 898
-     * AssetXuLie :
+
+
+    /**DeviceCode:452452
+     * AreaID : 1
+     * AreaName : 现金区
+     * AssetName : 电脑 三星 123
+     * AssetXuLie : a254267
+     * BeginTime :
      * BrandID : 30123
      * BrandName : 三星
      * ClientID : 30371
@@ -17,18 +21,20 @@ public class DevicesEntry {
      * ContactName :
      * DepartID : 0
      * DepartName :
-     * ID : 36261
+     * ID : 36293
      * IsHavePic : 0
-     * ModelID : 30344
-     * ModelName : 898
-     * Remark : 测试绑定
+     * ModelID : 30361
+     * ModelName : 123
+     * Remark :
      * TypeID : 50095
      * TypeName : 电脑
      */
-
+    private String DeviceCode;
+    private String AreaID;
     private String AreaName;
     private String AssetName;
     private String AssetXuLie;
+    private String BeginTime;
     private String BrandID;
     private String BrandName;
     private String ClientID;
@@ -43,7 +49,27 @@ public class DevicesEntry {
     private String ModelName;
     private String Remark;
     private String TypeID;
+    private String QBCodeID;
     private String TypeName;
+
+    public String getQBCodeID() {
+        return QBCodeID;
+    }
+
+    public void setQBCodeID(String QBCodeID) {
+        this.QBCodeID = QBCodeID;
+    }
+    public String getDeviceCode() {
+        return DeviceCode;
+    }
+
+    public void setDeviceCode(String deviceCode) {
+        DeviceCode = deviceCode;
+    }
+
+    public void setAreaID(String AreaID) {
+        this.AreaID = AreaID;
+    }
 
     public void setAreaName(String AreaName) {
         this.AreaName = AreaName;
@@ -55,6 +81,10 @@ public class DevicesEntry {
 
     public void setAssetXuLie(String AssetXuLie) {
         this.AssetXuLie = AssetXuLie;
+    }
+
+    public void setBeginTime(String BeginTime) {
+        this.BeginTime = BeginTime;
     }
 
     public void setBrandID(String BrandID) {
@@ -117,6 +147,10 @@ public class DevicesEntry {
         this.TypeName = TypeName;
     }
 
+    public String getAreaID() {
+        return AreaID;
+    }
+
     public String getAreaName() {
         return AreaName;
     }
@@ -127,6 +161,10 @@ public class DevicesEntry {
 
     public String getAssetXuLie() {
         return AssetXuLie;
+    }
+
+    public String getBeginTime() {
+        return BeginTime;
     }
 
     public String getBrandID() {
